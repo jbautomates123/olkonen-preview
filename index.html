@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ==========================================================
+     HIDE FROM GOOGLE (preview only)
+     This line tells Google not to list this page in search results.
+     DELETE THIS LINE when this becomes Olkonen's real website.
+     ========================================================== -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- ==========================================================
+     PAGE TITLE + DESCRIPTION
+     Shown in Google results and in text-message link previews.
+     These live here (not in SETTINGS) because link previews read
+     the page without running the script. If the phone number ever
+     changes, update it here too.
+     ========================================================== -->
+<title>Olkonen Earthscapes | Landscaping in Hopkinton &amp; Concord, NH</title>
+<meta name="description" content="Olkonen Earthscapes: landscaping, trees and shrubs, walls, walks, steps and patios, light excavation, winter services and maintenance in the Hopkinton and Concord, NH area. Call 603-224-4328.">
+<meta property="og:title" content="Olkonen Earthscapes | Landscaping in Hopkinton &amp; Concord, NH">
+<meta property="og:description" content="Landscaping, stonework, light excavation, winter services and maintenance in the Hopkinton and Concord, NH area. Call 603-224-4328.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2e4a36">
+
+<style>
+/* ==========================================================
+   COLORS AND FONTS
+   (Button corner roundness is set in SETTINGS in the script.)
+   ========================================================== */
+:root {
+  --green: #2e4a36;        /* main forest green */
+  --green-dark: #1f3326;   /* darker green for headings and footer */
+  --cream: #f8f5ee;        /* page background */
+  --stone: #ede7db;        /* alternate section background */
+  --line: #d6cdbb;         /* borders */
+  --text: #2b2a26;         /* main text */
+  --muted: #55524a;        /* softer text */
+  --clay: #96512d;         /* "Request a Quote" button */
+  --clay-dark: #7a4122;
+  --corner: 6px;           /* overwritten by SETTINGS.look.buttonCorners */
+  --serif: Georgia, "Times New Roman", Tinos, Times, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  padding-bottom: 80px; /* room for the phone call bar */
+}
+@media (min-width: 900px) { body { padding-bottom: 0; } }
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--green); }
+a[href^="tel:"] { white-space: nowrap; } /* never split a phone number across lines */
+:focus-visible { outline: 3px solid #c98a2f; outline-offset: 2px; }
+
+h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
+h2 { font-size: clamp(1.75rem, 4.5vw, 2.35rem); font-weight: 400; margin: 0 0 12px; color: var(--green-dark); }
+h3 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; color: var(--green-dark); }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 600px) { .wrap { padding: 0 24px; } }
+
+.skip { position: absolute; left: -9999px; top: 0; background: #fff; padding: 12px 16px; z-index: 100; }
+.skip:focus { left: 8px; top: 8px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 12px 22px;
+  border-radius: var(--corner); border: 2px solid transparent;
+  font-family: inherit; font-size: 1.1rem; font-weight: 700; line-height: 1.25;
+  text-decoration: none; text-align: center; cursor: pointer;
+}
+.btn-call  { background: var(--green); color: #fff; }
+.btn-call:hover  { background: var(--green-dark); }
+.btn-light { background: var(--cream); color: var(--green-dark); }
+.btn-light:hover { background: #fff; }
+.btn-quote { background: var(--clay); color: #fff; }
+.btn-quote:hover { background: var(--clay-dark); }
+.btn-block { display: flex; width: 100%; }
+
+/* The X close button used on every banner, menu and popup */
+.x {
+  flex: none; width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); border-radius: var(--corner);
+  background: #fff; color: var(--text);
+  font-size: 1.75rem; line-height: 1; cursor: pointer; padding: 0;
+}
+.x:hover { background: var(--stone); }
+
+/* ---------- Preview banner ---------- */
+.preview {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: #fbf3dc; border-bottom: 1px solid #e6d7a8;
+  padding: 8px 16px; font-size: 0.95rem; line-height: 1.4;
+}
+.preview p { margin: 0; }
+.preview .x { width: 36px; height: 36px; font-size: 1.4rem; }
+
+/* ---------- Header ---------- */
+.site-header { background: #fff; border-bottom: 1px solid var(--line); }
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+.brand { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; line-height: 1.2; color: var(--green-dark); text-decoration: none; }
+@media (max-width: 380px) { .brand { font-size: 1.2rem; } }
+.nav-desktop { display: none; }
+.nav-desktop a { color: var(--text); text-decoration: none; font-size: 1.05rem; }
+.nav-desktop a:hover { text-decoration: underline; color: var(--green); }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.header-phone { display: none; font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
+.menu-btn {
+  min-height: 44px; padding: 8px 16px;
+  border: 2px solid var(--green); border-radius: var(--corner);
+  background: #fff; color: var(--green); font: inherit; font-weight: 700; cursor: pointer;
+}
+@media (min-width: 640px) { .header-phone { display: inline-block; } }
+@media (min-width: 900px) {
+  .site-header { position: sticky; top: 0; z-index: 40; }
+  section[id] { scroll-margin-top: 70px; }
+  .nav-desktop { display: flex; gap: 24px; }
+  .menu-btn { display: none; }
+}
+
+/* ---------- Top section (hero) ---------- */
+.hero { background: var(--green); color: var(--cream); padding: 40px 0 48px; }
+.hero-grid { display: grid; gap: 32px; align-items: center; }
+.hero h1 { font-size: clamp(2.1rem, 6.5vw, 3.2rem); font-weight: 400; margin: 0 0 16px; color: #fff; text-wrap: balance; }
+.lead { font-size: 1.2rem; margin: 0; color: #ece8dc; max-width: 34em; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hero-note { margin: 20px 0 0; color: #dcd7c8; font-size: 1.05rem; }
+.hero-pic { border-radius: calc(var(--corner) * 2); overflow: hidden; background: #efe7d2; aspect-ratio: 3 / 2; }
+.hero-pic svg, .hero-pic img { width: 100%; height: 100%; display: block; object-fit: cover; }
+@media (max-width: 599px) { .btn-row .btn { flex: 1 1 100%; } }
+@media (min-width: 900px) {
+  .hero { padding: 72px 0; }
+  .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 48px; }
+}
+
+/* ---------- Sections ---------- */
+.section { padding: 56px 0; }
+.section-alt { background: var(--stone); }
+.section-intro { color: var(--muted); max-width: 40em; margin: 0 0 28px; }
+@media (min-width: 900px) { .section { padding: 80px 0; } }
+
+/* Services */
+.services { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.service {
+  background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--green);
+  border-radius: var(--corner); padding: 20px 22px;
+}
+.service p { margin: 0; color: var(--muted); }
+.services-note { margin: 28px 0 0; font-size: 1.1rem; }
+@media (min-width: 700px) { .services { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .services { grid-template-columns: 1fr 1fr 1fr; } }
+
+/* Our Work photos (only shows once real photos are added) */
+.gallery { display: grid; gap: 16px; }
+.gallery figure { margin: 0; }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--corner); }
+.gallery figcaption { margin-top: 6px; color: var(--muted); font-size: 1rem; }
+@media (min-width: 700px) { .gallery { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .gallery { grid-template-columns: 1fr 1fr 1fr; } }
+
+/* About */
+.about-grid { display: grid; gap: 32px; }
+.about-text p { margin: 0 0 16px; max-width: 40em; }
+.facts { margin: 8px 0 0; padding-left: 1.2em; }
+.facts li { margin-bottom: 6px; }
+.side-card { background: #fff; border: 1px solid var(--line); border-radius: var(--corner); padding: 24px; align-self: start; }
+.side-card p { margin: 0 0 18px; color: var(--muted); }
+.side-card .btn + .btn { margin-top: 12px; }
+@media (min-width: 900px) { .about-grid { grid-template-columns: 1.6fr 1fr; gap: 48px; } }
+
+/* Hiring strip */
+.hiring { background: #f3e7dc; border-top: 1px solid #e3cfbd; border-bottom: 1px solid #e3cfbd; padding: 22px 0; }
+.hiring p { margin: 0; font-size: 1.1rem; }
+.hiring strong { font-family: var(--serif); font-size: 1.25rem; color: var(--green-dark); margin-right: 6px; }
+
+/* Service area */
+.towns { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.towns li { background: #fff; border: 1px solid var(--line); border-radius: var(--corner); padding: 6px 16px; font-weight: 700; color: var(--green-dark); }
+.area-note { margin: 20px 0 0; }
+
+/* Quote form */
+.quote-grid { display: grid; gap: 28px; }
+.quote-side p { margin: 0 0 16px; max-width: 32em; }
+.big-phone { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
+form.quote { background: #fff; border: 1px solid var(--line); border-radius: var(--corner); padding: 24px 20px; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-weight: 700; margin-bottom: 6px; }
+.field .opt { font-weight: 400; color: var(--muted); }
+.field input, .field select, .field textarea {
+  width: 100%; font: inherit; font-size: 1.05rem; color: var(--text);
+  padding: 12px 14px; background: #fff;
+  border: 1px solid #a9a08c; border-radius: var(--corner);
+}
+.field textarea { min-height: 130px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); outline: 2px solid var(--green); outline-offset: 0; }
+.demo-note { background: #fbf3dc; border: 1px solid #e6d7a8; border-radius: var(--corner); padding: 10px 14px; font-size: 1rem; margin: 0 0 18px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+@media (min-width: 600px) { form.quote { padding: 28px; } }
+@media (min-width: 900px) { .quote-grid { grid-template-columns: 1fr 1.3fr; gap: 48px; } }
+
+/* Contact */
+.contact { background: var(--green); color: var(--cream); }
+.contact h2 { color: #fff; }
+.contact a { color: #fff; }
+.contact-list { display: grid; gap: 24px; margin: 24px 0 0; }
+.contact-list dt { font-size: 0.95rem; color: #cfd8c9; text-transform: none; margin-bottom: 2px; }
+.contact-list dd { margin: 0; font-size: 1.2rem; overflow-wrap: anywhere; }
+.contact-list .phone-big { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; text-decoration: none; }
+@media (min-width: 700px) { .contact-list { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .contact-list { grid-template-columns: repeat(4, 1fr); } }
+
+/* Footer */
+.site-footer { background: var(--green-dark); color: #cfc9b8; padding: 24px 0; font-size: 0.95rem; }
+.site-footer p { margin: 0 0 6px; }
+.site-footer a { color: #fff; }
+
+/* Phone call bar (phones and tablets only) */
+.callbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  display: flex; gap: 10px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: #fff; border-top: 1px solid var(--line);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+}
+.callbar .btn { flex: 1; min-height: 54px; padding: 8px 10px; font-size: 1.05rem; }
+.callbar .btn-call { flex: 1.4; }
+@media (max-width: 380px) { .callbar .btn { font-size: 1rem; } }
+@media (min-width: 900px) { .callbar { display: none; } }
+
+/* Popups and the menu */
+dialog {
+  border: none; padding: 0; width: calc(100% - 32px); max-width: 440px;
+  border-radius: calc(var(--corner) * 2); background: #fff; color: var(--text);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+dialog::backdrop { background: rgba(20, 30, 22, 0.55); }
+.dialog-inner { position: relative; padding: 28px 24px 24px; }
+.dialog-inner > .x { position: absolute; top: 12px; right: 12px; }
+.dialog-inner h2 { font-size: 1.5rem; padding-right: 52px; margin-bottom: 12px; }
+.dialog-inner p { margin: 0 0 20px; }
+dialog.menu { margin-top: 16px; }
+.menu-links { list-style: none; margin: 8px 0 20px; padding: 0; }
+.menu-links a { display: block; padding: 14px 4px; border-bottom: 1px solid var(--line); color: var(--text); text-decoration: none; font-size: 1.25rem; font-family: var(--serif); }
+.menu-links a:hover { color: var(--green); }
+.menu-title { font-family: var(--serif); font-size: 1.3rem; margin: 6px 0 0; color: var(--green-dark); padding-right: 52px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- Preview banner. Turn it off in SETTINGS (previewBanner.show = false). -->
+<div class="preview" id="preview-banner" hidden>
+  <p id="preview-text"></p>
+  <button type="button" class="x" id="preview-close" aria-label="Close this notice">&times;</button>
+</div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="#top" class="brand" id="brand-name"></a>
+    <nav class="nav-desktop" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#area">Service Area</a>
+      <a href="#quote">Request a Quote</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a class="header-phone" data-tel="{phone}"></a>
+      <button type="button" class="menu-btn" id="menu-open" aria-haspopup="dialog" aria-controls="menu">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- TOP SECTION -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="hero-heading"></h1>
+        <p class="lead" id="hero-sub"></p>
+        <div class="btn-row">
+          <a class="btn btn-light" data-tel="Call {phone}"></a>
+          <a class="btn btn-quote" href="#quote" data-text="hero.quoteButton"></a>
+        </div>
+        <p class="hero-note" id="hero-note"></p>
+      </div>
+      <div class="hero-pic" id="hero-pic">
+        <!-- Simple drawing shown until a real photo is set in SETTINGS.photos.hero -->
+        <svg viewBox="0 0 600 400" role="img" aria-label="Drawing of a landscaped yard with a stone wall and trees" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="400" fill="#efe7d2"/>
+          <circle cx="470" cy="92" r="42" fill="#e5c98d"/>
+          <path d="M0 230 C120 170 220 200 320 185 C420 170 500 150 600 175 L600 400 L0 400Z" fill="#a3b391"/>
+          <path d="M0 280 C140 235 260 265 380 245 C470 230 540 240 600 250 L600 400 L0 400Z" fill="#738d65"/>
+          <rect x="425" y="200" width="10" height="44" rx="4" fill="#5a4632"/>
+          <circle cx="430" cy="190" r="32" fill="#3f5d40"/>
+          <circle cx="410" cy="204" r="20" fill="#476847"/>
+          <rect x="517" y="212" width="8" height="34" rx="4" fill="#5a4632"/>
+          <circle cx="521" cy="204" r="23" fill="#4a6a49"/>
+          <rect x="150" y="222" width="8" height="36" rx="4" fill="#5a4632"/>
+          <circle cx="154" cy="214" r="24" fill="#567556"/>
+          <path d="M0 330 C180 300 360 322 600 302 L600 400 L0 400Z" fill="#506e47"/>
+          <g>
+            <rect x="52"  y="290" width="30" height="14" rx="5" fill="#b9b3a6"/>
+            <rect x="85"  y="290" width="38" height="14" rx="5" fill="#a49e91"/>
+            <rect x="126" y="290" width="28" height="14" rx="5" fill="#c8c2b4"/>
+            <rect x="157" y="290" width="34" height="14" rx="5" fill="#b0aa9d"/>
+            <rect x="194" y="290" width="30" height="14" rx="5" fill="#c3bdaf"/>
+            <rect x="227" y="290" width="36" height="14" rx="5" fill="#a49e91"/>
+            <rect x="266" y="290" width="28" height="14" rx="5" fill="#bdb7aa"/>
+            <rect x="297" y="290" width="34" height="14" rx="5" fill="#ada79a"/>
+            <rect x="334" y="290" width="24" height="14" rx="5" fill="#c8c2b4"/>
+            <rect x="40"  y="306" width="34" height="14" rx="5" fill="#a9a396"/>
+            <rect x="77"  y="306" width="28" height="14" rx="5" fill="#c5bfb1"/>
+            <rect x="108" y="306" width="40" height="14" rx="5" fill="#b3ad9f"/>
+            <rect x="151" y="306" width="30" height="14" rx="5" fill="#a19b8e"/>
+            <rect x="184" y="306" width="36" height="14" rx="5" fill="#c0baac"/>
+            <rect x="223" y="306" width="26" height="14" rx="5" fill="#ada79a"/>
+            <rect x="252" y="306" width="38" height="14" rx="5" fill="#c8c2b4"/>
+            <rect x="293" y="306" width="30" height="14" rx="5" fill="#a49e91"/>
+            <rect x="326" y="306" width="34" height="14" rx="5" fill="#bab4a7"/>
+          </g>
+          <circle cx="382" cy="314" r="17" fill="#5f7f4f"/>
+          <circle cx="24"  cy="318" r="18" fill="#5f7f4f"/>
+          <circle cx="402" cy="320" r="11" fill="#6b8b58"/>
+          <ellipse cx="470" cy="372" rx="30" ry="9" fill="#ddd3bd"/>
+          <ellipse cx="492" cy="347" rx="23" ry="7" fill="#ddd3bd"/>
+          <ellipse cx="508" cy="327" rx="17" ry="5.5" fill="#ddd3bd"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <h2 data-text="services.heading"></h2>
+      <p class="section-intro" data-text="services.intro"></p>
+      <ul class="services" id="services-list"></ul>
+      <p class="services-note" id="services-note"></p>
+    </div>
+  </section>
+
+  <!-- OUR WORK (hidden until real photos are added in SETTINGS.photos.work) -->
+  <section class="section section-alt" id="work" hidden>
+    <div class="wrap">
+      <h2 data-text="photos.workHeading"></h2>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section-alt" id="about">
+    <div class="wrap about-grid">
+      <div class="about-text">
+        <h2 data-text="about.heading"></h2>
+        <div id="about-paragraphs"></div>
+        <ul class="facts" id="about-facts" hidden></ul>
+      </div>
+      <aside class="side-card" aria-label="Contact us">
+        <h3 data-text="about.cardHeading"></h3>
+        <p data-text="about.cardText"></p>
+        <a class="btn btn-call btn-block" data-tel="Call {phone}"></a>
+        <a class="btn btn-quote btn-block" href="#quote" data-text="hero.quoteButton"></a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- HIRING STRIP (turn off in SETTINGS.hiring.show) -->
+  <div class="hiring" id="hiring" hidden>
+    <div class="wrap"><p id="hiring-text"></p></div>
+  </div>
+
+  <!-- SERVICE AREA -->
+  <section class="section" id="area">
+    <div class="wrap">
+      <h2 data-text="serviceArea.heading"></h2>
+      <p class="section-intro" style="margin-bottom:0" data-text="serviceArea.text"></p>
+      <ul class="towns" id="towns"></ul>
+      <p class="area-note" id="area-note"></p>
+    </div>
+  </section>
+
+  <!-- QUOTE FORM -->
+  <section class="section section-alt" id="quote">
+    <div class="wrap quote-grid">
+      <div class="quote-side">
+        <h2 data-text="form.heading"></h2>
+        <p data-text="form.intro"></p>
+        <p data-text="form.preferCall"></p>
+        <a class="big-phone" data-tel="{phone}"></a>
+      </div>
+      <form class="quote" id="quote-form">
+        <p class="demo-note" id="demo-note" hidden></p>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone number</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email <span class="opt">(optional)</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="f-town">Town or street address</label>
+          <input id="f-town" name="town" type="text" autocomplete="street-address">
+        </div>
+        <div class="field">
+          <label for="f-service">What do you need help with?</label>
+          <select id="f-service" name="service"></select>
+        </div>
+        <div class="field">
+          <label for="f-details">Tell us about your project <span class="opt">(optional)</span></label>
+          <textarea id="f-details" name="details"></textarea>
+        </div>
+        <!-- Spam trap: real people never see or fill this in -->
+        <div class="hp" aria-hidden="true">
+          <label for="f-gotcha">Leave this empty</label>
+          <input id="f-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="_subject" id="f-subject">
+        <button type="submit" class="btn btn-quote btn-block" id="f-submit"></button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="wrap">
+      <h2>Contact Us</h2>
+      <dl class="contact-list">
+        <div><dt>Phone</dt><dd><a class="phone-big" data-tel="{phone}"></a></dd></div>
+        <div><dt>Email</dt><dd><a id="contact-email"></a></dd></div>
+        <div><dt>Address</dt><dd id="contact-address"></dd></div>
+        <div id="contact-fb-wrap"><dt>Facebook</dt><dd><a id="contact-fb" target="_blank" rel="noopener">Find us on Facebook</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p id="footer-line"></p>
+    <p id="footer-credit"></p>
+  </div>
+</footer>
+
+<!-- Phone call bar (shows on phones and tablets only) -->
+<div class="callbar" id="callbar">
+  <a class="btn btn-call" data-tel="Call {phone}"></a>
+  <a class="btn btn-quote" href="#quote">Request a Quote</a>
+</div>
+
+<!-- MENU (phones and tablets) -->
+<dialog class="menu" id="menu" aria-labelledby="menu-title">
+  <div class="dialog-inner">
+    <button type="button" class="x" data-close aria-label="Close menu">&times;</button>
+    <p class="menu-title" id="menu-title">Menu</p>
+    <ul class="menu-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#area">Service Area</a></li>
+      <li><a href="#quote">Request a Quote</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-call btn-block" data-tel="Call {phone}"></a>
+  </div>
+</dialog>
+
+<!-- POPUP (form messages) -->
+<dialog id="popup" aria-labelledby="popup-title">
+  <div class="dialog-inner">
+    <button type="button" class="x" data-close aria-label="Close">&times;</button>
+    <h2 id="popup-title"></h2>
+    <p id="popup-msg"></p>
+    <button type="button" class="btn btn-call btn-block" data-close>Close</button>
+  </div>
+</dialog>
+
+<noscript>
+  <p style="padding:16px;background:#fff">Olkonen Earthscapes, Hopkinton, NH. Call <a href="tel:+16032244328">603-224-4328</a> or email <a href="mailto:Olkonen@comcast.net">Olkonen@comcast.net</a>.</p>
+</noscript>
+
+<script>
+/* ================================================================
+   SETTINGS: edit the website here.
+   Change the words between the quotes. Keep the quotes and commas.
+   {phone} anywhere in the text is replaced with the phone number
+   below, as a tap-to-call link.
+   ================================================================ */
+const SETTINGS = {
+
+  // ---- PREVIEW BANNER (set show to false before going live) ----
+  previewBanner: {
+    show: true,
+    text: "Free sample redesign by JB Automates. This is not the live Olkonen Earthscapes website."
+  },
+
+  // ---- BUSINESS INFO ----
+  business: {
+    name: "Olkonen Earthscapes",
+    legalName: "Olkonen Earthscapes, Inc.",   // ASK THE OWNER: OK to show "Inc." in the footer?
+    phone: "603-224-4328",                      // verified correct (the old footer had 244, which is wrong)
+    email: "Olkonen@comcast.net",
+    street: "Upper Straw Road",                 // ASK THE OWNER: OK to show the street on the site?
+    town: "Hopkinton",
+    state: "NH",
+    zip: "03229",
+    facebook: "https://www.facebook.com/profile.php?id=100064281150246",
+    websiteAddress: ""                          // fill in once they have their own domain, e.g. "https://www.olkonen.com"
+  },
+
+  // ---- TOP SECTION ----
+  hero: {
+    heading: "Landscaping in Hopkinton & Concord, NH",
+    // Based on the owner's own About text.
+    subheading: "We listen to what you want, give you our professional advice, and work with you to get the landscape you're after.",
+    quoteButton: "Request a Quote"              // ASK THE OWNER: are quotes free? If yes, can say "Request a Free Quote"
+  },
+
+  // ---- SERVICES ----
+  // CONFIRM WITH OWNER: the six service names come from their old site.
+  // The short descriptions were written for this sample. Ask the owner
+  // what each service really includes and fix the wording.
+  services: {
+    heading: "Our Services",
+    intro: "Here's what we can help with, from planning a new landscape to keeping your driveway clear in winter.",
+    list: [
+      { name: "Landscaping",
+        description: "New plantings, garden beds, lawns and full landscape projects, planned with you from the start." },
+      { name: "Trees & Shrubs",
+        description: "Choosing, planting and caring for trees and shrubs that suit your property." },
+      { name: "Walls, Walks, Steps & Patios",
+        description: "Walls, walkways, steps and patios for outdoor spaces you'll use every day." },
+      { name: "Light Excavation",
+        description: "Grading, site preparation and other smaller excavation jobs." },
+      { name: "Winter Services",
+        description: "Snow removal to help keep your driveway and walkways clear through the winter." },
+      { name: "Maintenance",
+        description: "Spring and fall cleanups and regular upkeep to keep your property looking its best." }
+    ],
+    note: "Don't see what you need? Call {phone} and ask."
+  },
+
+  // ---- PHOTOS ----
+  // Put photo files in the same folder as this page, then type the file names here.
+  // Until a hero photo is set, the simple drawing shows instead.
+  // The "Our Work" section stays hidden until at least one work photo is listed.
+  photos: {
+    hero: "",                                   // e.g. "patio.jpg"
+    heroAlt: "",                                // describe the photo, e.g. "Stone patio built in Hopkinton"
+    workHeading: "Our Work",
+    work: [
+      // { file: "wall.jpg", caption: "Stone wall, Hopkinton" },
+    ]
+  },
+
+  // ---- ABOUT ----
+  about: {
+    heading: "About Olkonen Earthscapes",
+    // The owner's own About text from the old site.
+    paragraphs: [
+      "At Olkonen Earthscapes, we are dedicated to helping you make the best decisions and providing you with the right direction on any type of landscape project throughout the Hopkinton and Concord area.",
+      "We focus on listening to what our customers want, giving you our professional advice and working together to deliver the landscaping you desire. While there are numerous landscape companies available to perform work, businesses and homeowners looking for landscaping services choose Olkonen Earthscapes, Inc. time and time again."
+    ],
+    // ASK THE OWNER: only add facts he confirms. The list stays hidden while empty.
+    // Examples: "Serving the area since ____", "Fully insured" (only if true).
+    facts: [],
+    cardHeading: "Have a project in mind?",
+    cardText: "Give us a call or send a quote request and tell us what you're thinking."
+  },
+
+  // ---- HIRING ----
+  // They were hiring on Indeed as of Oct 17, 2026. Set show to false once the job is filled.
+  hiring: {
+    show: true,
+    text: "Interested in landscaping work? Call {phone} to ask about current openings.",
+    link: "",                                   // ASK THE OWNER: paste the Indeed job link here if he wants it shown
+    linkText: "See the job posting"
+  },
+
+  // ---- SERVICE AREA ----
+  serviceArea: {
+    heading: "Where We Work",
+    text: "We serve homeowners and businesses throughout the Hopkinton and Concord area.",
+    // ASK THE OWNER: which other nearby towns does he cover?
+    towns: ["Hopkinton", "Contoocook", "Concord"],
+    note: "Not sure if you're in our area? Call {phone} and ask."
+  },
+
+  // ---- QUOTE FORM ----
+  form: {
+    // Paste your Formspree form ID or full link here, e.g. "abcdwxyz" or "https://formspree.io/f/abcdwxyz".
+    // While this is empty, the form is in DEMO MODE: nothing is sent to anyone.
+    formspreeId: "",
+    heading: "Request a Quote",
+    intro: "Tell us a little about your project and we'll be in touch.",
+    preferCall: "Rather talk to someone? Call us:",
+    submitButton: "Send My Request",
+    otherOption: "Something else / not sure",
+    emailSubject: "New quote request from the website",
+    demoNote: "Demo mode: this sample form is not connected yet. Nothing you type here will be sent.",
+    demoTitle: "Demo mode: nothing was sent",
+    demoMessage: "This sample form isn't connected yet, so your request was not sent to anyone. Once it's set up, requests will go straight to Olkonen Earthscapes by email.",
+    thanksTitle: "Thank you!",
+    thanksMessage: "Your request was sent. We'll get back to you soon. If it's urgent, call {phone}.",
+    errorTitle: "Sorry, that didn't go through",
+    errorMessage: "Something went wrong sending your request. Please call us at {phone} instead."
+  },
+
+  // ---- LOOK ----
+  look: {
+    buttonCorners: 6                            // roundness of buttons and boxes, in pixels. 0 = square corners.
+  },
+
+  // ---- FOOTER ----
+  footerCredit: "Sample website by JB Automates"   // after launch, e.g. "Website by JB Automates", or "" to remove
+};
+/* ======================== END OF SETTINGS ======================== */
+
+
+/* ----- The code below builds the page from SETTINGS. No need to edit it. ----- */
+(function () {
+  "use strict";
+  const S = SETTINGS;
+  const B = S.business;
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+  // Phone: "603-224-4328" becomes "tel:+16032244328"
+  const digits = B.phone.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
+  const telHref = "tel:+1" + digits;
+
+  function telLink(text) {
+    const a = document.createElement("a");
+    a.href = telHref;
+    a.textContent = text || B.phone;
+    return a;
+  }
+
+  // Put text into an element, turning {phone} into a tap-to-call link.
+  function fillWithPhone(el, text) {
+    el.textContent = "";
+    String(text).split("{phone}").forEach((part, i) => {
+      if (i > 0) el.appendChild(telLink());
+      if (part) el.appendChild(document.createTextNode(part));
+    });
+  }
+  const plain = (text) => String(text).split("{phone}").join(B.phone);
+
+  // Look
+  document.documentElement.style.setProperty("--corner", Number(S.look.buttonCorners) + "px");
+
+  // Every phone link on the page
+  $$("[data-tel]").forEach((el) => {
+    el.href = telHref;
+    el.textContent = plain(el.getAttribute("data-tel") || "{phone}");
+  });
+
+  // Simple text spots: data-text="section.key"
+  $$("[data-text]").forEach((el) => {
+    const value = el.getAttribute("data-text").split(".").reduce((o, k) => (o ? o[k] : undefined), S);
+    if (value !== undefined) el.textContent = plain(value);
+  });
+
+  // Preview banner
+  const banner = $("#preview-banner");
+  if (S.previewBanner.show) {
+    $("#preview-text").textContent = S.previewBanner.text;
+    banner.hidden = false;
+    $("#preview-close").addEventListener("click", () => { banner.hidden = true; });
+  }
+
+  // Header and top section
+  $("#brand-name").textContent = B.name;
+  $("#hero-heading").textContent = S.hero.heading;
+  $("#hero-sub").textContent = S.hero.subheading;
+  $("#hero-note").textContent = S.serviceArea.text;
+
+  if (S.photos.hero) {
+    const pic = $("#hero-pic");
+    pic.textContent = "";
+    const img = document.createElement("img");
+    img.src = S.photos.hero;
+    img.alt = S.photos.heroAlt || "";
+    pic.appendChild(img);
+  }
+
+  // Services
+  const list = $("#services-list");
+  S.services.list.forEach((s) => {
+    const li = document.createElement("li");
+    li.className = "service";
+    const h = document.createElement("h3");
+    h.textContent = s.name;
+    const p = document.createElement("p");
+    p.textContent = s.description;
+    li.append(h, p);
+    list.appendChild(li);
+  });
+  fillWithPhone($("#services-note"), S.services.note);
+
+  // Our Work photos
+  if (S.photos.work && S.photos.work.length) {
+    const gallery = $("#gallery");
+    S.photos.work.forEach((w) => {
+      const fig = document.createElement("figure");
+      const img = document.createElement("img");
+      img.src = w.file;
+      img.alt = w.caption || "Project photo";
+      img.loading = "lazy";
+      fig.appendChild(img);
+      if (w.caption) {
+        const cap = document.createElement("figcaption");
+        cap.textContent = w.caption;
+        fig.appendChild(cap);
+      }
+      gallery.appendChild(fig);
+    });
+    $("#work").hidden = false;
+    $("#about").classList.remove("section-alt"); // keep backgrounds alternating
+  }
+
+  // About
+  const paras = $("#about-paragraphs");
+  S.about.paragraphs.forEach((t) => {
+    const p = document.createElement("p");
+    p.textContent = t;
+    paras.appendChild(p);
+  });
+  if (S.about.facts.length) {
+    const facts = $("#about-facts");
+    S.about.facts.forEach((f) => {
+      const li = document.createElement("li");
+      li.textContent = f;
+      facts.appendChild(li);
+    });
+    facts.hidden = false;
+  }
+
+  // Hiring
+  if (S.hiring.show) {
+    const p = $("#hiring-text");
+    const strong = document.createElement("strong");
+    strong.textContent = "We're hiring.";
+    const rest = document.createElement("span");
+    fillWithPhone(rest, S.hiring.text);
+    p.append(strong, rest);
+    if (S.hiring.link) {
+      const a = document.createElement("a");
+      a.href = S.hiring.link;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = S.hiring.linkText;
+      p.append(" ", a);
+    }
+    $("#hiring").hidden = false;
+  }
+
+  // Service area
+  const towns = $("#towns");
+  S.serviceArea.towns.forEach((t) => {
+    const li = document.createElement("li");
+    li.textContent = t;
+    towns.appendChild(li);
+  });
+  fillWithPhone($("#area-note"), S.serviceArea.note);
+
+  // Contact
+  const email = $("#contact-email");
+  email.href = "mailto:" + B.email;
+  email.textContent = B.email;
+  $("#contact-address").textContent = [B.street, B.town + ", " + B.state + " " + B.zip].filter(Boolean).join(", ");
+  if (B.facebook) $("#contact-fb").href = B.facebook;
+  else $("#contact-fb-wrap").hidden = true;
+
+  // Footer
+  const foot = $("#footer-line");
+  foot.textContent = "© " + new Date().getFullYear() + " " + B.legalName + " · " + B.town + ", " + B.state + " · ";
+  foot.appendChild(telLink());
+  const credit = $("#footer-credit");
+  if (S.footerCredit) credit.textContent = S.footerCredit;
+  else credit.hidden = true;
+
+  // ---- Popups and menu: X button, Escape key, and tapping outside all close them ----
+  $$("dialog").forEach((d) => {
+    d.addEventListener("click", (e) => { if (e.target === d) d.close(); });
+  });
+  $$("[data-close]").forEach((btn) => {
+    btn.addEventListener("click", () => btn.closest("dialog").close());
+  });
+
+  const menu = $("#menu");
+  $("#menu-open").addEventListener("click", () => menu.showModal());
+  $$("#menu .menu-links a").forEach((a) => a.addEventListener("click", () => menu.close()));
+  // If the screen gets wide enough for the normal menu, close the phone menu.
+  window.matchMedia("(min-width: 900px)").addEventListener("change", (e) => { if (e.matches && menu.open) menu.close(); });
+
+  const popup = $("#popup");
+  function showPopup(title, message) {
+    $("#popup-title").textContent = title;
+    fillWithPhone($("#popup-msg"), message);
+    popup.showModal();
+  }
+
+  // ---- Quote form ----
+  const F = S.form;
+  const form = $("#quote-form");
+  const submit = $("#f-submit");
+  submit.textContent = F.submitButton;
+  $("#f-subject").value = F.emailSubject;
+
+  const select = $("#f-service");
+  const first = new Option("Choose one", "");
+  select.add(first);
+  S.services.list.forEach((s) => select.add(new Option(s.name, s.name)));
+  select.add(new Option(F.otherOption, F.otherOption));
+
+  // Accept either "abcdwxyz" or the full "https://formspree.io/f/abcdwxyz"
+  const formId = String(F.formspreeId || "").trim().replace(/^.*\/f\//, "").replace(/[/?#].*$/, "");
+  const demoMode = formId === "";
+  if (demoMode) {
+    $("#demo-note").textContent = F.demoNote;
+    $("#demo-note").hidden = false;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (demoMode) {
+      showPopup(F.demoTitle, F.demoMessage);
+      form.reset();
+      return;
+    }
+    submit.disabled = true;
+    submit.textContent = "Sending...";
+    try {
+      const res = await fetch("https://formspree.io/f/" + encodeURIComponent(formId), {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+      if (!res.ok) throw new Error("Formspree returned " + res.status);
+      form.reset();
+      showPopup(F.thanksTitle, F.thanksMessage);
+    } catch (err) {
+      showPopup(F.errorTitle, F.errorMessage);
+    } finally {
+      submit.disabled = false;
+      submit.textContent = F.submitButton;
+    }
+  });
+
+  // ---- Business info for Google (shows the right phone number in search) ----
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    name: B.name,
+    legalName: B.legalName,
+    telephone: "+1-" + digits.slice(0, 3) + "-" + digits.slice(3, 6) + "-" + digits.slice(6),
+    email: B.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: B.street,
+      addressLocality: B.town,
+      addressRegion: B.state,
+      postalCode: B.zip,
+      addressCountry: "US"
+    },
+    areaServed: S.serviceArea.towns.map((t) => ({ "@type": "City", name: t + ", " + B.state })),
+    sameAs: B.facebook ? [B.facebook] : []
+  };
+  if (B.websiteAddress) ld.url = B.websiteAddress;
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.textContent = JSON.stringify(ld);
+  document.head.appendChild(script);
+})();
+</script>
+</body>
+</html>
