@@ -856,9 +856,9 @@ const SETTINGS = {
     // Soft shaded area around the towns (circles merged into one shape)
     const blur = el("filter", { id: "soft", x: "-50%", y: "-50%", width: "200%", height: "200%" }, el("defs", {}));
     el("feGaussianBlur", { stdDeviation: 14 }, blur);
-    const area = el("g", { opacity: "0.6", filter: "url(#soft)" });
+    const area = el("g", { opacity: "0.85", filter: "url(#soft)" });
     const r = 0.06 * scale;
-    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r, fill: "#c9d6bd" }, area));
+    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r, fill: "#bccdab" }, area));
 
     // Interstates
     const line = (path) => path.map(([la, lo], i) => (i ? "L" : "M") + X(lo).toFixed(1) + " " + Y(la).toFixed(1)).join(" ");
