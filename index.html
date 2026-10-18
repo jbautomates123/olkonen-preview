@@ -12,18 +12,36 @@
 <meta name="robots" content="noindex, nofollow">
 
 <!-- ==========================================================
-     PAGE TITLE + DESCRIPTION
-     Shown in Google results and in text-message link previews.
-     These live here (not in SETTINGS) because link previews read
-     the page without running the script. If the phone number ever
-     changes, update it here too.
+     PAGE TITLE, DESCRIPTION AND LINK PREVIEW
+     Shown in Google results and on the preview card when the link
+     is texted or shared. These live here (not in SETTINGS) because
+     link previews read the page without running the script.
+     - If the phone number changes, update it here too.
+     - When the site moves to its own web address, change the two
+       "jbautomates123.github.io/olkonen-preview" addresses below.
      ========================================================== -->
 <title>Olkonen Earthscapes | Landscaping in Hopkinton &amp; Concord, NH</title>
 <meta name="description" content="Olkonen Earthscapes: landscaping, trees and shrubs, walls, walks, steps and patios, light excavation, winter services and maintenance in the Hopkinton and Concord, NH area. Call 603-224-4328.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Olkonen Earthscapes">
 <meta property="og:title" content="Olkonen Earthscapes | Landscaping in Hopkinton &amp; Concord, NH">
 <meta property="og:description" content="Landscaping, stonework, light excavation, winter services and maintenance in the Hopkinton and Concord, NH area. Call 603-224-4328.">
-<meta property="og:type" content="website">
+<meta property="og:url" content="https://jbautomates123.github.io/olkonen-preview/">
+<meta property="og:image" content="https://jbautomates123.github.io/olkonen-preview/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Olkonen Earthscapes logo. Landscaping in Hopkinton and Concord, NH. Call 603-224-4328.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#115c31">
+
+<!-- Browser tab icon (a pine from the logo). apple-touch-icon.png is the icon an iPhone uses
+     if someone saves the site to their home screen (that file sits next to this page). -->
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEe0lEQVR4nLxXbUxbVRh+zm17224UCsLWwvgYcY2AhbIRZclgDogLjDGXaECYOIXxQwxDY+aIWXRGnfKHhGXJsiEu6qbORLPBZCZ+LWRzGwhlgCM6lvAxvhnlQ1oK9HpOTQmE0vZWxpO059z3fd77Puece+49rxSLoD5oUGNWeIOAJAoEBtpuwCpAgDBEBBhpexMyUmE6ZzQ5fMTR8c2LT5cAVdQSjEcJAX3zQOHE+ea6BQG+uXG7JRx3FWuIeQEZTATxy9X7c5y0ndq0WEuwmbDO6DlCJC97m7wk9xBKXiyCV6BLzfF8PsceOHiBgqxcNPEjaJIP2/veaSCJnACIFpCV9CxMWh41Q832H+szm1iw3HQJEC4mKDFmK0INUajq+W3BxvrMxnxiwHJzYgIitWHYk5GJDzovLfMxG/Mxjhh4LEClXI+ywlK83v75ihzmYxzGXXUBJ9/6CPnG0255jMO4qyqgovQ4Sju+xPS81S2XcRiXxayKgM2aUPgpVSiL3IvUwBhIyMohzJcaGG3nshgW6w7E/0C8AA+wd3sank7egeLWcy55p/QHcetaPWpu/gxP4NEShAUFIykp2W1yBsZJSt6J0CDPXq5uBUglEnxc/A4OtVXDUzBuefExcMT9+NwyKkqO45WWMxCLV++cpbHvueW5FPBJURl+n+uBD6+EWPjIFLhte4ATRUfhtYDquotQ91pQZRD/xTtjKISq24zPrnwDrwXIeRkS4rYip6ESYnGg8RQS4xPA87xLntNtyL5Q+3amQ7dNj6N3XY/AHcqfyMGfjUbU1P8Im7B8xzudgZgIHfalpP/v5AxHOr7G82mZ0G2KdOqXOjOGbgjB1KwF+WHJmLRZMDVnQZ/5IdrHe+EJ9H6h0Cj9oZIq4cPJMUnjwzUh6OjpXMZ1OgP9o4OorauFvG0YUQNyvB2egXBFIDzF5nVBOEJjdH0S+z0u/1CDwdERp1yXr+I921OQSZfiw/uX0TreAzGI9QvDscgsfP/TFdTd+nVFHlHnGQYIIRsXG4P8AnA4twitGMbpLs/e6SvhtYg0RM0HoPKrsxiZGFviEwRhUKKM1abR0+HjDqMuJALlh9/F+901uDrUsuyGW1Ra7Nr4JLIei0OveRT+/DoUbUqBRhVAi6p5PLROLeE3mO6ji4yjcv+baLrbgrGpiQUfPZRel9J/I+3vdhhN01Oo/+MGTuhfwLeDDQiSqcALHCwzFqQEx+LBcD/+6rwHTjqGgug0+5adbOtGiG0OqZHPQKvT4Jf+O1DIFbASG4atk8jWPoVrjTcwOb1UHMtN1DmGCLoXmqka9WLfOrkSO2ISWF2H2blZ/GMxo73rb0zPmO1+fx9flGQXgG3tkxc/XRjZeoUS0WFb7K1MKmOjRH1bA8xWy9Lph2DCHOLtpZk6L24/Idx3WEMINuE50wXjJQm7sLQOdvB67W26J3dRwSo8SvxXnGaPXzDWskuJwz7TOnBPsU1TTatGK52WGVqeq+j0eX68dZnTXp5fp+15yPDS+BfGNofvXwAAAP//1IVlfwAAAAZJREFUAwAAaIW8dIViXwAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23115c31%22/%3E%3Cpath d=%22M32.00 8.50 L46.00 24.59 L40.75 25.94 L49.10 35.83 L44.19 36.71 L52.33 43.10 L50.45 43.71 L52.73 45.73 L43.31 46.40 L54.35 53.67 L49.23 55.89 L43.11 55.69 L38.06 54.35 L34.83 53.61 L33.82 53.61 L33.82 56.50 L30.18 56.50 L30.18 53.61 L29.17 53.61 L25.94 54.35 L20.89 55.69 L14.77 55.89 L9.65 53.67 L20.69 46.40 L11.27 45.73 L13.55 43.71 L11.67 43.10 L19.81 36.71 L14.90 35.83 L23.25 25.94 L18.00 24.59 L32.00 8.50Z%22 fill=%22%2300a651%22 stroke=%22%23e9f6ec%22 stroke-width=%221.6%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- If a browser has scripts turned off, show the simple contact box instead of empty spots -->
+<noscript><style>#fallback { display: block !important; } .preview, .site-header, main, .site-footer, .callbar { display: none !important; }</style></noscript>
 
 <style>
 /* ==========================================================
@@ -34,22 +52,27 @@
   --green: #115c31;        /* main green: the dark pine green from the Olkonen logo */
   --green-dark: #0b3f22;   /* darker green for headings and footer */
   --leaf: #00a651;         /* bright tree green from the logo: thin accents only (too light for text) */
+  --leaf-tint: #e6f1e8;    /* pale green behind the service icons */
   --cream: #f8f5ee;        /* page background */
   --stone: #ede7db;        /* alternate section background */
   --line: #d6cdbb;         /* borders */
+  --line-soft: #e9e2d4;    /* thin lines between rows */
   --text: #2b2a26;         /* main text */
   --muted: #55524a;        /* softer text */
   --clay: #96512d;         /* "Request a Quote" button */
   --clay-dark: #7a4122;
+  --focus: #b8741f;        /* keyboard focus ring */
   --corner: 6px;           /* overwritten by SETTINGS.look.buttonCorners */
   --serif: Georgia, "Times New Roman", Tinos, Times, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(30, 40, 28, 0.06), 0 3px 12px rgba(30, 40, 28, 0.05);
+  --shadow-md: 0 2px 6px rgba(30, 40, 28, 0.08), 0 14px 34px rgba(30, 40, 28, 0.12);
   color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(17, 92, 49, 0.12); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
 body {
@@ -59,33 +82,52 @@ body {
   font-family: var(--sans);
   font-size: 1.125rem;
   line-height: 1.6;
-  padding-bottom: 80px; /* room for the phone call bar */
+  padding-bottom: 84px; /* room for the phone call bar */
 }
 @media (min-width: 900px) { body { padding-bottom: 0; } }
 
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--green); }
+a { color: var(--green); text-underline-offset: 0.15em; }
 a[href^="tel:"] { white-space: nowrap; } /* never split a phone number across lines */
-:focus-visible { outline: 3px solid #c98a2f; outline-offset: 2px; }
+p { text-wrap: pretty; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
+h1, h2, h3 { font-family: var(--serif); line-height: 1.2; text-wrap: balance; }
 h2 { font-size: clamp(1.75rem, 4.5vw, 2.35rem); font-weight: 400; margin: 0 0 12px; color: var(--green-dark); }
 h3 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; color: var(--green-dark); }
+/* A short leaf-green line above each section heading */
+.sec-head::before { content: ""; display: block; width: 44px; height: 3px; border-radius: 2px; background: var(--leaf); margin-bottom: 14px; }
 
 .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 @media (min-width: 600px) { .wrap { padding: 0 24px; } }
 
 .skip { position: absolute; left: -9999px; top: 0; background: #fff; padding: 12px 16px; z-index: 100; }
 .skip:focus { left: 8px; top: 8px; }
+.icon { display: inline-flex; flex: none; }
+.icon svg, .btn svg, .header-phone svg, .big-phone svg { display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Light text on dark green: crisper on Macs, and a brighter focus ring */
+.hero, .contact, .site-footer, .btn-call, .btn-quote { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.hero :focus-visible, .contact :focus-visible, .site-footer :focus-visible { outline-color: #f2c66d; }
+
+/* Backup contact box: only shows if the page's script can't run */
+#fallback { display: none; width: calc(100% - 32px); max-width: 640px; margin: 40px auto; padding: 24px; background: #fff; border: 1px solid var(--line); border-radius: 12px; text-align: center; }
+#fallback p { margin: 0 0 8px; }
+#fallback .fb-name { font-family: var(--serif); font-size: 1.6rem; color: var(--green-dark); }
+#fallback .fb-detail { margin-top: 16px; font-size: 0.85rem; color: var(--muted); }
+.js-failed #fallback { display: block; }
+.js-failed .preview, .js-failed .site-header, .js-failed main, .js-failed .site-footer, .js-failed .callbar { display: none !important; }
 
 /* ---------- Buttons ---------- */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   min-height: 52px; padding: 12px 22px;
   border-radius: var(--corner); border: 2px solid transparent;
   font-family: inherit; font-size: 1.1rem; font-weight: 700; line-height: 1.25;
   text-decoration: none; text-align: center; cursor: pointer;
 }
+.btn svg { width: 1.2em; height: 1.2em; flex: none; }
 .btn-call  { background: var(--green); color: #fff; }
 .btn-call:hover  { background: var(--green-dark); }
 .btn-light { background: var(--cream); color: var(--green-dark); }
@@ -93,6 +135,10 @@ h3 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; color: var(--green-da
 .btn-quote { background: var(--clay); color: #fff; }
 .btn-quote:hover { background: var(--clay-dark); }
 .btn-block { display: flex; width: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: background-color 0.15s ease, transform 0.12s ease; }
+  .btn:active { transform: scale(0.98); }
+}
 
 /* The X close button used on every banner, menu and popup */
 .x {
@@ -111,70 +157,88 @@ h3 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; color: var(--green-da
   padding: 8px 16px; font-size: 0.95rem; line-height: 1.4;
 }
 .preview p { margin: 0; }
-.preview .x { width: 36px; height: 36px; font-size: 1.4rem; }
+.preview .x { width: 40px; height: 40px; font-size: 1.5rem; }
 
 /* ---------- Header ---------- */
 .site-header { background: #fff; border-bottom: 1px solid var(--line); }
 .header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
-.brand img { display: block; height: 72px; width: auto; padding: 4px 0; }
+.brand { display: block; font-family: var(--serif); font-size: 1.4rem; font-weight: 700; line-height: 1.2; color: var(--green-dark); text-decoration: none; }
+.brand img { display: block; height: 72px; width: auto; aspect-ratio: 331 / 150; padding: 4px 0; }
 @media (min-width: 640px) { .brand img { height: 92px; } }
-.quote-logo { display: block; width: 100%; max-width: 340px; height: auto; margin-top: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--corner); padding: 16px 20px; }
-.brand { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; line-height: 1.2; color: var(--green-dark); text-decoration: none; }
-@media (max-width: 380px) { .brand { font-size: 1.2rem; } }
 .nav-desktop { display: none; }
-.nav-desktop a { color: var(--text); text-decoration: none; font-size: 1.05rem; }
-.nav-desktop a:hover { text-decoration: underline; color: var(--green); }
+.nav-desktop a { color: var(--text); text-decoration: none; font-size: 1.05rem; padding: 6px 0; }
+.nav-desktop a:hover { color: var(--green); text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--leaf); }
 .header-right { display: flex; align-items: center; gap: 12px; }
-.header-phone { display: none; font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
+.header-phone { display: none; align-items: center; gap: 8px; font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
+.header-phone svg { width: 20px; height: 20px; color: var(--green); }
+.header-phone:hover { color: var(--green); }
 .menu-btn {
-  min-height: 44px; padding: 8px 16px;
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 46px; padding: 8px 16px;
   border: 2px solid var(--green); border-radius: var(--corner);
   background: #fff; color: var(--green); font: inherit; font-weight: 700; cursor: pointer;
 }
-@media (min-width: 640px) { .header-phone { display: inline-block; } }
+.menu-btn svg { width: 22px; height: 22px; }
+@media (min-width: 640px) { .header-phone { display: inline-flex; } }
 @media (min-width: 900px) {
-  .site-header { position: sticky; top: 0; z-index: 40; }
+  .site-header { position: sticky; top: 0; z-index: 40; transition: box-shadow 0.2s ease; }
+  .site-header.scrolled { box-shadow: 0 2px 14px rgba(30, 40, 28, 0.1); }
   section[id] { scroll-margin-top: 100px; }
-  .nav-desktop { display: flex; gap: 24px; }
+  .nav-desktop { display: flex; gap: 26px; }
   .menu-btn { display: none; }
 }
 
 /* ---------- Top section (hero) ---------- */
-.hero { background: var(--green); color: var(--cream); padding: 40px 0 48px; }
-.hero-grid { display: grid; gap: 32px; align-items: center; }
-.hero h1 { font-size: clamp(2.1rem, 6.5vw, 3.2rem); font-weight: 400; margin: 0 0 16px; color: #fff; text-wrap: balance; }
-.lead { font-size: 1.2rem; margin: 0; color: #ece8dc; max-width: 34em; }
-.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-.hero-note { margin: 20px 0 0; color: #dcd7c8; font-size: 1.05rem; }
-.hero-pic { border-radius: calc(var(--corner) * 2); overflow: hidden; background: #efe7d2; aspect-ratio: 3 / 2; }
+.hero { background: var(--green); color: var(--cream); padding: 32px 0 40px; }
+.hero-grid { display: grid; gap: 28px; align-items: center; }
+.hero h1 { font-size: clamp(2.05rem, 5.6vw, 3.1rem); font-weight: 400; margin: 0 0 14px; color: #fff; }
+.lead { font-size: 1.15rem; margin: 0; color: #ece8dc; max-width: 34em; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.hero-pic { border-radius: calc(var(--corner) * 2); overflow: hidden; background: #efe7d2; aspect-ratio: 2 / 1; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); }
 .hero-pic svg, .hero-pic img { width: 100%; height: 100%; display: block; object-fit: cover; }
 @media (max-width: 599px) { .btn-row .btn { flex: 1 1 100%; } }
 @media (min-width: 900px) {
   .hero { padding: 72px 0; }
-  .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 48px; }
+  .hero-grid { grid-template-columns: 1.25fr 1fr; gap: 48px; }
+  .lead { font-size: 1.2rem; }
+  .btn-row { margin-top: 30px; }
+  .hero-pic { aspect-ratio: 3 / 2; }
 }
 
 /* ---------- Sections ---------- */
-.section { padding: 56px 0; }
+.section { padding: 48px 0; }
 .section-alt { background: var(--stone); }
-.section-intro { color: var(--muted); max-width: 40em; margin: 0 0 28px; }
-@media (min-width: 900px) { .section { padding: 80px 0; } }
-
-/* Services */
-.services { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
-.service {
-  background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--leaf);
-  border-radius: var(--corner); padding: 20px 22px;
+.section-intro { color: var(--muted); max-width: 40em; margin: 0 0 22px; }
+@media (min-width: 900px) {
+  .section { padding: 80px 0; }
+  .section-intro { margin-bottom: 30px; }
 }
-.service p { margin: 0; color: var(--muted); }
-.services-note { margin: 28px 0 0; font-size: 1.1rem; }
-@media (min-width: 700px) { .services { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px) { .services { grid-template-columns: 1fr 1fr 1fr; } }
+
+/* Services: a compact list on phones, cards on bigger screens */
+.services { list-style: none; margin: 0; padding: 0; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); box-shadow: var(--shadow-sm); overflow: hidden; }
+.service { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; }
+.service + .service { border-top: 1px solid var(--line-soft); }
+.service-icon { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--leaf-tint); color: var(--green); display: flex; align-items: center; justify-content: center; }
+.service-icon svg { width: 26px; height: 26px; }
+.service h3 { font-size: 1.15rem; margin: 1px 0 2px; }
+.service p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+.services-note { margin: 20px 0 0; font-size: 1.1rem; }
+@media (min-width: 700px) {
+  .services { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+  .service { display: block; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 24px; box-shadow: var(--shadow-sm); }
+  .service + .service { border-top: 1px solid var(--line); }
+  .service-icon { width: 52px; height: 52px; margin-bottom: 14px; }
+  .service-icon svg { width: 30px; height: 30px; }
+  .service h3 { font-size: 1.3rem; margin: 0 0 6px; }
+  .service p { font-size: 1.05rem; line-height: 1.55; }
+  .services-note { margin-top: 28px; }
+}
+@media (min-width: 1000px) { .services { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
 
 /* Our Work photos (only shows once real photos are added) */
 .gallery { display: grid; gap: 16px; }
 .gallery figure { margin: 0; }
-.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--corner); }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--corner); outline: 1px solid rgba(0, 0, 0, 0.08); outline-offset: -1px; }
 .gallery figcaption { margin-top: 6px; color: var(--muted); font-size: 1rem; }
 @media (min-width: 700px) { .gallery { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1000px) { .gallery { grid-template-columns: 1fr 1fr 1fr; } }
@@ -182,94 +246,160 @@ h3 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; color: var(--green-da
 /* About */
 .about-grid { display: grid; gap: 32px; }
 .about-text p { margin: 0 0 16px; max-width: 40em; }
-.facts { margin: 8px 0 0; padding-left: 1.2em; }
+.about-text p:last-of-type { margin-bottom: 0; }
+.facts { margin: 16px 0 0; padding-left: 1.2em; }
 .facts li { margin-bottom: 6px; }
-.side-card { background: #fff; border: 1px solid var(--line); border-radius: var(--corner); padding: 24px; align-self: start; }
+.side-card { display: none; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 26px; align-self: start; box-shadow: var(--shadow-sm); }
 .side-card p { margin: 0 0 18px; color: var(--muted); }
 .side-card .btn + .btn { margin-top: 12px; }
-@media (min-width: 900px) { .about-grid { grid-template-columns: 1.6fr 1fr; gap: 48px; } }
+@media (min-width: 900px) {
+  .about-grid { grid-template-columns: 1.6fr 1fr; gap: 48px; }
+  .side-card { display: block; } /* on phones the call bar already does this job */
+}
 
 /* Hiring strip */
-.hiring { background: #f3e7dc; border-top: 1px solid #e3cfbd; border-bottom: 1px solid #e3cfbd; padding: 22px 0; }
+.hiring { background: #f3e7dc; border-top: 1px solid #e3cfbd; border-bottom: 1px solid #e3cfbd; padding: 20px 0; }
 .hiring p { margin: 0; font-size: 1.1rem; }
 .hiring strong { font-family: var(--serif); font-size: 1.25rem; color: var(--green-dark); margin-right: 6px; }
 
 /* Service area */
-.area-grid { display: grid; gap: 28px; align-items: center; }
-.area-note { margin: 20px 0 0; }
-.area-map { background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) * 2); overflow: hidden; }
+.area-grid { display: grid; gap: 24px; align-items: center; }
+.area-note { margin: 18px 0 0; }
+.area-map { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) * 2); overflow: hidden; box-shadow: var(--shadow-sm); }
 .area-map svg { display: block; width: 100%; height: auto; }
-.area-map figcaption { padding: 8px 14px; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line); }
+.area-map figcaption { padding: 8px 14px; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line-soft); }
 @media (min-width: 900px) { .area-grid { grid-template-columns: 1fr 1.2fr; gap: 48px; } }
 
 /* Quote form */
-.quote-grid { display: grid; gap: 28px; }
-.quote-side p { margin: 0 0 16px; max-width: 32em; }
-.big-phone { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
-form.quote { background: #fff; border: 1px solid var(--line); border-radius: var(--corner); padding: 24px 20px; }
+.quote-grid { display: grid; gap: 24px; }
+.quote-side p { margin: 0 0 14px; max-width: 32em; }
+.big-phone { display: inline-flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
+.big-phone svg { width: 26px; height: 26px; color: var(--green); }
+.big-phone:hover { color: var(--green); }
+.quote-logo { display: block; width: 100%; max-width: 230px; height: auto; aspect-ratio: 331 / 150; box-sizing: content-box; margin-top: 22px; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 12px 16px; }
+form.quote { background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 22px 18px; box-shadow: var(--shadow-sm); }
 .field { margin-bottom: 18px; }
 .field label { display: block; font-weight: 700; margin-bottom: 6px; }
 .field .opt { font-weight: 400; color: var(--muted); }
 .field input, .field select, .field textarea {
   width: 100%; font: inherit; font-size: 1.05rem; color: var(--text);
   padding: 12px 14px; background: #fff;
-  border: 1px solid #a9a08c; border-radius: var(--corner);
+  border: 1px solid #8a816d; border-radius: var(--corner);
 }
-.field textarea { min-height: 130px; resize: vertical; }
+.field textarea { min-height: 120px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); outline: 2px solid var(--green); outline-offset: 0; }
+.field input:user-invalid { border-color: #b3261e; }
 .demo-note { background: #fbf3dc; border: 1px solid #e6d7a8; border-radius: var(--corner); padding: 10px 14px; font-size: 1rem; margin: 0 0 18px; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 @media (min-width: 600px) { form.quote { padding: 28px; } }
-@media (min-width: 900px) { .quote-grid { grid-template-columns: 1fr 1.3fr; gap: 48px; } }
+@media (min-width: 900px) {
+  .quote-grid { grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: start; }
+  .quote-side { position: sticky; top: 124px; } /* phone number and logo stay in view beside the long form */
+  .quote-logo { max-width: 300px; padding: 16px 20px; margin-top: 28px; }
+}
 
 /* Contact */
 .contact { background: var(--green); color: var(--cream); }
 .contact h2 { color: #fff; }
 .contact a { color: #fff; }
-.contact-list { display: grid; gap: 24px; margin: 24px 0 0; }
-.contact-list dt { font-size: 0.95rem; color: #cfd8c9; text-transform: none; margin-bottom: 2px; }
+.contact-list { display: grid; gap: 22px; margin: 24px 0 0; }
+.contact-list dt { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: #cfd8c9; margin-bottom: 4px; }
+.contact-list dt svg { width: 18px; height: 18px; }
 .contact-list dd { margin: 0; font-size: 1.2rem; overflow-wrap: anywhere; }
 .contact-list .phone-big { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; text-decoration: none; }
 @media (min-width: 700px) { .contact-list { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1000px) { .contact-list { grid-template-columns: repeat(4, 1fr); } }
 
 /* Footer */
-.site-footer { background: var(--green-dark); color: #cfc9b8; padding: 24px 0; font-size: 0.95rem; }
-.site-footer p { margin: 0 0 6px; }
+.site-footer { background: var(--green-dark); color: #cfc9b8; padding: 22px 0; font-size: 0.95rem; }
+.footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.site-footer p { margin: 0 0 4px; }
 .site-footer a { color: #fff; }
+.to-top { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; text-decoration: none; }
+.to-top svg { width: 18px; height: 18px; }
+.to-top:hover { text-decoration: underline; }
 
-/* Phone call bar (phones and tablets only) */
+/* Phone call bar (phones and tablets only). It slides in once the top buttons scroll away. */
 .callbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
   display: flex; gap: 10px;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   background: #fff; border-top: 1px solid var(--line);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
 }
-.callbar .btn { flex: 1; min-height: 54px; padding: 8px 10px; font-size: 1.05rem; }
+.callbar .btn { flex: 1; min-height: 54px; padding: 8px 10px; font-size: 1.05rem; gap: 8px; }
 .callbar .btn-call { flex: 1.4; }
-@media (max-width: 380px) { .callbar .btn { font-size: 1rem; } }
+.callbar.is-hidden { transform: translateY(110%); visibility: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .callbar { transition: transform 0.25s ease, visibility 0s linear 0s; }
+  .callbar.is-hidden { transition: transform 0.2s ease, visibility 0s linear 0.2s; }
+}
+@media (max-width: 380px) { .callbar .btn { font-size: 1rem; } .callbar .btn svg { display: none; } }
 @media (min-width: 900px) { .callbar { display: none; } }
 
 /* Popups and the menu */
+dialog:not([open]) { display: none; }
 dialog {
   border: none; padding: 0; width: calc(100% - 32px); max-width: 440px;
   border-radius: calc(var(--corner) * 2); background: #fff; color: var(--text);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
 }
 dialog::backdrop { background: rgba(20, 30, 22, 0.55); }
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open] { animation: dlg-in 0.2s ease-out; }
+  dialog[open]::backdrop { animation: fade-in 0.2s ease-out; }
+}
+@keyframes dlg-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 .dialog-inner { position: relative; padding: 28px 24px 24px; }
 .dialog-inner > .x { position: absolute; top: 12px; right: 12px; }
 .dialog-inner h2 { font-size: 1.5rem; padding-right: 52px; margin-bottom: 12px; }
 .dialog-inner p { margin: 0 0 20px; }
 dialog.menu { margin-top: 16px; }
 .menu-links { list-style: none; margin: 8px 0 20px; padding: 0; }
-.menu-links a { display: block; padding: 14px 4px; border-bottom: 1px solid var(--line); color: var(--text); text-decoration: none; font-size: 1.25rem; font-family: var(--serif); }
+.menu-links a { display: block; padding: 14px 4px; border-bottom: 1px solid var(--line-soft); color: var(--text); text-decoration: none; font-size: 1.25rem; font-family: var(--serif); }
 .menu-links a:hover { color: var(--green); }
 .menu-title { font-family: var(--serif); font-size: 1.3rem; margin: 6px 0 0; color: var(--green-dark); padding-right: 52px; }
+/* Older phones without built-in popups get the same look */
+.no-dialog dialog[open] { display: block; position: fixed; z-index: 101; top: 16px; left: 0; right: 0; margin: 0 auto; max-height: calc(100% - 32px); overflow: auto; }
+.dlg-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; background: rgba(20, 30, 22, 0.55); }
+
+/* Printing: just the words, no buttons or bars */
+@media print {
+  .preview, .callbar, .menu-btn, .nav-desktop, dialog, .hero-pic, .area-map, .to-top, .side-card, form.quote, .btn-row { display: none !important; }
+  .quote-side { position: static !important; }
+  body { padding: 0; background: #fff; }
+  .hero, .contact, .site-footer, .section-alt, .hiring { background: #fff !important; }
+  .hero *, .contact *, .site-footer * { color: #000 !important; }
+  .site-header { position: static; box-shadow: none; }
+}
 </style>
 </head>
 <body>
+<div id="page-top"></div>
+
+<!-- Backup contact box. Only shows if the page's script can't run (see the note just below). -->
+<div id="fallback" role="alert">
+  <p class="fb-name">Olkonen Earthscapes</p>
+  <p>Landscaping in Hopkinton &amp; Concord, NH</p>
+  <p>Call <a href="tel:+16032244328">603-224-4328</a> or email <a href="mailto:Olkonen@comcast.net">Olkonen@comcast.net</a></p>
+  <p class="fb-detail" id="fallback-detail"></p>
+</div>
+<script>
+  /* Safety net: if the page's code stops because of a mistake (for example a missing
+     quote or comma in SETTINGS), show the contact box above instead of a broken page,
+     and say which line to check. */
+  window.siteReady = false;
+  window.addEventListener("error", function (e) {
+    if (window.siteReady) return;
+    var here = location.href.split("#")[0];
+    if (e.filename && e.filename.split("#")[0] !== here) return;
+    document.documentElement.className += " js-failed";
+    var d = document.getElementById("fallback-detail");
+    if (d) d.textContent = "For the site owner: the page stopped at line " + e.lineno + " (" + e.message + "). Check SETTINGS near that line for a missing quote or comma.";
+  });
+</script>
+
 <a class="skip" href="#main">Skip to main content</a>
 
 <!-- Preview banner. Turn it off in SETTINGS (previewBanner.show = false). -->
@@ -280,7 +410,7 @@ dialog.menu { margin-top: 16px; }
 
 <header class="site-header">
   <div class="wrap header-row">
-    <a href="#top" class="brand" id="brand-name"></a>
+    <a href="#page-top" class="brand" id="brand-name"></a>
     <nav class="nav-desktop" aria-label="Main">
       <a href="#services">Services</a>
       <a href="#about">About</a>
@@ -289,8 +419,8 @@ dialog.menu { margin-top: 16px; }
       <a href="#contact">Contact</a>
     </nav>
     <div class="header-right">
-      <a class="header-phone" data-tel="{phone}"></a>
-      <button type="button" class="menu-btn" id="menu-open" aria-haspopup="dialog" aria-controls="menu">Menu</button>
+      <a class="header-phone" data-tel="{phone}" data-icon="phone"></a>
+      <button type="button" class="menu-btn" id="menu-open" aria-haspopup="dialog" aria-controls="menu"><span class="icon" data-icon="menu"></span>Menu</button>
     </div>
   </div>
 </header>
@@ -303,26 +433,27 @@ dialog.menu { margin-top: 16px; }
       <div>
         <h1 id="hero-heading"></h1>
         <p class="lead" id="hero-sub"></p>
-        <div class="btn-row">
-          <a class="btn btn-light" data-tel="Call {phone}"></a>
+        <div class="btn-row" id="hero-buttons">
+          <a class="btn btn-light" data-tel="Call {phone}" data-icon="phone"></a>
           <a class="btn btn-quote" href="#quote" data-text="hero.quoteButton"></a>
         </div>
-        <p class="hero-note" id="hero-note"></p>
       </div>
       <div class="hero-pic" id="hero-pic">
         <!-- Simple drawing shown until a real photo is set in SETTINGS.photos.hero -->
-        <svg viewBox="0 0 600 400" role="img" aria-label="Drawing of a landscaped yard with a stone wall and trees" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox="0 0 600 400" role="img" aria-label="Drawing of a landscaped yard with a stone wall, pine trees and a path" preserveAspectRatio="xMidYMid slice">
           <rect width="600" height="400" fill="#efe7d2"/>
           <circle cx="470" cy="92" r="42" fill="#e5c98d"/>
           <path d="M0 230 C120 170 220 200 320 185 C420 170 500 150 600 175 L600 400 L0 400Z" fill="#a9c7a6"/>
+          <g transform="translate(-50 92)">
+            <path d="M137.00 43.30 L159.60 65.60 L150.70 66.80 L164.90 81.30 L156.30 82.30 L170.40 91.60 L167.60 92.40 L171.60 96.00 L155.80 96.80 L173.40 107.00 L166.00 109.90 L154.00 109.60 L145.00 108.00 L137.00 107.40 L129.00 108.00 L120.00 109.60 L108.00 109.90 L100.60 107.00 L118.20 96.80 L102.40 96.00 L106.40 92.40 L103.60 91.60 L117.70 82.30 L109.10 81.30 L123.30 66.80 L114.40 65.60 L137.00 43.30ZM194.80 43.30 L217.40 65.60 L208.50 66.80 L222.70 81.30 L214.10 82.30 L228.20 91.60 L225.40 92.40 L229.40 96.00 L213.60 96.80 L231.20 107.00 L223.80 109.90 L211.80 109.60 L202.80 108.00 L194.80 107.40 L186.80 108.00 L177.80 109.60 L165.80 109.90 L158.40 107.00 L176.00 96.80 L160.20 96.00 L164.20 92.40 L161.40 91.60 L175.50 82.30 L166.90 81.30 L181.10 66.80 L172.20 65.60 L194.80 43.30Z" fill="#115c31"/>
+            <path d="M166.70 42.30 L187.50 66.20 L179.70 68.20 L192.10 82.90 L184.80 84.20 L196.90 93.70 L194.10 94.60 L197.50 97.60 L183.50 98.60 L199.90 109.40 L192.30 112.70 L183.20 112.40 L175.70 110.40 L170.90 109.30 L169.40 109.30 L169.40 113.60 L164.00 113.60 L164.00 109.30 L162.50 109.30 L157.70 110.40 L150.20 112.40 L141.10 112.70 L133.50 109.40 L149.90 98.60 L135.90 97.60 L139.30 94.60 L136.50 93.70 L148.60 84.20 L141.30 82.90 L153.70 68.20 L145.90 66.20 L166.70 42.30Z" fill="#1f9a52"/>
+          </g>
           <path d="M0 280 C140 235 260 265 380 245 C470 230 540 240 600 250 L600 400 L0 400Z" fill="#6f9e75"/>
           <rect x="425" y="200" width="10" height="44" rx="4" fill="#5a4632"/>
           <circle cx="430" cy="190" r="32" fill="#115c31"/>
           <circle cx="410" cy="204" r="20" fill="#056839"/>
           <rect x="517" y="212" width="8" height="34" rx="4" fill="#5a4632"/>
           <circle cx="521" cy="204" r="23" fill="#0f6b3a"/>
-          <rect x="150" y="222" width="8" height="36" rx="4" fill="#5a4632"/>
-          <circle cx="154" cy="214" r="24" fill="#1d7442"/>
           <path d="M0 330 C180 300 360 322 600 302 L600 400 L0 400Z" fill="#3f7d50"/>
           <g>
             <rect x="52"  y="290" width="30" height="14" rx="5" fill="#b9b3a6"/>
@@ -358,7 +489,7 @@ dialog.menu { margin-top: 16px; }
   <!-- SERVICES -->
   <section class="section" id="services">
     <div class="wrap">
-      <h2 data-text="services.heading"></h2>
+      <h2 class="sec-head" data-text="services.heading"></h2>
       <p class="section-intro" data-text="services.intro"></p>
       <ul class="services" id="services-list"></ul>
       <p class="services-note" id="services-note"></p>
@@ -368,7 +499,7 @@ dialog.menu { margin-top: 16px; }
   <!-- OUR WORK (hidden until real photos are added in SETTINGS.photos.work) -->
   <section class="section section-alt" id="work" hidden>
     <div class="wrap">
-      <h2 data-text="photos.workHeading"></h2>
+      <h2 class="sec-head" data-text="photos.workHeading"></h2>
       <div class="gallery" id="gallery"></div>
     </div>
   </section>
@@ -377,14 +508,14 @@ dialog.menu { margin-top: 16px; }
   <section class="section section-alt" id="about">
     <div class="wrap about-grid">
       <div class="about-text">
-        <h2 data-text="about.heading"></h2>
+        <h2 class="sec-head" data-text="about.heading"></h2>
         <div id="about-paragraphs"></div>
         <ul class="facts" id="about-facts" hidden></ul>
       </div>
       <aside class="side-card" aria-label="Contact us">
         <h3 data-text="about.cardHeading"></h3>
         <p data-text="about.cardText"></p>
-        <a class="btn btn-call btn-block" data-tel="Call {phone}"></a>
+        <a class="btn btn-call btn-block" data-tel="Call {phone}" data-icon="phone"></a>
         <a class="btn btn-quote btn-block" href="#quote" data-text="hero.quoteButton"></a>
       </aside>
     </div>
@@ -399,14 +530,14 @@ dialog.menu { margin-top: 16px; }
   <section class="section" id="area">
     <div class="wrap area-grid">
       <div>
-        <h2 data-text="serviceArea.heading"></h2>
+        <h2 class="sec-head" data-text="serviceArea.heading"></h2>
         <p class="section-intro" style="margin-bottom:0" data-text="serviceArea.text"></p>
         <p class="area-note" id="area-note"></p>
       </div>
       <!-- Simple drawn map, built from SETTINGS.serviceArea.towns -->
-      <figure class="area-map" id="area-map" style="margin:0">
+      <figure class="area-map" id="area-map">
         <svg id="map-svg" viewBox="0 0 600 400" role="img"></svg>
-        <figcaption>Simple map for reference. Not sure if we cover your town? Just call.</figcaption>
+        <figcaption>Simple map for reference.</figcaption>
       </figure>
     </div>
   </section>
@@ -415,11 +546,11 @@ dialog.menu { margin-top: 16px; }
   <section class="section section-alt" id="quote">
     <div class="wrap quote-grid">
       <div class="quote-side">
-        <h2 data-text="form.heading"></h2>
+        <h2 class="sec-head" data-text="form.heading"></h2>
         <p data-text="form.intro"></p>
         <p data-text="form.preferCall"></p>
-        <a class="big-phone" data-tel="{phone}"></a>
-        <img class="quote-logo" id="quote-logo" alt="Olkonen Earthscapes" hidden>
+        <a class="big-phone" data-tel="{phone}" data-icon="phone"></a>
+        <img class="quote-logo" id="quote-logo" alt="Olkonen Earthscapes" width="331" height="150" hidden>
       </div>
       <form class="quote" id="quote-form">
         <p class="demo-note" id="demo-note" hidden></p>
@@ -461,28 +592,31 @@ dialog.menu { margin-top: 16px; }
   <!-- CONTACT -->
   <section class="section contact" id="contact">
     <div class="wrap">
-      <h2>Contact Us</h2>
+      <h2 class="sec-head">Contact Us</h2>
       <dl class="contact-list">
-        <div><dt>Phone</dt><dd><a class="phone-big" data-tel="{phone}"></a></dd></div>
-        <div><dt>Email</dt><dd><a id="contact-email"></a></dd></div>
-        <div><dt>Address</dt><dd id="contact-address"></dd></div>
-        <div id="contact-fb-wrap"><dt>Facebook</dt><dd><a id="contact-fb" target="_blank" rel="noopener">Find us on Facebook</a></dd></div>
+        <div><dt><span class="icon" data-icon="phone"></span>Phone</dt><dd><a class="phone-big" data-tel="{phone}"></a></dd></div>
+        <div><dt><span class="icon" data-icon="mail"></span>Email</dt><dd><a id="contact-email"></a></dd></div>
+        <div><dt><span class="icon" data-icon="pin"></span>Address</dt><dd id="contact-address"><span id="addr-street"></span><br><span id="addr-town"></span></dd></div>
+        <div id="contact-fb-wrap"><dt><span class="icon" data-icon="out"></span>Facebook</dt><dd><a id="contact-fb" target="_blank" rel="noopener">Find us on Facebook<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
       </dl>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">
-    <p id="footer-line"></p>
-    <p id="footer-credit"></p>
+  <div class="wrap footer-row">
+    <div>
+      <p id="footer-line"></p>
+      <p id="footer-credit"></p>
+    </div>
+    <a class="to-top" href="#page-top"><span class="icon" data-icon="up"></span>Back to top</a>
   </div>
 </footer>
 
-<!-- Phone call bar (shows on phones and tablets only) -->
-<div class="callbar" id="callbar">
-  <a class="btn btn-call" data-tel="Call {phone}"></a>
-  <a class="btn btn-quote" href="#quote">Request a Quote</a>
+<!-- Phone call bar (phones and tablets only) -->
+<div class="callbar is-hidden" id="callbar">
+  <a class="btn btn-call" data-tel="Call {phone}" data-icon="phone"></a>
+  <a class="btn btn-quote" href="#quote" data-text="hero.quoteButton"></a>
 </div>
 
 <!-- MENU (phones and tablets) -->
@@ -497,7 +631,7 @@ dialog.menu { margin-top: 16px; }
       <li><a href="#quote">Request a Quote</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="btn btn-call btn-block" data-tel="Call {phone}"></a>
+    <a class="btn btn-call btn-block" data-tel="Call {phone}" data-icon="phone"></a>
   </div>
 </dialog>
 
@@ -511,23 +645,21 @@ dialog.menu { margin-top: 16px; }
   </div>
 </dialog>
 
-<noscript>
-  <p style="padding:16px;background:#fff">Olkonen Earthscapes, Hopkinton, NH. Call <a href="tel:+16032244328">603-224-4328</a> or email <a href="mailto:Olkonen@comcast.net">Olkonen@comcast.net</a>.</p>
-</noscript>
-
 <script>
 /* ================================================================
    SETTINGS: edit the website here.
    Change the words between the quotes. Keep the quotes and commas.
    {phone} anywhere in the text is replaced with the phone number
    below, as a tap-to-call link.
+   If you make a typo here, the page shows a small contact box with
+   the line number to check, instead of breaking silently.
    ================================================================ */
 const SETTINGS = {
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
     show: true,
-    text: "Free sample redesign by JB Automates. This is not the live Olkonen Earthscapes website."
+    text: "Free sample redesign by JB Automates. Not the live Olkonen Earthscapes website."
   },
 
   // ---- BUSINESS INFO ----
@@ -556,22 +688,23 @@ const SETTINGS = {
   // CONFIRM WITH OWNER: the six service names come from their old site.
   // The short descriptions were written for this sample. Ask the owner
   // what each service really includes and fix the wording.
+  // icon can be: "plant", "tree", "wall", "shovel", "snow" or "rake".
   services: {
     heading: "Our Services",
     intro: "Here's what we can help with, from planning a new landscape to keeping your driveway clear in winter.",
     list: [
-      { name: "Landscaping",
-        description: "New plantings, garden beds, lawns and full landscape projects, planned with you from the start." },
-      { name: "Trees & Shrubs",
-        description: "Choosing, planting and caring for trees and shrubs that suit your property." },
-      { name: "Walls, Walks, Steps & Patios",
-        description: "Walls, walkways, steps and patios for outdoor spaces you'll use every day." },
-      { name: "Light Excavation",
-        description: "Grading, site preparation and other smaller excavation jobs." },
-      { name: "Winter Services",
-        description: "Snow removal to help keep your driveway and walkways clear through the winter." },
-      { name: "Maintenance",
-        description: "Spring and fall cleanups and regular upkeep to keep your property looking its best." }
+      { name: "Landscaping", icon: "plant",
+        description: "New plantings, garden beds, lawns and full landscape projects." },
+      { name: "Trees & Shrubs", icon: "tree",
+        description: "Planting and caring for trees and shrubs that suit your property." },
+      { name: "Walls, Walks, Steps & Patios", icon: "wall",
+        description: "Walls, walkways, steps and patios made for everyday use." },
+      { name: "Light Excavation", icon: "shovel",
+        description: "Grading, site preparation and other smaller digging jobs." },
+      { name: "Winter Services", icon: "snow",
+        description: "Snow removal to keep your driveway and walks clear." },
+      { name: "Maintenance", icon: "rake",
+        description: "Spring and fall cleanups and regular upkeep." }
     ],
     note: "Don't see what you need? Call {phone} and ask."
   },
@@ -606,6 +739,7 @@ const SETTINGS = {
     // ASK THE OWNER: only add facts he confirms. The list stays hidden while empty.
     // Examples: "Serving the area since ____", "Fully insured" (only if true).
     facts: [],
+    // The small box next to the About text (computers only; phones have the call bar instead)
     cardHeading: "Have a project in mind?",
     cardText: "Give us a call or send a quote request and tell us what you're thinking."
   },
@@ -679,6 +813,27 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+  // ---- Small line icons drawn for this site (24 x 24 grid) ----
+  const ICONS = {
+    phone: '<path fill="currentColor" stroke="none" d="M6.6 3.2h2.5c.55 0 1 .37 1.12.9l.78 3.3c.1.45-.06.92-.42 1.2L9 9.9a12.4 12.4 0 0 0 5.1 5.1l1.3-1.6c.3-.36.76-.52 1.2-.42l3.3.78c.53.12.9.57.9 1.12v2.5c0 1.25-1.03 2.27-2.28 2.2C9.6 19 5 14.4 4.4 5.48 4.33 4.23 5.35 3.2 6.6 3.2z"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    plant: '<path d="M12 20.5v-9"/><path d="M12 11.5c0-4.2 2.9-6.6 7.2-6.6 0 4.2-2.9 6.6-7.2 6.6z"/><path d="M12 14.5c0-3.4-2.4-5.4-5.8-5.4 0 3.4 2.4 5.4 5.8 5.4z"/><path d="M5.5 20.5h13"/>',
+    tree: '<path d="M12 2.8l4.6 5.6h-2.5l3.9 4.9h-2.6l4 5H4.6l4-5H6l3.9-4.9H7.4z"/><path d="M12 18.3v3"/>',
+    wall: '<rect x="2.6" y="4" width="7.4" height="4.8" rx="1.6"/><rect x="11.4" y="4" width="10" height="4.8" rx="1.6"/><rect x="2.6" y="10.2" width="4.4" height="4.8" rx="1.6"/><rect x="8.4" y="10.2" width="7.6" height="4.8" rx="1.6"/><rect x="17.4" y="10.2" width="4" height="4.8" rx="1.6"/><rect x="2.6" y="16.4" width="9" height="4.8" rx="1.6"/><rect x="13" y="16.4" width="8.4" height="4.8" rx="1.6"/>',
+    shovel: '<path d="M15.2 8.8l4.3-4.3"/><path d="M17.3 2.6l4.1 4.1"/><path d="M13.6 10.4l-2.2-2.2-5.2 5.2a3.6 3.6 0 0 0 0 5.1l.3.3a3.6 3.6 0 0 0 5.1 0l5.2-5.2-2.2-2.2"/><path d="M12.3 9.1l3.6 3.6"/>',
+    snow: '<path d="M12 2.8v18.4M4 7.4l16 9.2M4 16.6l16-9.2"/><path d="M9.6 4.4L12 6l2.4-1.6M9.6 19.6L12 18l2.4 1.6M4.6 10.3l2.6-1.2-.2-2.9M19.4 13.7l-2.6 1.2.2 2.9M7 17.8l.2-2.9-2.6-1.2M17 6.2l-.2 2.9 2.6 1.2"/>',
+    rake: '<path d="M12 2.8v11"/><path d="M5.5 13.8h13"/><path d="M6.5 13.8v6M9.8 13.8v6.6M14.2 13.8v6.6M17.5 13.8v6"/>',
+    mail: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.8 6.5l8.2 6.2 8.2-6.2"/>',
+    pin: '<path d="M12 21.2s-6.8-6.1-6.8-11.1a6.8 6.8 0 0 1 13.6 0c0 5-6.8 11.1-6.8 11.1z"/><circle cx="12" cy="10.1" r="2.4"/>',
+    out: '<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>',
+    up: '<path d="M12 19V5M6 11l6-6 6 6"/>'
+  };
+  function icon(name) {
+    const t = document.createElement("template");
+    t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (ICONS[name] || ICONS.plant) + "</svg>";
+    return t.content.firstChild;
+  }
+
   // Phone: "603-224-4328" becomes "tel:+16032244328"
   const digits = B.phone.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
   const telHref = "tel:+1" + digits;
@@ -703,11 +858,17 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   // Look
   document.documentElement.style.setProperty("--corner", Number(S.look.buttonCorners) + "px");
 
-  // Every phone link on the page
+  // Every phone link on the page (some get a small phone icon)
   $$("[data-tel]").forEach((el) => {
     el.href = telHref;
-    el.textContent = plain(el.getAttribute("data-tel") || "{phone}");
+    el.textContent = "";
+    if (el.hasAttribute("data-icon")) el.appendChild(icon(el.getAttribute("data-icon")));
+    const span = document.createElement("span");
+    span.textContent = plain(el.getAttribute("data-tel") || "{phone}");
+    el.appendChild(span);
   });
+  // Other small icons
+  $$("span.icon[data-icon]").forEach((el) => el.appendChild(icon(el.getAttribute("data-icon"))));
 
   // Simple text spots: data-text="section.key"
   $$("[data-text]").forEach((el) => {
@@ -723,13 +884,15 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     $("#preview-close").addEventListener("click", () => { banner.hidden = true; });
   }
 
-  // Header and top section
+  // Header logo (and the second copy next to the quote form)
   const brand = $("#brand-name");
   const logoSrc = S.logo.file || LOGO_BUILT_IN;
   if (S.logo.showLogo && logoSrc) {
     const img = document.createElement("img");
     img.src = logoSrc;
     img.alt = B.name + " home";
+    img.width = 331;
+    img.height = 150;
     brand.appendChild(img);
     const ql = $("#quote-logo");
     ql.src = logoSrc;
@@ -738,10 +901,10 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   } else {
     brand.textContent = B.name;
   }
+
+  // Top section
   $("#hero-heading").textContent = S.hero.heading;
   $("#hero-sub").textContent = S.hero.subheading;
-  $("#hero-note").textContent = S.serviceArea.text;
-
   if (S.photos.hero) {
     const pic = $("#hero-pic");
     pic.textContent = "";
@@ -756,11 +919,16 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   S.services.list.forEach((s) => {
     const li = document.createElement("li");
     li.className = "service";
+    const ic = document.createElement("span");
+    ic.className = "service-icon";
+    ic.appendChild(icon(s.icon));
+    const text = document.createElement("div");
     const h = document.createElement("h3");
     h.textContent = s.name;
     const p = document.createElement("p");
     p.textContent = s.description;
-    li.append(h, p);
+    text.append(h, p);
+    li.append(ic, text);
     list.appendChild(li);
   });
   fillWithPhone($("#services-note"), S.services.note);
@@ -874,7 +1042,7 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     const NS = "http://www.w3.org/2000/svg";
     const el = (tag, attrs, parent) => {
       const e = document.createElementNS(NS, tag);
-      Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v));
+      Object.keys(attrs).forEach((k) => e.setAttribute(k, attrs[k]));
       (parent || svg).appendChild(e);
       return e;
     };
@@ -887,35 +1055,35 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     el("feGaussianBlur", { stdDeviation: 14 }, blur);
     const area = el("g", { opacity: "0.85", filter: "url(#soft)" });
     const r = 0.06 * scale;
-    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r, fill: "#b2d3b8" }, area));
+    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r: r, fill: "#b2d3b8" }, area));
 
     // Interstates
-    const line = (path) => path.map(([la, lo], i) => (i ? "L" : "M") + X(lo).toFixed(1) + " " + Y(la).toFixed(1)).join(" ");
+    const line = (path) => path.map((pt, i) => (i ? "L" : "M") + X(pt[1]).toFixed(1) + " " + Y(pt[0]).toFixed(1)).join(" ");
     [I89, I93].forEach((path) => {
       el("path", { d: line(path), fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" });
       el("path", { d: line(path), fill: "none", stroke: "#b3ab99", "stroke-width": 3.5, "stroke-linecap": "round", "stroke-linejoin": "round" });
     });
     // Highway number tags: placed on the road, as far as possible from town dots and names
     const boxes = pts.map((p) => {
-      const x = X(p.lon), y = Y(p.lat), w = p.name.length * 10 + 20;
-      return p.side === "left" ? [x - w, y - 14, x + 10, y + 14] : [x - 10, y - 14, x + w, y + 14];
+      const x = X(p.lon), y = Y(p.lat), w = p.name.length * 11 + 22;
+      return p.side === "left" ? [x - w, y - 15, x + 11, y + 15] : [x - 11, y - 15, x + w, y + 15];
     });
-    const clearance = (x, y) => Math.min(...boxes.map(([a, b, c, d]) => Math.hypot(Math.max(a - x, 0, x - c), Math.max(b - y, 0, y - d))));
+    const clearance = (x, y) => Math.min(...boxes.map((b) => Math.hypot(Math.max(b[0] - x, 0, x - b[2]), Math.max(b[1] - y, 0, y - b[3]))));
     const tag = (path, label) => {
       let best = null;
       for (let i = 1; i < path.length; i++) {
-        const [ax, ay] = [X(path[i - 1][1]), Y(path[i - 1][0])], [bx, by] = [X(path[i][1]), Y(path[i][0])];
+        const ax = X(path[i - 1][1]), ay = Y(path[i - 1][0]), bx = X(path[i][1]), by = Y(path[i][0]);
         for (let t = 0; t <= 1; t += 0.05) {
           const x = ax + (bx - ax) * t, y = ay + (by - ay) * t;
           if (x < 40 || x > W - 70 || y < 40 || y > H - 30) continue;
           const score = Math.min(clearance(x, y), 70) - Math.hypot(x - W / 2, y - H / 2) * 0.05;
-          if (!best || score > best.score) best = { x, y, score };
+          if (!best || score > best.score) best = { x: x, y: y, score: score };
         }
       }
       if (!best) return;
-      const g = el("g", { transform: `translate(${best.x.toFixed(1)} ${best.y.toFixed(1)})` });
-      el("rect", { x: -15, y: -11, width: 30, height: 22, rx: 6, fill: "#5d6b5f" }, g);
-      const t = el("text", { x: 0, y: 5, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: "#fff", "font-family": "system-ui, Arial, sans-serif" }, g);
+      const g = el("g", { transform: "translate(" + best.x.toFixed(1) + " " + best.y.toFixed(1) + ")" });
+      el("rect", { x: -16, y: -12, width: 32, height: 24, rx: 6, fill: "#5d6b5f" }, g);
+      const t = el("text", { x: 0, y: 5, "text-anchor": "middle", "font-size": 14, "font-weight": 700, fill: "#fff", "font-family": "system-ui, Arial, sans-serif" }, g);
       t.textContent = label;
     };
     tag(I89, "89");
@@ -924,13 +1092,13 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     // Town dots and names
     pts.forEach((p) => {
       const x = X(p.lon), y = Y(p.lat);
-      el("circle", { cx: x, cy: y, r: 9, fill: "#fff" });
-      el("circle", { cx: x, cy: y, r: 6, fill: "#115c31" });
+      el("circle", { cx: x, cy: y, r: 10, fill: "#fff" });
+      el("circle", { cx: x, cy: y, r: 6.5, fill: "#115c31" });
       const left = p.side === "left";
       const t = el("text", {
-        x: x + (left ? -14 : 14), y: y + 6,
+        x: x + (left ? -15 : 15), y: y + 7,
         "text-anchor": left ? "end" : "start",
-        "font-size": 20, fill: "#0b3f22",
+        "font-size": 22, fill: "#0b3f22",
         "font-family": "Georgia, 'Times New Roman', Tinos, serif",
         stroke: "#f4f0e6", "stroke-width": 5, "paint-order": "stroke", "stroke-linejoin": "round"
       });
@@ -938,7 +1106,7 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     });
 
     // Small "N" arrow
-    const n = el("g", { transform: `translate(${W - 34} 40)` });
+    const n = el("g", { transform: "translate(" + (W - 34) + " 40)" });
     el("path", { d: "M0 -16 L8 6 L0 1 L-8 6 Z", fill: "#5d6b5f" }, n);
     const nt = el("text", { x: 0, y: 24, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: "#5d6b5f", "font-family": "system-ui, Arial, sans-serif" }, n);
     nt.textContent = "N";
@@ -948,7 +1116,9 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   const email = $("#contact-email");
   email.href = "mailto:" + B.email;
   email.textContent = B.email;
-  $("#contact-address").textContent = [B.street, B.town + ", " + B.state + " " + B.zip].filter(Boolean).join(", ");
+  $("#addr-street").textContent = B.street;
+  $("#addr-town").textContent = B.town + ", " + B.state + " " + B.zip;
+  if (!B.street) $("#contact-address br").remove();
   if (B.facebook) $("#contact-fb").href = B.facebook;
   else $("#contact-fb-wrap").hidden = true;
 
@@ -961,6 +1131,23 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   else credit.hidden = true;
 
   // ---- Popups and menu: X button, Escape key, and tapping outside all close them ----
+  // Older phones (before 2022) don't have built-in popups, so give them a simple stand-in.
+  const nativeDialogs = typeof HTMLDialogElement === "function" && "showModal" in HTMLDialogElement.prototype;
+  if (!nativeDialogs) {
+    document.documentElement.className += " no-dialog";
+    const backdrop = document.createElement("div");
+    backdrop.className = "dlg-backdrop";
+    backdrop.hidden = true;
+    document.body.appendChild(backdrop);
+    $$("dialog").forEach((d) => {
+      Object.defineProperty(d, "open", { get: () => d.hasAttribute("open") });
+      d.showModal = () => { d.setAttribute("open", ""); backdrop.hidden = false; backdrop.onclick = () => d.close(); };
+      d.close = () => { d.removeAttribute("open"); backdrop.hidden = true; };
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" || e.key === "Esc") $$("dialog[open]").forEach((d) => d.close());
+    });
+  }
   $$("dialog").forEach((d) => {
     d.addEventListener("click", (e) => { if (e.target === d) d.close(); });
   });
@@ -972,7 +1159,9 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   $("#menu-open").addEventListener("click", () => menu.showModal());
   $$("#menu .menu-links a").forEach((a) => a.addEventListener("click", () => menu.close()));
   // If the screen gets wide enough for the normal menu, close the phone menu.
-  window.matchMedia("(min-width: 900px)").addEventListener("change", (e) => { if (e.matches && menu.open) menu.close(); });
+  const wide = window.matchMedia("(min-width: 900px)");
+  const onWide = (e) => { if (e.matches && menu.open) menu.close(); };
+  if (wide.addEventListener) wide.addEventListener("change", onWide); else if (wide.addListener) wide.addListener(onWide);
 
   const popup = $("#popup");
   function showPopup(title, message) {
@@ -980,6 +1169,23 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     fillWithPhone($("#popup-msg"), message);
     popup.showModal();
   }
+
+  // ---- Phone call bar: slides in once the big buttons at the top scroll out of view ----
+  const callbar = $("#callbar");
+  const heroButtons = $("#hero-buttons");
+  if ("IntersectionObserver" in window && heroButtons) {
+    new IntersectionObserver((entries) => {
+      callbar.classList.toggle("is-hidden", entries[0].isIntersecting);
+    }).observe(heroButtons);
+  } else {
+    callbar.classList.remove("is-hidden");
+  }
+
+  // ---- Soft shadow under the top bar once the page is scrolled (computers) ----
+  const header = $(".site-header");
+  const onScroll = () => header.classList.toggle("scrolled", window.pageYOffset > 4);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
   // ---- Quote form ----
   const F = S.form;
@@ -989,8 +1195,7 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   $("#f-subject").value = F.emailSubject;
 
   const select = $("#f-service");
-  const first = new Option("Choose one", "");
-  select.add(first);
+  select.add(new Option("Choose one", ""));
   S.services.list.forEach((s) => select.add(new Option(s.name, s.name)));
   select.add(new Option(F.otherOption, F.otherOption));
 
@@ -1052,6 +1257,8 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   script.type = "application/ld+json";
   script.textContent = JSON.stringify(ld);
   document.head.appendChild(script);
+
+  window.siteReady = true;
 })();
 </script>
 </body>
