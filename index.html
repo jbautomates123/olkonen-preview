@@ -32,7 +32,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Olkonen Earthscapes logo. Landscaping in Hopkinton and Concord, NH. Call 603-224-4328.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#115c31">
+<meta name="theme-color" content="#f8f6f0">
 
 <!-- Browser tab icon (a pine from the logo). apple-touch-icon.png is the icon an iPhone uses
      if someone saves the site to their home screen (that file sits next to this page). -->
@@ -40,338 +40,390 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23115c31%22/%3E%3Cpath d=%22M32.00 8.50 L46.00 24.59 L40.75 25.94 L49.10 35.83 L44.19 36.71 L52.33 43.10 L50.45 43.71 L52.73 45.73 L43.31 46.40 L54.35 53.67 L49.23 55.89 L43.11 55.69 L38.06 54.35 L34.83 53.61 L33.82 53.61 L33.82 56.50 L30.18 56.50 L30.18 53.61 L29.17 53.61 L25.94 54.35 L20.89 55.69 L14.77 55.89 L9.65 53.67 L20.69 46.40 L11.27 45.73 L13.55 43.71 L11.67 43.10 L19.81 36.71 L14.90 35.83 L23.25 25.94 L18.00 24.59 L32.00 8.50Z%22 fill=%22%2300a651%22 stroke=%22%23e9f6ec%22 stroke-width=%221.6%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+<!-- Fonts. If Google Fonts is blocked, the page falls back to Georgia and the computer's own font. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+
 <!-- If a browser has scripts turned off, show the simple contact box instead of empty spots -->
 <noscript><style>#fallback { display: block !important; } .preview, .site-header, main, .site-footer, .callbar { display: none !important; }</style></noscript>
 
 <style>
 /* ==========================================================
    COLORS AND FONTS
+   Layout idea: an editorial New England look. A big serif headline
+   on warm paper, one wide photo of real work, then calm sections
+   with lots of room. Greens come from the Olkonen logo.
    (Button corner roundness is set in SETTINGS in the script.)
    ========================================================== */
 :root {
-  --green: #115c31;        /* main green: the dark pine green from the Olkonen logo */
-  --green-dark: #0b3f22;   /* darker green for headings and footer */
-  --leaf: #00a651;         /* bright tree green from the logo: thin accents only (too light for text) */
-  --leaf-tint: #e6f1e8;    /* pale green behind the service icons */
-  --cream: #f8f5ee;        /* page background */
-  --stone: #ede7db;        /* alternate section background */
-  --line: #d6cdbb;         /* borders */
-  --line-soft: #e9e2d4;    /* thin lines between rows */
-  --text: #2b2a26;         /* main text */
-  --muted: #55524a;        /* softer text */
-  --clay: #96512d;         /* "Request a Quote" button */
-  --clay-dark: #7a4122;
+  --paper: #f8f6f0;        /* page background: warm off-white */
+  --stone: #efebe2;        /* alternate section background: pale granite */
+  --white: #ffffff;
+  --ink: #1e2420;          /* main text */
+  --ink-2: #4a524c;        /* softer text */
+  --pine: #115c31;         /* dark pine green from the logo: buttons and links */
+  --pine-deep: #0b3f22;    /* darker green: footer and dark band */
+  --pine-tint: #e4eee6;    /* pale green behind small things */
+  --leaf: #00a651;         /* bright tree green from the logo: thin lines only */
+  --line: #d9d4c7;         /* borders */
+  --line-soft: #e6e1d5;    /* thin lines between rows */
   --focus: #b8741f;        /* keyboard focus ring */
-  --corner: 6px;           /* overwritten by SETTINGS.look.buttonCorners */
-  --serif: Georgia, "Times New Roman", Tinos, Times, serif;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --shadow-sm: 0 1px 2px rgba(30, 40, 28, 0.06), 0 3px 12px rgba(30, 40, 28, 0.05);
-  --shadow-md: 0 2px 6px rgba(30, 40, 28, 0.08), 0 14px 34px rgba(30, 40, 28, 0.12);
+  --corner: 4px;           /* overwritten by SETTINGS.look.buttonCorners */
+  --display: "Libre Caslon Display", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(20, 32, 24, 0.06), 0 4px 14px rgba(20, 32, 24, 0.05);
+  --shadow-md: 0 2px 8px rgba(20, 32, 24, 0.08), 0 18px 40px rgba(20, 32, 24, 0.12);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(17, 92, 49, 0.12); }
+html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(17, 92, 49, 0.12); background: var(--paper); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-
 body {
   margin: 0;
-  background: var(--cream);
-  color: var(--text);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--sans);
   font-size: 1.125rem;
   line-height: 1.6;
   padding-bottom: 84px; /* room for the phone call bar */
 }
 @media (min-width: 900px) { body { padding-bottom: 0; } }
-
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--green); text-underline-offset: 0.15em; }
+a { color: var(--pine); text-underline-offset: 0.16em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
 a[href^="tel:"] { white-space: nowrap; } /* never split a phone number across lines */
 p { text-wrap: pretty; }
-:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 400; color: var(--ink); }
+h2 { font-family: var(--display); font-size: clamp(2rem, 4.4vw, 3.1rem); line-height: 1.08; letter-spacing: -0.005em; }
+h3 { font-family: var(--serif); font-size: 1.28rem; line-height: 1.3; }
+section[id], #top { scroll-margin-top: 84px; }
 
-h1, h2, h3 { font-family: var(--serif); line-height: 1.2; text-wrap: balance; }
-h2 { font-size: clamp(1.75rem, 4.5vw, 2.35rem); font-weight: 400; margin: 0 0 12px; color: var(--green-dark); }
-h3 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; color: var(--green-dark); }
-/* A short leaf-green line above each section heading */
-.sec-head::before { content: ""; display: block; width: 44px; height: 3px; border-radius: 2px; background: var(--leaf); margin-bottom: 14px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+@media (min-width: 700px) { .wrap { padding-left: 32px; padding-right: 32px; } }
+@media (min-width: 1100px) { .wrap { padding-left: 48px; padding-right: 48px; } }
 
-.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
-@media (min-width: 600px) { .wrap { padding: 0 24px; } }
+/* Small green label above headings (the old site's leaf line, kept as a brand detail) */
+.eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; font-family: var(--sans); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; color: var(--pine); }
+.eyebrow::before { content: ""; width: 32px; height: 2px; border-radius: 2px; background: var(--leaf); flex: none; }
 
-.skip { position: absolute; left: -9999px; top: 0; background: #fff; padding: 12px 16px; z-index: 100; }
+.skip { position: absolute; left: -9999px; top: 0; background: var(--white); padding: 12px 16px; z-index: 100; }
 .skip:focus { left: 8px; top: 8px; }
 .icon { display: inline-flex; flex: none; }
 .icon svg, .btn svg, .header-phone svg, .big-phone svg { display: block; }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* Light text on dark green: crisper on Macs, and a brighter focus ring */
-.hero, .contact, .site-footer, .btn-call, .btn-quote { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-.hero :focus-visible, .contact :focus-visible, .site-footer :focus-visible { outline-color: #f2c66d; }
-
 /* Backup contact box: only shows if the page's script can't run */
-#fallback { display: none; width: calc(100% - 32px); max-width: 640px; margin: 40px auto; padding: 24px; background: #fff; border: 1px solid var(--line); border-radius: 12px; text-align: center; }
+#fallback { display: none; width: calc(100% - 32px); max-width: 640px; margin: 40px auto; padding: 24px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; }
 #fallback p { margin: 0 0 8px; }
-#fallback .fb-name { font-family: var(--serif); font-size: 1.6rem; color: var(--green-dark); }
-#fallback .fb-detail { margin-top: 16px; font-size: 0.85rem; color: var(--muted); }
+#fallback .fb-name { font-family: var(--display); font-size: 1.8rem; color: var(--pine-deep); }
+#fallback .fb-detail { margin-top: 16px; font-size: 0.85rem; color: var(--ink-2); }
 .js-failed #fallback { display: block; }
 .js-failed .preview, .js-failed .site-header, .js-failed main, .js-failed .site-footer, .js-failed .callbar { display: none !important; }
 
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 52px; padding: 12px 22px;
-  border-radius: var(--corner); border: 2px solid transparent;
-  font-family: inherit; font-size: 1.1rem; font-weight: 700; line-height: 1.25;
-  text-decoration: none; text-align: center; cursor: pointer;
+  min-height: 52px; padding: 0 24px; border-radius: var(--corner);
+  font-family: var(--sans); font-size: 1.0625rem; font-weight: 600; line-height: 1.2;
+  text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+  -webkit-font-smoothing: antialiased;
 }
-.btn svg { width: 1.2em; height: 1.2em; flex: none; }
-.btn-call  { background: var(--green); color: #fff; }
-.btn-call:hover  { background: var(--green-dark); }
-.btn-light { background: var(--cream); color: var(--green-dark); }
-.btn-light:hover { background: #fff; }
-.btn-quote { background: var(--clay); color: #fff; }
-.btn-quote:hover { background: var(--clay-dark); }
-.btn-block { display: flex; width: 100%; }
-@media (prefers-reduced-motion: no-preference) {
-  .btn { transition: background-color 0.15s ease, transform 0.12s ease; }
-  .btn:active { transform: scale(0.98); }
-}
-
-/* The X close button used on every banner, menu and popup */
-.x {
-  flex: none; width: 44px; height: 44px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid var(--line); border-radius: var(--corner);
-  background: #fff; color: var(--text);
-  font-size: 1.75rem; line-height: 1; cursor: pointer; padding: 0;
-}
-.x:hover { background: var(--stone); }
+.btn:hover { text-decoration: none; }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 19px; height: 19px; }
+.btn-solid { background: var(--pine); color: var(--white); }
+.btn-solid:hover { background: var(--pine-deep); box-shadow: 0 6px 18px rgba(11, 63, 34, 0.25); }
+.btn-outline { border-color: var(--pine); color: var(--pine); background: transparent; }
+.btn-outline:hover { background: var(--pine-tint); }
+.btn-light { background: var(--white); color: var(--pine-deep); }
+.btn-light:hover { background: var(--pine-tint); }
+.btn-sm { min-height: 44px; padding: 0 18px; font-size: 1rem; }
+.btn-block { width: 100%; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* ---------- Preview banner ---------- */
-.preview {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  background: #fbf3dc; border-bottom: 1px solid #e6d7a8;
-  padding: 8px 16px; font-size: 0.95rem; line-height: 1.4;
-}
+.preview { background: var(--pine-deep); color: #e9f1eb; font-size: 0.9rem; -webkit-font-smoothing: antialiased; }
+.preview .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; padding-bottom: 8px; }
 .preview p { margin: 0; }
-.preview .x { width: 40px; height: 40px; font-size: 1.5rem; }
-
-/* ---------- Header ---------- */
-.site-header { background: #fff; border-bottom: 1px solid var(--line); }
-.header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
-.brand { display: block; font-family: var(--serif); font-size: 1.4rem; font-weight: 700; line-height: 1.2; color: var(--green-dark); text-decoration: none; }
-.brand img { display: block; height: 72px; width: auto; aspect-ratio: 331 / 150; padding: 4px 0; }
-@media (min-width: 640px) { .brand img { height: 92px; } }
-.nav-desktop { display: none; }
-.nav-desktop a { color: var(--text); text-decoration: none; font-size: 1.05rem; padding: 6px 0; }
-.nav-desktop a:hover { color: var(--green); text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--leaf); }
-.header-right { display: flex; align-items: center; gap: 12px; }
-.header-phone { display: none; align-items: center; gap: 8px; font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
-.header-phone svg { width: 20px; height: 20px; color: var(--green); }
-.header-phone:hover { color: var(--green); }
-.menu-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  min-height: 46px; padding: 8px 16px;
-  border: 2px solid var(--green); border-radius: var(--corner);
-  background: #fff; color: var(--green); font: inherit; font-weight: 700; cursor: pointer;
+.x {
+  flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.14); color: inherit; font-size: 1.5rem; line-height: 1;
 }
-.menu-btn svg { width: 22px; height: 22px; }
-@media (min-width: 640px) { .header-phone { display: inline-flex; } }
-@media (min-width: 900px) {
-  .site-header { position: sticky; top: 0; z-index: 40; transition: box-shadow 0.2s ease; }
-  .site-header.scrolled { box-shadow: 0 2px 14px rgba(30, 40, 28, 0.1); }
-  section[id] { scroll-margin-top: 100px; }
-  .nav-desktop { display: flex; gap: 26px; }
+.x:hover { background: rgba(255, 255, 255, 0.24); }
+
+/* ---------- Header (stays at the top while scrolling) ---------- */
+.site-header { position: sticky; top: 0; z-index: 30; background: rgba(248, 246, 240, 0.96); border-bottom: 1px solid transparent; transition: border-color 0.25s, box-shadow 0.25s; }
+@supports (backdrop-filter: blur(8px)) { .site-header { background: rgba(248, 246, 240, 0.86); backdrop-filter: saturate(1.2) blur(10px); -webkit-backdrop-filter: saturate(1.2) blur(10px); } }
+.site-header.scrolled { border-bottom-color: var(--line); box-shadow: 0 6px 20px rgba(20, 32, 24, 0.06); }
+.header-row { display: flex; align-items: center; gap: 16px; min-height: 72px; }
+.brand { display: block; flex: none; line-height: 0; text-decoration: none; color: var(--pine-deep); font-family: var(--display); font-size: 1.4rem; }
+.brand img { width: auto; height: 46px; }
+@media (min-width: 1100px) { .brand img { height: 58px; } .header-row { min-height: 88px; } }
+.nav-desktop { display: none; gap: 28px; margin-left: auto; }
+.nav-desktop a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 1rem; white-space: nowrap; padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav-desktop a:hover { border-bottom-color: var(--leaf); }
+.header-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.header-phone {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 44px; height: 44px; border-radius: 50%; background: var(--pine-tint); color: var(--pine);
+  text-decoration: none; font-weight: 700;
+}
+.header-phone svg { width: 19px; height: 19px; }
+.header-phone span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.header-quote { display: none; white-space: nowrap; }
+.header-quote .long { display: none; }
+.menu-btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+  border: 1.5px solid var(--line); border-radius: var(--corner); background: var(--white); color: var(--ink);
+  font: 600 1rem var(--sans); cursor: pointer;
+}
+.menu-btn svg { width: 20px; height: 20px; }
+@media (min-width: 370px) { .header-quote { display: inline-flex; padding: 0 14px; } }
+@media (min-width: 760px) {
+  .header-phone { width: auto; height: auto; background: none; border-radius: 0; font-size: 1.125rem; }
+  .header-phone span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  .header-quote { padding: 0 18px; }
+  .header-quote .long { display: inline; }
+  .header-quote .short { display: none; }
+}
+@media (min-width: 1080px) {
+  .nav-desktop { display: flex; }
+  .header-actions { margin-left: 28px; gap: 20px; }
   .menu-btn { display: none; }
 }
+@media (max-width: 399px) { .brand img { height: 40px; } .header-row { gap: 10px; } .header-actions { gap: 8px; } .menu-btn, .header-quote { padding: 0 11px; } }
 
 /* ---------- Top section (hero) ---------- */
-.hero { background: var(--green); color: var(--cream); padding: 32px 0 40px; }
-.hero-grid { display: grid; gap: 28px; align-items: center; }
-.hero h1 { font-size: clamp(2.05rem, 5.6vw, 3.1rem); font-weight: 400; margin: 0 0 14px; color: #fff; }
-.lead { font-size: 1.15rem; margin: 0; color: #ece8dc; max-width: 34em; }
-.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-.hero-pic { border-radius: calc(var(--corner) * 2); overflow: hidden; background: #efe7d2; aspect-ratio: 2 / 1; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); }
-.hero-pic svg, .hero-pic img { width: 100%; height: 100%; display: block; object-fit: cover; }
-@media (max-width: 599px) { .btn-row .btn { flex: 1 1 100%; } }
-@media (min-width: 900px) {
-  .hero { padding: 72px 0; }
-  .hero-grid { grid-template-columns: 1.25fr 1fr; gap: 48px; }
-  .lead { font-size: 1.2rem; }
-  .btn-row { margin-top: 30px; }
-  .hero-pic { aspect-ratio: 3 / 2; }
+.hero { padding: 44px 0 0; }
+@media (min-width: 900px) { .hero { padding-top: 72px; } }
+.hero-top { display: grid; gap: 26px; }
+@media (min-width: 1100px) { .hero-top { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; gap: 56px; } }
+@media (min-width: 700px) and (max-width: 1099px) { .hero .lead { max-width: 40em; } }
+.hero h1 { font-family: var(--display); font-size: clamp(2.6rem, 6.6vw, 5.6rem); line-height: 1.02; letter-spacing: -0.012em; color: var(--ink); }
+.hero h1 .accent { display: block; font-family: var(--serif); font-style: italic; font-size: 0.86em; color: var(--pine); margin-top: 0.08em; }
+.lead { font-size: 1.2rem; line-height: 1.6; color: var(--ink-2); margin: 0 0 24px; max-width: 34em; }
+.hero-photo { margin: 40px 0 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); }
+@media (min-width: 900px) { .hero-photo { margin-top: 56px; } }
+.hero-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 45%; }
+@media (min-width: 700px) { .hero-photo img { aspect-ratio: 16 / 8; } }
+@media (min-width: 1100px) { .hero-photo img { aspect-ratio: 2 / 1; } }
+.photo-cap {
+  position: absolute; left: 12px; bottom: 12px; margin: 0; max-width: calc(100% - 24px);
+  padding: 6px 12px; border-radius: 999px; background: rgba(15, 26, 19, 0.62); color: #fff;
+  font-size: 0.85rem; line-height: 1.35; -webkit-font-smoothing: antialiased;
 }
+@supports (backdrop-filter: blur(6px)) { .photo-cap { background: rgba(15, 26, 19, 0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); } }
+
+/* Gentle entrance when the page opens (skipped if the computer asks for less motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .eyebrow, .hero h1, .hero-side { animation: rise 0.9s var(--ease) both; }
+  .hero h1 { animation-delay: 0.06s; }
+  .hero-side { animation-delay: 0.18s; }
+  .hero-photo { animation: fadein 1s ease 0.25s both; }
+  .hero-photo img { animation: settle 1.8s var(--ease) 0.25s both; }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes settle { from { transform: scale(1.06); } to { transform: scale(1); } }
+
+/* Sections fade up a little as they come into view (only if the script turns it on) */
+.reveal-on .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.9s var(--ease); }
+.reveal-on .reveal.in { opacity: 1; transform: none; }
 
 /* ---------- Sections ---------- */
-.section { padding: 48px 0; }
-.section-alt { background: var(--stone); }
-.section-intro { color: var(--muted); max-width: 40em; margin: 0 0 22px; }
-@media (min-width: 900px) {
-  .section { padding: 80px 0; }
-  .section-intro { margin-bottom: 30px; }
-}
+.section { padding: 72px 0; }
+@media (min-width: 900px) { .section { padding: 112px 0; } }
+.section-stone { background: var(--stone); }
+.section-intro { color: var(--ink-2); margin: 14px 0 0; max-width: 40em; }
 
-/* Services: a compact list on phones, cards on bigger screens */
-.services { list-style: none; margin: 0; padding: 0; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); box-shadow: var(--shadow-sm); overflow: hidden; }
-.service { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; }
-.service + .service { border-top: 1px solid var(--line-soft); }
-.service-icon { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--leaf-tint); color: var(--green); display: flex; align-items: center; justify-content: center; }
+/* ---------- Services ---------- */
+.services-grid { display: grid; gap: 36px; }
+@media (min-width: 900px) { .services-grid { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 72px; align-items: start; } }
+.side-photo { margin: 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--paper); }
+.side-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 900px) {
+  .services-photo { position: sticky; top: 112px; }
+  .services-photo img { aspect-ratio: 3 / 4; }
+}
+.services { list-style: none; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.service { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+@media (min-width: 700px) { .service { grid-template-columns: 34px minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 20px; align-items: baseline; padding: 26px 0; } }
+.service-icon { color: var(--pine); padding-top: 2px; }
 .service-icon svg { width: 26px; height: 26px; }
-.service h3 { font-size: 1.15rem; margin: 1px 0 2px; }
-.service p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.45; }
-.services-note { margin: 20px 0 0; font-size: 1.1rem; }
-@media (min-width: 700px) {
-  .services { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
-  .service { display: block; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 24px; box-shadow: var(--shadow-sm); }
-  .service + .service { border-top: 1px solid var(--line); }
-  .service-icon { width: 52px; height: 52px; margin-bottom: 14px; }
-  .service-icon svg { width: 30px; height: 30px; }
-  .service h3 { font-size: 1.3rem; margin: 0 0 6px; }
-  .service p { font-size: 1.05rem; line-height: 1.55; }
-  .services-note { margin-top: 28px; }
+.service h3 { font-size: 1.32rem; }
+.service p { margin: 4px 0 0; color: var(--ink-2); font-size: 1.05rem; }
+@media (max-width: 699px) { .service p { grid-column: 2; } }
+@media (min-width: 700px) { .service p { margin: 0; } }
+.services-note { margin: 24px 0 0; color: var(--ink-2); }
+
+/* ---------- Recent work: before / after slider + photos ---------- */
+.work-head { display: grid; gap: 14px; margin-bottom: 36px; }
+@media (min-width: 900px) { .work-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 56px; margin-bottom: 48px; } .work-head p { margin: 0; } }
+.work-head p { color: var(--ink-2); margin: 0; max-width: 34em; }
+.ba { margin: 0; }
+.ba-frame { position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); aspect-ratio: 4 / 3; --pos: 50%; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+@media (min-width: 900px) { .ba-frame { aspect-ratio: 16 / 9; } }
+.ba-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; pointer-events: none; }
+.ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.ba-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12); pointer-events: none; }
+.ba-knob {
+  position: absolute; top: 50%; left: var(--pos); width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%;
+  background: #fff; color: var(--pine-deep); display: flex; align-items: center; justify-content: center; gap: 2px;
+  box-shadow: var(--shadow-md); pointer-events: none; transition: transform 0.2s var(--ease);
 }
-@media (min-width: 1000px) { .services { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
-
-/* Our Work photos (only shows once real photos are added) */
-.gallery { display: grid; gap: 16px; }
-.gallery figure { margin: 0; }
-.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--corner); outline: 1px solid rgba(0, 0, 0, 0.08); outline-offset: -1px; }
-.gallery figcaption { margin-top: 6px; color: var(--muted); font-size: 1rem; }
-@media (min-width: 700px) { .gallery { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px) { .gallery { grid-template-columns: 1fr 1fr 1fr; } }
-
-/* About */
-.about-grid { display: grid; gap: 32px; }
-.about-text p { margin: 0 0 16px; max-width: 40em; }
-.about-text p:last-of-type { margin-bottom: 0; }
-.facts { margin: 16px 0 0; padding-left: 1.2em; }
-.facts li { margin-bottom: 6px; }
-.side-card { display: none; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 26px; align-self: start; box-shadow: var(--shadow-sm); }
-.side-card p { margin: 0 0 18px; color: var(--muted); }
-.side-card .btn + .btn { margin-top: 12px; }
-@media (min-width: 900px) {
-  .about-grid { grid-template-columns: 1.6fr 1fr; gap: 48px; }
-  .side-card { display: block; } /* on phones the call bar already does this job */
+.ba-knob svg { width: 22px; height: 22px; }
+.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; }
+.ba-range:focus-visible + .ba-knob { outline: 3px solid var(--focus); outline-offset: 3px; }
+.ba-frame:hover .ba-knob { transform: scale(1.06); }
+.ba-tag { position: absolute; top: 14px; padding: 5px 12px; border-radius: 999px; background: rgba(15, 26, 19, 0.62); color: #fff; font-size: 0.85rem; font-weight: 600; pointer-events: none; -webkit-font-smoothing: antialiased; }
+.ba-tag-before { left: 14px; }
+.ba-tag-after { right: 14px; }
+.ba-cap { margin: 12px 0 0; font-size: 0.92rem; color: var(--ink-2); }
+.work-grid { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.work-item { margin: 0; }
+.work-open { display: block; width: 100%; padding: 0; border: 0; background: var(--stone); cursor: zoom-in; position: relative; overflow: hidden; border-radius: 3px; }
+.work-open img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.8s var(--ease); }
+.work-open:hover img { transform: scale(1.035); }
+.work-item figcaption { margin-top: 10px; font-size: 0.95rem; color: var(--ink-2); }
+.work-more {
+  display: flex; flex-direction: column; justify-content: space-between; gap: 18px; height: 100%; min-height: 200px;
+  padding: 26px; border-radius: 3px; background: var(--pine-deep); color: #eaf2ec; text-decoration: none; -webkit-font-smoothing: antialiased;
 }
+.work-more:hover { background: var(--pine); text-decoration: none; }
+.work-more strong { font-family: var(--display); font-weight: 400; font-size: 1.7rem; line-height: 1.15; color: #fff; }
+.work-more span { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.work-more svg { width: 18px; height: 18px; }
 
-/* Hiring strip */
-.hiring { background: #f3e7dc; border-top: 1px solid #e3cfbd; border-bottom: 1px solid #e3cfbd; padding: 20px 0; }
-.hiring p { margin: 0; font-size: 1.1rem; }
-.hiring strong { font-family: var(--serif); font-size: 1.25rem; color: var(--green-dark); margin-right: 6px; }
+/* ---------- About ---------- */
+.about-grid { display: grid; gap: 36px; }
+@media (min-width: 900px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; } }
+.statement { font-family: var(--display); font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.2; color: var(--ink); margin: 0 0 24px; text-wrap: balance; }
+.about-text p:not(.statement):not(.eyebrow) { color: var(--ink-2); margin: 0 0 16px; max-width: 36em; }
+.facts { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px; }
+.facts li { display: flex; gap: 10px; align-items: baseline; }
+.facts li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); flex: none; transform: translateY(-2px); }
+.about-call { margin-top: 24px !important; color: var(--ink) !important; font-weight: 600; }
 
-/* Service area */
-.area-grid { display: grid; gap: 24px; align-items: center; }
-.area-note { margin: 18px 0 0; }
-.area-map { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) * 2); overflow: hidden; box-shadow: var(--shadow-sm); }
-.area-map svg { display: block; width: 100%; height: auto; }
-.area-map figcaption { padding: 8px 14px; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line-soft); }
-@media (min-width: 900px) { .area-grid { grid-template-columns: 1fr 1.2fr; gap: 48px; } }
+/* ---------- Hiring strip ---------- */
+.hiring { background: var(--pine-tint); }
+.hiring .wrap { padding-top: 20px; padding-bottom: 20px; }
+.hiring p { margin: 0; }
+.hiring strong { margin-right: 6px; }
 
-/* Quote form */
-.quote-grid { display: grid; gap: 24px; }
-.quote-side p { margin: 0 0 14px; max-width: 32em; }
-.big-phone { display: inline-flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
-.big-phone svg { width: 26px; height: 26px; color: var(--green); }
-.big-phone:hover { color: var(--green); }
-.quote-logo { display: block; width: 100%; max-width: 230px; height: auto; aspect-ratio: 331 / 150; box-sizing: content-box; margin-top: 22px; background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 12px 16px; }
-form.quote { background: #fff; border: 1px solid var(--line); border-radius: calc(var(--corner) + 4px); padding: 22px 18px; box-shadow: var(--shadow-sm); }
-.field { margin-bottom: 18px; }
-.field label { display: block; font-weight: 700; margin-bottom: 6px; }
-.field .opt { font-weight: 400; color: var(--muted); }
+/* ---------- Service area ---------- */
+.area-grid { display: grid; gap: 32px; }
+@media (min-width: 900px) { .area-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; align-items: center; } }
+.area-note { color: var(--ink-2); margin: 16px 0 0; }
+.town-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 22px 0 0; padding: 0; }
+.town-list li { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 0.98rem; }
+.area-map { margin: 0; }
+.area-map svg { display: block; width: 100%; height: auto; border-radius: 3px; border: 1px solid var(--line); background: #f1eee5; }
+.area-map figcaption { font-size: 0.85rem; color: var(--ink-2); margin-top: 8px; }
+
+/* ---------- Quote form ---------- */
+.quote-grid { display: grid; gap: 36px; }
+@media (min-width: 900px) { .quote-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; align-items: start; } .quote-side { position: sticky; top: 112px; } }
+.quote-side p { color: var(--ink-2); margin: 14px 0 0; max-width: 30em; }
+.big-phone { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-family: var(--display); font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1; color: var(--pine-deep); text-decoration: none; }
+.big-phone svg { width: 28px; height: 28px; color: var(--pine); }
+.big-phone:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.quote-logo { width: 220px; margin-top: 36px; }
+.quote { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 24px; box-shadow: var(--shadow-sm); display: grid; gap: 18px; }
+@media (min-width: 600px) { .quote { padding: 36px; grid-template-columns: 1fr 1fr; column-gap: 20px; } .field-wide, .quote .demo-note, .quote button { grid-column: 1 / -1; } }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-weight: 600; font-size: 1rem; }
+.opt { font-weight: 400; color: var(--ink-2); }
 .field input, .field select, .field textarea {
-  width: 100%; font: inherit; font-size: 1.05rem; color: var(--text);
-  padding: 12px 14px; background: #fff;
-  border: 1px solid #8a816d; border-radius: var(--corner);
+  width: 100%; min-height: 50px; padding: 12px 14px; border: 1.5px solid #8a816d; border-radius: var(--corner);
+  font: inherit; font-size: 1.05rem; color: var(--ink); background: var(--white);
 }
-.field textarea { min-height: 120px; resize: vertical; }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); outline: 2px solid var(--green); outline-offset: 0; }
-.field input:user-invalid { border-color: #b3261e; }
-.demo-note { background: #fbf3dc; border: 1px solid #e6d7a8; border-radius: var(--corner); padding: 10px 14px; font-size: 1rem; margin: 0 0 18px; }
+.field select { -webkit-appearance: none; appearance: none; padding-right: 40px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23115c31' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px; }
+.field textarea { min-height: 130px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--pine); outline: 3px solid rgba(17, 92, 49, 0.18); outline-offset: 0; }
+.demo-note { margin: 0; padding: 12px 14px; border-radius: var(--corner); background: #fbf3e2; border: 1px solid #ead7ae; font-size: 0.95rem; color: #5b4618; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-@media (min-width: 600px) { form.quote { padding: 28px; } }
-@media (min-width: 900px) {
-  .quote-grid { grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: start; }
-  .quote-side { position: sticky; top: 124px; } /* phone number and logo stay in view beside the long form */
-  .quote-logo { max-width: 300px; padding: 16px 20px; margin-top: 28px; }
-}
 
-/* Contact */
-.contact { background: var(--green); color: var(--cream); }
-.contact h2 { color: #fff; }
-.contact a { color: #fff; }
-.contact-list { display: grid; gap: 22px; margin: 24px 0 0; }
-.contact-list dt { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: #cfd8c9; margin-bottom: 4px; }
-.contact-list dt svg { width: 18px; height: 18px; }
-.contact-list dd { margin: 0; font-size: 1.2rem; overflow-wrap: anywhere; }
-.contact-list .phone-big { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; text-decoration: none; }
-@media (min-width: 700px) { .contact-list { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px) { .contact-list { grid-template-columns: repeat(4, 1fr); } }
+/* ---------- Contact ---------- */
+.contact-list { display: grid; gap: 0; margin: 32px 0 0; border-top: 1px solid var(--line); }
+@media (min-width: 760px) { .contact-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; } }
+@media (min-width: 1100px) { .contact-list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.contact-list > div { padding: 22px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.contact-list dt { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 600; color: var(--ink-2); margin-bottom: 6px; }
+.contact-list dt svg { width: 18px; height: 18px; color: var(--pine); }
+.contact-list dd { margin: 0; font-size: 1.15rem; overflow-wrap: anywhere; }
+.phone-big { font-family: var(--display); font-size: 1.7rem; text-decoration: none; color: var(--pine-deep); }
 
-/* Footer */
-.site-footer { background: var(--green-dark); color: #cfc9b8; padding: 22px 0; font-size: 0.95rem; }
-.footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
-.site-footer p { margin: 0 0 4px; }
+/* ---------- Footer ---------- */
+.site-footer { background: var(--pine-deep); color: #d7e3da; padding: 56px 0 40px; -webkit-font-smoothing: antialiased; }
 .site-footer a { color: #fff; }
-.to-top { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; text-decoration: none; }
+.site-footer :focus-visible { outline-color: #f2c66d; }
+.footer-row { display: grid; gap: 28px; }
+@media (min-width: 760px) { .footer-row { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
+.footer-name { font-family: var(--display); font-size: clamp(1.8rem, 3.4vw, 2.4rem); color: #fff; margin: 0 0 10px; line-height: 1.1; }
+.site-footer p { margin: 0 0 6px; }
+.footer-small { font-size: 0.88rem; color: #a9c0b0; }
+.to-top { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; }
 .to-top svg { width: 18px; height: 18px; }
-.to-top:hover { text-decoration: underline; }
 
-/* Phone call bar (phones and tablets only). It slides in once the top buttons scroll away. */
+/* ---------- Phone call bar (phones and tablets) ---------- */
 .callbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-  display: flex; gap: 10px;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  background: #fff; border-top: 1px solid var(--line);
-  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(248, 246, 240, 0.97);
+  border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(20, 32, 24, 0.08);
+  transition: transform 0.35s var(--ease);
 }
-.callbar .btn { flex: 1; min-height: 54px; padding: 8px 10px; font-size: 1.05rem; gap: 8px; }
-.callbar .btn-call { flex: 1.4; }
-.callbar.is-hidden { transform: translateY(110%); visibility: hidden; }
-@media (prefers-reduced-motion: no-preference) {
-  .callbar { transition: transform 0.25s ease, visibility 0s linear 0s; }
-  .callbar.is-hidden { transition: transform 0.2s ease, visibility 0s linear 0.2s; }
-}
-@media (max-width: 380px) { .callbar .btn { font-size: 1rem; } .callbar .btn svg { display: none; } }
+.callbar .btn { min-height: 50px; padding: 0 10px; font-size: 1rem; }
+.callbar.is-hidden { transform: translateY(110%); }
 @media (min-width: 900px) { .callbar { display: none; } }
+@media (prefers-reduced-motion: reduce) { .callbar { transition: none; } }
 
-/* Popups and the menu */
-dialog:not([open]) { display: none; }
-dialog {
-  border: none; padding: 0; width: calc(100% - 32px); max-width: 440px;
-  border-radius: calc(var(--corner) * 2); background: #fff; color: var(--text);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-}
-dialog::backdrop { background: rgba(20, 30, 22, 0.55); }
-@media (prefers-reduced-motion: no-preference) {
-  dialog[open] { animation: dlg-in 0.2s ease-out; }
-  dialog[open]::backdrop { animation: fade-in 0.2s ease-out; }
-}
-@keyframes dlg-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-.dialog-inner { position: relative; padding: 28px 24px 24px; }
-.dialog-inner > .x { position: absolute; top: 12px; right: 12px; }
-.dialog-inner h2 { font-size: 1.5rem; padding-right: 52px; margin-bottom: 12px; }
-.dialog-inner p { margin: 0 0 20px; }
-dialog.menu { margin-top: 16px; }
-.menu-links { list-style: none; margin: 8px 0 20px; padding: 0; }
-.menu-links a { display: block; padding: 14px 4px; border-bottom: 1px solid var(--line-soft); color: var(--text); text-decoration: none; font-size: 1.25rem; font-family: var(--serif); }
-.menu-links a:hover { color: var(--green); }
-.menu-title { font-family: var(--serif); font-size: 1.3rem; margin: 6px 0 0; color: var(--green-dark); padding-right: 52px; }
-/* Older phones without built-in popups get the same look */
-.no-dialog dialog[open] { display: block; position: fixed; z-index: 101; top: 16px; left: 0; right: 0; margin: 0 auto; max-height: calc(100% - 32px); overflow: auto; }
-.dlg-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; background: rgba(20, 30, 22, 0.55); }
+/* ---------- Popups: menu, messages, photo viewer ---------- */
+dialog { border: 0; padding: 0; background: transparent; color: var(--ink); max-width: none; max-height: none; }
+dialog::backdrop { background: rgba(14, 22, 17, 0.55); }
+.dialog-inner { position: relative; background: var(--paper); border-radius: 10px; padding: 28px 24px 24px; width: min(440px, calc(100vw - 32px)); box-shadow: var(--shadow-md); }
+.dialog-inner .x, .lightbox .x { position: absolute; top: 12px; right: 12px; background: var(--stone); color: var(--ink); }
+.dialog-inner .x:hover { background: var(--line); }
+#popup .dialog-inner h2 { font-size: 1.7rem; padding-right: 44px; margin-bottom: 10px; }
+#popup .dialog-inner p { margin: 0 0 20px; color: var(--ink-2); }
+dialog.menu { margin: 0 0 0 auto; height: 100%; }
+dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius: 0; padding: 26px 22px; display: flex; flex-direction: column; gap: 20px; }
+.menu-title { margin: 0; font-family: var(--display); font-size: 1.6rem; }
+.menu-links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.menu-links a { display: block; padding: 15px 2px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 1.15rem; font-weight: 600; }
+.menu-actions { display: grid; gap: 10px; margin-top: auto; }
+.lightbox .lb-inner { position: relative; width: min(1100px, calc(100vw - 24px)); }
+.lightbox img { width: 100%; max-height: calc(100vh - 140px); object-fit: contain; border-radius: 4px; background: #111; }
+.lightbox .x { background: rgba(255, 255, 255, 0.92); }
+.lb-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; color: #fff; }
+.lb-bar p { margin: 0; font-size: 0.98rem; -webkit-font-smoothing: antialiased; }
+.lb-nav { display: flex; gap: 8px; }
+.lb-nav button { width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.92); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.lb-nav svg { width: 20px; height: 20px; }
+.lightbox::backdrop { background: rgba(8, 12, 10, 0.86); }
 
-/* Printing: just the words, no buttons or bars */
+/* Older phones (before 2022) have no built-in popups: a simple stand-in */
+.no-dialog dialog { display: none; position: fixed; inset: 0; z-index: 60; margin: auto; align-items: center; justify-content: center; }
+.no-dialog dialog[open] { display: flex; }
+.no-dialog dialog.menu[open] { justify-content: flex-end; align-items: stretch; }
+.dlg-backdrop { position: fixed; inset: 0; z-index: 55; background: rgba(14, 22, 17, 0.6); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
 @media print {
-  .preview, .callbar, .menu-btn, .nav-desktop, dialog, .hero-pic, .area-map, .to-top, .side-card, form.quote, .btn-row { display: none !important; }
-  .quote-side { position: static !important; }
+  .site-header, .callbar, .preview, .quote, .menu-btn, dialog, .ba-range, .ba-knob { display: none !important; }
   body { padding: 0; background: #fff; }
-  .hero, .contact, .site-footer, .section-alt, .hiring { background: #fff !important; }
-  .hero *, .contact *, .site-footer * { color: #000 !important; }
-  .site-header { position: static; box-shadow: none; }
+  .section { padding: 24px 0; }
 }
 </style>
 </head>
@@ -404,22 +456,25 @@ dialog.menu { margin-top: 16px; }
 
 <!-- Preview banner. Turn it off in SETTINGS (previewBanner.show = false). -->
 <div class="preview" id="preview-banner" hidden>
-  <p id="preview-text"></p>
-  <button type="button" class="x" id="preview-close" aria-label="Close this notice">&times;</button>
+  <div class="wrap">
+    <p id="preview-text"></p>
+    <button type="button" class="x" id="preview-close" aria-label="Close this notice">&times;</button>
+  </div>
 </div>
 
-<header class="site-header">
+<header class="site-header" id="site-header">
   <div class="wrap header-row">
     <a href="#page-top" class="brand" id="brand-name"></a>
     <nav class="nav-desktop" aria-label="Main">
       <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
       <a href="#about">About</a>
       <a href="#area">Service Area</a>
-      <a href="#quote">Request a Quote</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="header-right">
+    <div class="header-actions">
       <a class="header-phone" data-tel="{phone}" data-icon="phone"></a>
+      <a class="btn btn-solid btn-sm header-quote" href="#quote"><span class="long" data-text="hero.quoteButtonShort"></span><span class="short">Quote</span></a>
       <button type="button" class="menu-btn" id="menu-open" aria-haspopup="dialog" aria-controls="menu"><span class="icon" data-icon="menu"></span>Menu</button>
     </div>
   </div>
@@ -429,95 +484,84 @@ dialog.menu { margin-top: 16px; }
 
   <!-- TOP SECTION -->
   <section class="hero" id="top">
-    <div class="wrap hero-grid">
-      <div>
-        <h1 id="hero-heading"></h1>
-        <p class="lead" id="hero-sub"></p>
-        <div class="btn-row" id="hero-buttons">
-          <a class="btn btn-light" data-tel="Call {phone}" data-icon="phone"></a>
-          <a class="btn btn-quote" href="#quote" data-text="hero.quoteButton"></a>
+    <div class="wrap">
+      <div class="hero-top">
+        <div>
+          <p class="eyebrow" data-text="hero.eyebrow"></p>
+          <h1 id="hero-heading"><span id="h1-main"></span><span class="accent" id="h1-accent"></span></h1>
+        </div>
+        <div class="hero-side">
+          <p class="lead" data-text="hero.subheading"></p>
+          <div class="btn-row" id="hero-buttons">
+            <a class="btn btn-solid" data-tel="Call {phone}" data-icon="phone"></a>
+            <a class="btn btn-outline" href="#quote" data-text="hero.quoteButton"></a>
+          </div>
         </div>
       </div>
-      <div class="hero-pic" id="hero-pic">
-        <!-- Simple drawing shown until a real photo is set in SETTINGS.photos.hero -->
-        <svg viewBox="0 0 600 400" role="img" aria-label="Drawing of a landscaped yard with a stone wall, pine trees and a path" preserveAspectRatio="xMidYMid slice">
-          <rect width="600" height="400" fill="#efe7d2"/>
-          <circle cx="470" cy="92" r="42" fill="#e5c98d"/>
-          <path d="M0 230 C120 170 220 200 320 185 C420 170 500 150 600 175 L600 400 L0 400Z" fill="#a9c7a6"/>
-          <g transform="translate(-50 92)">
-            <path d="M137.00 43.30 L159.60 65.60 L150.70 66.80 L164.90 81.30 L156.30 82.30 L170.40 91.60 L167.60 92.40 L171.60 96.00 L155.80 96.80 L173.40 107.00 L166.00 109.90 L154.00 109.60 L145.00 108.00 L137.00 107.40 L129.00 108.00 L120.00 109.60 L108.00 109.90 L100.60 107.00 L118.20 96.80 L102.40 96.00 L106.40 92.40 L103.60 91.60 L117.70 82.30 L109.10 81.30 L123.30 66.80 L114.40 65.60 L137.00 43.30ZM194.80 43.30 L217.40 65.60 L208.50 66.80 L222.70 81.30 L214.10 82.30 L228.20 91.60 L225.40 92.40 L229.40 96.00 L213.60 96.80 L231.20 107.00 L223.80 109.90 L211.80 109.60 L202.80 108.00 L194.80 107.40 L186.80 108.00 L177.80 109.60 L165.80 109.90 L158.40 107.00 L176.00 96.80 L160.20 96.00 L164.20 92.40 L161.40 91.60 L175.50 82.30 L166.90 81.30 L181.10 66.80 L172.20 65.60 L194.80 43.30Z" fill="#115c31"/>
-            <path d="M166.70 42.30 L187.50 66.20 L179.70 68.20 L192.10 82.90 L184.80 84.20 L196.90 93.70 L194.10 94.60 L197.50 97.60 L183.50 98.60 L199.90 109.40 L192.30 112.70 L183.20 112.40 L175.70 110.40 L170.90 109.30 L169.40 109.30 L169.40 113.60 L164.00 113.60 L164.00 109.30 L162.50 109.30 L157.70 110.40 L150.20 112.40 L141.10 112.70 L133.50 109.40 L149.90 98.60 L135.90 97.60 L139.30 94.60 L136.50 93.70 L148.60 84.20 L141.30 82.90 L153.70 68.20 L145.90 66.20 L166.70 42.30Z" fill="#1f9a52"/>
-          </g>
-          <path d="M0 280 C140 235 260 265 380 245 C470 230 540 240 600 250 L600 400 L0 400Z" fill="#6f9e75"/>
-          <rect x="425" y="200" width="10" height="44" rx="4" fill="#5a4632"/>
-          <circle cx="430" cy="190" r="32" fill="#115c31"/>
-          <circle cx="410" cy="204" r="20" fill="#056839"/>
-          <rect x="517" y="212" width="8" height="34" rx="4" fill="#5a4632"/>
-          <circle cx="521" cy="204" r="23" fill="#0f6b3a"/>
-          <path d="M0 330 C180 300 360 322 600 302 L600 400 L0 400Z" fill="#3f7d50"/>
-          <g>
-            <rect x="52"  y="290" width="30" height="14" rx="5" fill="#b9b3a6"/>
-            <rect x="85"  y="290" width="38" height="14" rx="5" fill="#a49e91"/>
-            <rect x="126" y="290" width="28" height="14" rx="5" fill="#c8c2b4"/>
-            <rect x="157" y="290" width="34" height="14" rx="5" fill="#b0aa9d"/>
-            <rect x="194" y="290" width="30" height="14" rx="5" fill="#c3bdaf"/>
-            <rect x="227" y="290" width="36" height="14" rx="5" fill="#a49e91"/>
-            <rect x="266" y="290" width="28" height="14" rx="5" fill="#bdb7aa"/>
-            <rect x="297" y="290" width="34" height="14" rx="5" fill="#ada79a"/>
-            <rect x="334" y="290" width="24" height="14" rx="5" fill="#c8c2b4"/>
-            <rect x="40"  y="306" width="34" height="14" rx="5" fill="#a9a396"/>
-            <rect x="77"  y="306" width="28" height="14" rx="5" fill="#c5bfb1"/>
-            <rect x="108" y="306" width="40" height="14" rx="5" fill="#b3ad9f"/>
-            <rect x="151" y="306" width="30" height="14" rx="5" fill="#a19b8e"/>
-            <rect x="184" y="306" width="36" height="14" rx="5" fill="#c0baac"/>
-            <rect x="223" y="306" width="26" height="14" rx="5" fill="#ada79a"/>
-            <rect x="252" y="306" width="38" height="14" rx="5" fill="#c8c2b4"/>
-            <rect x="293" y="306" width="30" height="14" rx="5" fill="#a49e91"/>
-            <rect x="326" y="306" width="34" height="14" rx="5" fill="#bab4a7"/>
-          </g>
-          <circle cx="382" cy="314" r="17" fill="#2f7a46"/>
-          <circle cx="24"  cy="318" r="18" fill="#2f7a46"/>
-          <circle cx="402" cy="320" r="11" fill="#3d8a52"/>
-          <ellipse cx="470" cy="372" rx="30" ry="9" fill="#ddd3bd"/>
-          <ellipse cx="492" cy="347" rx="23" ry="7" fill="#ddd3bd"/>
-          <ellipse cx="508" cy="327" rx="17" ry="5.5" fill="#ddd3bd"/>
-        </svg>
-      </div>
+      <figure class="hero-photo" id="hero-photo" hidden>
+        <img id="hero-img" alt="" width="800" height="800" fetchpriority="high">
+        <figcaption class="photo-cap" id="hero-cap"></figcaption>
+      </figure>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section class="section" id="services">
-    <div class="wrap">
-      <h2 class="sec-head" data-text="services.heading"></h2>
-      <p class="section-intro" data-text="services.intro"></p>
-      <ul class="services" id="services-list"></ul>
-      <p class="services-note" id="services-note"></p>
+  <section class="section section-stone" id="services">
+    <div class="wrap services-grid">
+      <figure class="side-photo services-photo reveal" id="services-photo" hidden>
+        <img id="services-img" alt="" width="600" height="800" loading="lazy">
+        <figcaption class="photo-cap" id="services-cap"></figcaption>
+      </figure>
+      <div class="reveal">
+        <p class="eyebrow" data-text="services.eyebrow"></p>
+        <h2 data-text="services.heading"></h2>
+        <p class="section-intro" data-text="services.intro"></p>
+        <ul class="services" id="services-list"></ul>
+        <p class="services-note" id="services-note"></p>
+      </div>
     </div>
   </section>
 
-  <!-- OUR WORK (hidden until real photos are added in SETTINGS.photos.work) -->
-  <section class="section section-alt" id="work" hidden>
+  <!-- RECENT WORK (before/after slider + photos; hidden if no photos are set) -->
+  <section class="section" id="work" hidden>
     <div class="wrap">
-      <h2 class="sec-head" data-text="photos.workHeading"></h2>
-      <div class="gallery" id="gallery"></div>
+      <div class="work-head reveal">
+        <div>
+          <p class="eyebrow" data-text="work.eyebrow"></p>
+          <h2 data-text="work.heading"></h2>
+        </div>
+        <p data-text="work.intro"></p>
+      </div>
+      <figure class="ba reveal" id="ba" hidden>
+        <div class="ba-frame" id="ba-frame">
+          <img class="ba-after" id="ba-after" alt="" width="800" height="600" loading="lazy">
+          <img class="ba-before" id="ba-before" alt="" width="800" height="600" loading="lazy">
+          <span class="ba-tag ba-tag-before" aria-hidden="true">Before</span>
+          <span class="ba-tag ba-tag-after" aria-hidden="true">After</span>
+          <span class="ba-line" aria-hidden="true"></span>
+          <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="50" step="1" aria-label="Slide to compare before and after">
+          <span class="ba-knob" aria-hidden="true"></span>
+        </div>
+        <figcaption class="ba-cap" id="ba-cap"></figcaption>
+      </figure>
+      <ul class="work-grid reveal" id="work-grid"></ul>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="section section-alt" id="about">
+  <section class="section section-stone" id="about">
     <div class="wrap about-grid">
-      <div class="about-text">
-        <h2 class="sec-head" data-text="about.heading"></h2>
+      <figure class="side-photo reveal" id="about-photo" hidden>
+        <img id="about-img" alt="" width="800" height="600" loading="lazy">
+        <figcaption class="photo-cap" id="about-cap"></figcaption>
+      </figure>
+      <div class="about-text reveal">
+        <h2 class="eyebrow" data-text="about.heading"></h2>
+        <p class="statement" data-text="about.statement"></p>
         <div id="about-paragraphs"></div>
         <ul class="facts" id="about-facts" hidden></ul>
+        <p class="about-call" id="about-call"></p>
       </div>
-      <aside class="side-card" aria-label="Contact us">
-        <h3 data-text="about.cardHeading"></h3>
-        <p data-text="about.cardText"></p>
-        <a class="btn btn-call btn-block" data-tel="Call {phone}" data-icon="phone"></a>
-        <a class="btn btn-quote btn-block" href="#quote" data-text="hero.quoteButton"></a>
-      </aside>
     </div>
   </section>
 
@@ -529,13 +573,15 @@ dialog.menu { margin-top: 16px; }
   <!-- SERVICE AREA -->
   <section class="section" id="area">
     <div class="wrap area-grid">
-      <div>
-        <h2 class="sec-head" data-text="serviceArea.heading"></h2>
-        <p class="section-intro" style="margin-bottom:0" data-text="serviceArea.text"></p>
+      <div class="reveal">
+        <p class="eyebrow" data-text="serviceArea.eyebrow"></p>
+        <h2 data-text="serviceArea.heading"></h2>
+        <p class="section-intro" data-text="serviceArea.text"></p>
+        <ul class="town-list" id="town-list"></ul>
         <p class="area-note" id="area-note"></p>
       </div>
       <!-- Simple drawn map, built from SETTINGS.serviceArea.towns -->
-      <figure class="area-map" id="area-map">
+      <figure class="area-map reveal" id="area-map">
         <svg id="map-svg" viewBox="0 0 600 400" role="img"></svg>
         <figcaption>Simple map for reference.</figcaption>
       </figure>
@@ -543,10 +589,11 @@ dialog.menu { margin-top: 16px; }
   </section>
 
   <!-- QUOTE FORM -->
-  <section class="section section-alt" id="quote">
+  <section class="section section-stone" id="quote">
     <div class="wrap quote-grid">
       <div class="quote-side">
-        <h2 class="sec-head" data-text="form.heading"></h2>
+        <p class="eyebrow" data-text="form.eyebrow"></p>
+        <h2 data-text="form.heading"></h2>
         <p data-text="form.intro"></p>
         <p data-text="form.preferCall"></p>
         <a class="big-phone" data-tel="{phone}" data-icon="phone"></a>
@@ -570,11 +617,11 @@ dialog.menu { margin-top: 16px; }
           <label for="f-town">Town or street address</label>
           <input id="f-town" name="town" type="text" autocomplete="street-address">
         </div>
-        <div class="field">
+        <div class="field field-wide">
           <label for="f-service">What do you need help with?</label>
           <select id="f-service" name="service"></select>
         </div>
-        <div class="field">
+        <div class="field field-wide">
           <label for="f-details">Tell us about your project <span class="opt">(optional)</span></label>
           <textarea id="f-details" name="details"></textarea>
         </div>
@@ -584,15 +631,16 @@ dialog.menu { margin-top: 16px; }
           <input id="f-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
         </div>
         <input type="hidden" name="_subject" id="f-subject">
-        <button type="submit" class="btn btn-quote btn-block" id="f-submit"></button>
+        <button type="submit" class="btn btn-solid btn-block" id="f-submit"></button>
       </form>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="section contact" id="contact">
+  <section class="section" id="contact">
     <div class="wrap">
-      <h2 class="sec-head">Contact Us</h2>
+      <p class="eyebrow">Get in touch</p>
+      <h2>Contact Us</h2>
       <dl class="contact-list">
         <div><dt><span class="icon" data-icon="phone"></span>Phone</dt><dd><a class="phone-big" data-tel="{phone}"></a></dd></div>
         <div><dt><span class="icon" data-icon="mail"></span>Email</dt><dd><a id="contact-email"></a></dd></div>
@@ -606,8 +654,9 @@ dialog.menu { margin-top: 16px; }
 <footer class="site-footer">
   <div class="wrap footer-row">
     <div>
+      <p class="footer-name" id="footer-name"></p>
       <p id="footer-line"></p>
-      <p id="footer-credit"></p>
+      <p class="footer-small" id="footer-credit"></p>
     </div>
     <a class="to-top" href="#page-top"><span class="icon" data-icon="up"></span>Back to top</a>
   </div>
@@ -615,8 +664,8 @@ dialog.menu { margin-top: 16px; }
 
 <!-- Phone call bar (phones and tablets only) -->
 <div class="callbar is-hidden" id="callbar">
-  <a class="btn btn-call" data-tel="Call {phone}" data-icon="phone"></a>
-  <a class="btn btn-quote" href="#quote" data-text="hero.quoteButton"></a>
+  <a class="btn btn-solid" data-tel="Call {phone}" data-icon="phone"></a>
+  <a class="btn btn-outline" href="#quote" data-text="hero.quoteButton" style="background: var(--white);"></a>
 </div>
 
 <!-- MENU (phones and tablets) -->
@@ -626,12 +675,16 @@ dialog.menu { margin-top: 16px; }
     <p class="menu-title" id="menu-title">Menu</p>
     <ul class="menu-links">
       <li><a href="#services">Services</a></li>
+      <li><a href="#work" id="menu-work">Our Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#area">Service Area</a></li>
       <li><a href="#quote">Request a Quote</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="btn btn-call btn-block" data-tel="Call {phone}" data-icon="phone"></a>
+    <div class="menu-actions">
+      <a class="btn btn-solid btn-block" data-tel="Call {phone}" data-icon="phone"></a>
+      <a class="btn btn-outline btn-block" href="#quote" data-text="hero.quoteButton"></a>
+    </div>
   </div>
 </dialog>
 
@@ -641,7 +694,22 @@ dialog.menu { margin-top: 16px; }
     <button type="button" class="x" data-close aria-label="Close">&times;</button>
     <h2 id="popup-title"></h2>
     <p id="popup-msg"></p>
-    <button type="button" class="btn btn-call btn-block" data-close>Close</button>
+    <button type="button" class="btn btn-solid btn-block" data-close>Close</button>
+  </div>
+</dialog>
+
+<!-- PHOTO VIEWER (opens when a work photo is tapped) -->
+<dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <div class="lb-inner">
+    <button type="button" class="x" data-close aria-label="Close photo">&times;</button>
+    <img id="lb-img" alt="">
+    <div class="lb-bar">
+      <p id="lb-cap"></p>
+      <div class="lb-nav" id="lb-nav">
+        <button type="button" id="lb-prev" aria-label="Previous photo"><span class="icon" data-icon="left"></span></button>
+        <button type="button" id="lb-next" aria-label="Next photo"><span class="icon" data-icon="right"></span></button>
+      </div>
+    </div>
   </div>
 </dialog>
 
@@ -656,19 +724,24 @@ dialog.menu { margin-top: 16px; }
    ================================================================ */
 const SETTINGS = {
 
+  // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
+  version: "2.0",
+
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
     show: true,
-    text: "Free sample redesign by JB Automates. Not the live Olkonen Earthscapes website."
+    text: "Free sample redesign by JB Automates. Not the live Olkonen Earthscapes website. Photos are from Olkonen's Facebook page."
   },
 
   // ---- BUSINESS INFO ----
   business: {
     name: "Olkonen Earthscapes",
-    legalName: "Olkonen Earthscapes, Inc.",   // ASK THE OWNER: OK to show "Inc." in the footer?
-    phone: "603-224-4328",                      // verified correct (the old footer had 244, which is wrong)
+    // ASK THE OWNER: the old site says "Inc." but Meghan's email signature says "LLC".
+    // Leave "" until he confirms; it's only used behind the scenes for Google.
+    legalName: "",
+    phone: "603-224-4328",                      // the office number (see the note Jack got on Nov 5 about 224 vs 244)
     email: "Olkonen@comcast.net",
-    street: "Upper Straw Road",                 // ASK THE OWNER: OK to show the street on the site?
+    street: "Upper Straw Road",                 // ASK THE OWNER: OK to show the street? (Google and Facebook already show "811 Upper Straw Rd")
     town: "Hopkinton",
     state: "NH",
     zip: "03229",
@@ -678,10 +751,13 @@ const SETTINGS = {
 
   // ---- TOP SECTION ----
   hero: {
-    heading: "Landscaping in Hopkinton & Concord, NH",
+    eyebrow: "Landscaping in Hopkinton & Concord, NH",
+    heading: "Landscapes planned with you,",
+    headingAccent: "built with care.",       // the second line, in green italic
     // Based on the owner's own About text.
-    subheading: "We listen to what you want, give you our professional advice, and work with you to get the landscape you're after.",
-    quoteButton: "Request a Quote"              // ASK THE OWNER: are quotes free? If yes, can say "Request a Free Quote"
+    subheading: "From new lawns and plantings to stone walls, walkways and patios, we listen to what you want, give you our professional advice, and build the landscape you're after.",
+    quoteButton: "Request a Quote",             // ASK THE OWNER: are quotes free? If yes, can say "Request a Free Quote"
+    quoteButtonShort: "Get a Quote"             // the smaller button in the top bar
   },
 
   // ---- SERVICES ----
@@ -690,15 +766,16 @@ const SETTINGS = {
   // what each service really includes and fix the wording.
   // icon can be: "plant", "tree", "wall", "shovel", "snow" or "rake".
   services: {
-    heading: "Our Services",
-    intro: "Here's what we can help with, from planning a new landscape to keeping your driveway clear in winter.",
+    eyebrow: "What we do",
+    heading: "Everything outside, from the first shovel to the last snowfall.",
+    intro: "New projects, stonework, site prep, and the upkeep that keeps it all looking right.",
     list: [
       { name: "Landscaping", icon: "plant",
         description: "New plantings, garden beds, lawns and full landscape projects." },
       { name: "Trees & Shrubs", icon: "tree",
         description: "Planting and caring for trees and shrubs that suit your property." },
       { name: "Walls, Walks, Steps & Patios", icon: "wall",
-        description: "Walls, walkways, steps and patios made for everyday use." },
+        description: "Stone walls, walkways, steps and patios made for everyday use." },
       { name: "Light Excavation", icon: "shovel",
         description: "Grading, site preparation and other smaller digging jobs." },
       { name: "Winter Services", icon: "snow",
@@ -716,21 +793,42 @@ const SETTINGS = {
   logo: { showLogo: true, file: "" },
 
   // ---- PHOTOS ----
-  // Put photo files in the same folder as this page, then type the file names here.
-  // Until a hero photo is set, the simple drawing shows instead.
-  // The "Our Work" section stays hidden until at least one work photo is listed.
+  // Photo files live in the "photos" folder next to this page. To change one, put the new
+  // file in that folder and type its name here. Leave file as "" to hide that photo's spot.
+  // These are from Olkonen's public Facebook page (small copies). ASK THE OWNER before launch,
+  // and ask for his original photos: they'll be much sharper.
   photos: {
-    hero: "",                                   // e.g. "patio.jpg"
-    heroAlt: "",                                // describe the photo, e.g. "Stone patio built in Hopkinton"
-    workHeading: "Our Work",
-    work: [
-      // { file: "wall.jpg", caption: "Stone wall, Hopkinton" },
-    ]
+    hero:     { file: "photos/pool-patio.jpg",         alt: "Stone patio around an in-ground pool and a stone-sided spa, with woods behind", caption: "Stone patio and pool surround" },
+    services: { file: "photos/lawn-sprinklers.jpg",    alt: "Green lawn with a fieldstone wall and sprinklers running, under a large shade tree", caption: "Lawn and fieldstone wall" },
+    about:    { file: "photos/crew-laying-sod.jpg",    alt: "The Olkonen crew laying rolls of sod next to stone pillars and a new paver walkway", caption: "Our crew laying sod" }
+  },
+
+  // ---- RECENT WORK ----
+  // The before/after slider: two photos taken from the same spot. Set show to false to hide it.
+  // The photos below it open a bigger viewer when tapped. The section hides if both are empty.
+  work: {
+    eyebrow: "Recent work",
+    heading: "Same hillside. Before and after.",
+    intro: "Slide across to see a slope we graded and prepped, then finished with a new lawn.",
+    beforeAfter: {
+      show: true,
+      before: { file: "photos/slope-before.jpg", alt: "A graded hillside of bare soil, raked smooth, next to planted beds" },
+      after:  { file: "photos/slope-after.jpg",  alt: "The same hillside finished with new green lawn, sprinklers running" },
+      caption: "Both photos are from the same job, posted on Olkonen's Facebook page in July 2020."
+    },
+    photos: [
+      { file: "photos/timber-entry.jpg",     caption: "New walkway and plantings at a timber-frame entry" },
+      { file: "photos/lawn-stone-house.jpg", caption: "New lawn and shrub beds along a stone-and-clapboard house" }
+    ],
+    // The last tile links to their Facebook page. Set to "" to hide it.
+    moreText: "See more of our work on Facebook"
   },
 
   // ---- ABOUT ----
   about: {
     heading: "About Olkonen Earthscapes",
+    // Big line at the top of About. Based on the owner's own About text.
+    statement: "We listen to what you want, give you our professional advice, and work with you to get the landscape you're after.",
     // The owner's own About text from the old site.
     paragraphs: [
       "At Olkonen Earthscapes, we are dedicated to helping you make the best decisions and providing you with the right direction on any type of landscape project throughout the Hopkinton and Concord area.",
@@ -739,9 +837,7 @@ const SETTINGS = {
     // ASK THE OWNER: only add facts he confirms. The list stays hidden while empty.
     // Examples: "Serving the area since ____", "Fully insured" (only if true).
     facts: [],
-    // The small box next to the About text (computers only; phones have the call bar instead)
-    cardHeading: "Have a project in mind?",
-    cardText: "Give us a call or send a quote request and tell us what you're thinking."
+    callLine: "Have a project in mind? Call {phone}."
   },
 
   // ---- HIRING ----
@@ -755,6 +851,7 @@ const SETTINGS = {
 
   // ---- SERVICE AREA ----
   serviceArea: {
+    eyebrow: "Service area",
     heading: "Where We Work",
     text: "We serve homeowners and businesses throughout the Hopkinton and Concord area.",
     // ASK THE OWNER: which other nearby towns does he cover?
@@ -774,8 +871,9 @@ const SETTINGS = {
     // Paste your Formspree form ID or full link here, e.g. "abcdwxyz" or "https://formspree.io/f/abcdwxyz".
     // While this is empty, the form is in DEMO MODE: nothing is sent to anyone.
     formspreeId: "",
-    heading: "Request a Quote",
-    intro: "Tell us a little about your project and we'll be in touch.",
+    eyebrow: "Request a Quote",
+    heading: "Tell us about your project.",
+    intro: "Fill this out and we'll be in touch.",
     preferCall: "Rather talk to someone? Call us:",
     submitButton: "Send My Request",
     otherOption: "Something else / not sure",
@@ -791,7 +889,7 @@ const SETTINGS = {
 
   // ---- LOOK ----
   look: {
-    buttonCorners: 6                            // roundness of buttons and boxes, in pixels. 0 = square corners.
+    buttonCorners: 4                            // roundness of buttons and boxes, in pixels. 0 = square corners.
   },
 
   // ---- FOOTER ----
@@ -812,6 +910,7 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   const B = S.business;
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---- Small line icons drawn for this site (24 x 24 grid) ----
   const ICONS = {
@@ -826,25 +925,26 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     mail: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.8 6.5l8.2 6.2 8.2-6.2"/>',
     pin: '<path d="M12 21.2s-6.8-6.1-6.8-11.1a6.8 6.8 0 0 1 13.6 0c0 5-6.8 11.1-6.8 11.1z"/><circle cx="12" cy="10.1" r="2.4"/>',
     out: '<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>',
-    up: '<path d="M12 19V5M6 11l6-6 6 6"/>'
+    up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+    left: '<path d="M15 5l-7 7 7 7"/>',
+    right: '<path d="M9 5l7 7-7 7"/>',
+    arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>'
   };
   function icon(name) {
     const t = document.createElement("template");
-    t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (ICONS[name] || ICONS.plant) + "</svg>";
+    t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (ICONS[name] || "") + "</svg>";
     return t.content.firstChild;
   }
 
   // Phone: "603-224-4328" becomes "tel:+16032244328"
   const digits = B.phone.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
   const telHref = "tel:+1" + digits;
-
   function telLink(text) {
     const a = document.createElement("a");
     a.href = telHref;
     a.textContent = text || B.phone;
     return a;
   }
-
   // Put text into an element, turning {phone} into a tap-to-call link.
   function fillWithPhone(el, text) {
     el.textContent = "";
@@ -869,11 +969,11 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   });
   // Other small icons
   $$("span.icon[data-icon]").forEach((el) => el.appendChild(icon(el.getAttribute("data-icon"))));
-
   // Simple text spots: data-text="section.key"
   $$("[data-text]").forEach((el) => {
     const value = el.getAttribute("data-text").split(".").reduce((o, k) => (o ? o[k] : undefined), S);
-    if (value !== undefined) el.textContent = plain(value);
+    if (value !== undefined && value !== "") el.textContent = plain(value);
+    else el.hidden = true;
   });
 
   // Preview banner
@@ -903,16 +1003,24 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   }
 
   // Top section
-  $("#hero-heading").textContent = S.hero.heading;
-  $("#hero-sub").textContent = S.hero.subheading;
-  if (S.photos.hero) {
-    const pic = $("#hero-pic");
-    pic.textContent = "";
-    const img = document.createElement("img");
-    img.src = S.photos.hero;
-    img.alt = S.photos.heroAlt || "";
-    pic.appendChild(img);
+  $("#h1-main").textContent = S.hero.heading;
+  if (S.hero.headingAccent) $("#h1-accent").textContent = " " + S.hero.headingAccent;
+  else $("#h1-accent").hidden = true;
+
+  // A photo spot: fills the img + caption, or hides the spot if no file is set
+  function setPhoto(figSel, imgSel, capSel, p) {
+    const fig = $(figSel);
+    if (!p || !p.file) { fig.hidden = true; return; }
+    const img = $(imgSel);
+    img.src = p.file;
+    img.alt = p.alt || "";
+    const cap = capSel ? $(capSel) : null;
+    if (cap) { if (p.caption) cap.textContent = p.caption; else cap.hidden = true; }
+    fig.hidden = false;
   }
+  setPhoto("#hero-photo", "#hero-img", "#hero-cap", S.photos.hero);
+  setPhoto("#services-photo", "#services-img", "#services-cap", S.photos.services);
+  setPhoto("#about-photo", "#about-img", "#about-cap", S.photos.about);
 
   // Services
   const list = $("#services-list");
@@ -922,37 +1030,112 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     const ic = document.createElement("span");
     ic.className = "service-icon";
     ic.appendChild(icon(s.icon));
-    const text = document.createElement("div");
     const h = document.createElement("h3");
     h.textContent = s.name;
     const p = document.createElement("p");
     p.textContent = s.description;
-    text.append(h, p);
-    li.append(ic, text);
+    li.append(ic, h, p);
     list.appendChild(li);
   });
   fillWithPhone($("#services-note"), S.services.note);
 
-  // Our Work photos
-  if (S.photos.work && S.photos.work.length) {
-    const gallery = $("#gallery");
-    S.photos.work.forEach((w) => {
-      const fig = document.createElement("figure");
-      const img = document.createElement("img");
-      img.src = w.file;
-      img.alt = w.caption || "Project photo";
-      img.loading = "lazy";
-      fig.appendChild(img);
-      if (w.caption) {
-        const cap = document.createElement("figcaption");
-        cap.textContent = w.caption;
-        fig.appendChild(cap);
-      }
-      gallery.appendChild(fig);
-    });
+  // ---- Recent work ----
+  const W = S.work;
+  const ba = W.beforeAfter;
+  const hasBA = ba && ba.show && ba.before.file && ba.after.file;
+  const workPhotos = (W.photos || []).filter((p) => p.file);
+  if (hasBA || workPhotos.length) {
     $("#work").hidden = false;
-    $("#about").classList.remove("section-alt"); // keep backgrounds alternating
+  } else {
+    $$('a[href="#work"]').forEach((a) => { const li = a.closest("li"); (li || a).hidden = true; });
   }
+  if (hasBA) {
+    $("#ba").hidden = false;
+    $("#ba-before").src = ba.before.file;
+    $("#ba-before").alt = ba.before.alt || "Before";
+    $("#ba-after").src = ba.after.file;
+    $("#ba-after").alt = ba.after.alt || "After";
+    if (ba.caption) $("#ba-cap").textContent = ba.caption; else $("#ba-cap").hidden = true;
+    const frame = $("#ba-frame");
+    const range = $("#ba-range");
+    const knob = frame.querySelector(".ba-knob");
+    knob.append(icon("left"), icon("right"));
+    const setPos = (v) => frame.style.setProperty("--pos", v + "%");
+    range.addEventListener("input", () => setPos(range.value));
+    // A small "nudge" the first time the slider comes into view, so people see it moves
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        const keys = [[0, 50], [700, 30], [1500, 68], [2200, 50]];
+        const start = performance.now();
+        let touched = false;
+        range.addEventListener("pointerdown", () => { touched = true; }, { once: true });
+        range.addEventListener("keydown", () => { touched = true; }, { once: true });
+        const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+        (function step(now) {
+          if (touched) return;
+          const t = now - start;
+          for (let i = 1; i < keys.length; i++) {
+            if (t <= keys[i][0]) {
+              const a = keys[i - 1], b = keys[i];
+              const v = a[1] + (b[1] - a[1]) * ease((t - a[0]) / (b[0] - a[0]));
+              range.value = Math.round(v);
+              setPos(v);
+              requestAnimationFrame(step);
+              return;
+            }
+          }
+          range.value = 50; setPos(50);
+        })(start);
+      }, { threshold: 0.6 });
+      io.observe(frame);
+    }
+  }
+  const grid = $("#work-grid");
+  workPhotos.forEach((p, i) => {
+    const li = document.createElement("li");
+    const fig = document.createElement("figure");
+    fig.className = "work-item";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "work-open";
+    btn.setAttribute("aria-label", "View bigger: " + (p.caption || "project photo"));
+    const img = document.createElement("img");
+    img.src = p.file;
+    img.alt = "";
+    img.loading = "lazy";
+    img.width = 800; img.height = 600;
+    btn.appendChild(img);
+    btn.addEventListener("click", () => openLightbox(i));
+    fig.appendChild(btn);
+    if (p.caption) {
+      const cap = document.createElement("figcaption");
+      cap.textContent = p.caption;
+      fig.appendChild(cap);
+    }
+    li.appendChild(fig);
+    grid.appendChild(li);
+  });
+  if (W.moreText && B.facebook) {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.className = "work-more";
+    a.href = B.facebook;
+    a.target = "_blank";
+    a.rel = "noopener";
+    const strong = document.createElement("strong");
+    strong.textContent = W.moreText;
+    const go = document.createElement("span");
+    go.append("Open Facebook", icon("arrow"));
+    const sr = document.createElement("span");
+    sr.className = "sr-only";
+    sr.textContent = " (opens in a new tab)";
+    a.append(strong, go, sr);
+    li.appendChild(a);
+    grid.appendChild(li);
+  }
+  if (!grid.children.length) grid.hidden = true;
 
   // About
   const paras = $("#about-paragraphs");
@@ -970,6 +1153,8 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     });
     facts.hidden = false;
   }
+  if (S.about.callLine) fillWithPhone($("#about-call"), S.about.callLine);
+  else $("#about-call").hidden = true;
 
   // Hiring
   if (S.hiring.show) {
@@ -991,6 +1176,12 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   }
 
   // Service area
+  const towns = $("#town-list");
+  S.serviceArea.towns.forEach((t) => {
+    const li = document.createElement("li");
+    li.textContent = t;
+    towns.appendChild(li);
+  });
   fillWithPhone($("#area-note"), S.serviceArea.note);
   if (S.serviceArea.showMap) drawMap(S.serviceArea.towns);
   else $("#area-map").hidden = true;
@@ -1022,10 +1213,8 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     // Interstates (approximate path)
     const I89 = [[43.1785,-71.5345],[43.1880,-71.5670],[43.1940,-71.5850],[43.2000,-71.6200],[43.2060,-71.6600],[43.2120,-71.7000],[43.2400,-71.7350],[43.2580,-71.7650],[43.2750,-71.8050],[43.2950,-71.8400],[43.3400,-71.9200],[43.3900,-71.9900]];
     const I93 = [[42.9900,-71.4400],[43.0600,-71.4500],[43.1000,-71.4700],[43.1650,-71.5300],[43.1785,-71.5345],[43.2050,-71.5350],[43.2450,-71.5550],[43.2900,-71.5900],[43.3500,-71.6200],[43.4200,-71.6400]];
-
     const pts = townNames.filter((n) => PLACES[n]).map((n) => ({ name: n, lat: PLACES[n][0], lon: PLACES[n][1], side: PLACES[n][2] }));
     if (!pts.length) { $("#area-map").hidden = true; return; }
-
     // Fit the towns into a 600 x 400 drawing, with room around them
     const W = 600, H = 400, PAD = 0.075; // PAD in degrees of latitude
     const kx = Math.cos(43.2 * Math.PI / 180); // longitude shrinks this far north
@@ -1037,7 +1226,6 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     const scale = W / (x1 - x0);
     const X = (lon) => (lon * kx - x0) * scale;
     const Y = (lat) => (y1 - lat) * scale;
-
     const svg = $("#map-svg");
     const NS = "http://www.w3.org/2000/svg";
     const el = (tag, attrs, parent) => {
@@ -1047,16 +1235,13 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
       return e;
     };
     svg.setAttribute("aria-label", "Simple map of the area we serve, showing " + pts.map((p) => p.name).join(", ") + ", New Hampshire");
-
-    el("rect", { width: W, height: H, fill: "#f4f0e6" });
-
+    el("rect", { width: W, height: H, fill: "#f1eee5" });
     // Soft shaded area around the towns (circles merged into one shape)
     const blur = el("filter", { id: "soft", x: "-50%", y: "-50%", width: "200%", height: "200%" }, el("defs", {}));
     el("feGaussianBlur", { stdDeviation: 14 }, blur);
     const area = el("g", { opacity: "0.85", filter: "url(#soft)" });
     const r = 0.06 * scale;
-    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r: r, fill: "#b2d3b8" }, area));
-
+    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r: r, fill: "#b8d4bd" }, area));
     // Interstates
     const line = (path) => path.map((pt, i) => (i ? "L" : "M") + X(pt[1]).toFixed(1) + " " + Y(pt[0]).toFixed(1)).join(" ");
     [I89, I93].forEach((path) => {
@@ -1088,7 +1273,6 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     };
     tag(I89, "89");
     tag(I93, "93");
-
     // Town dots and names
     pts.forEach((p) => {
       const x = X(p.lon), y = Y(p.lat);
@@ -1099,12 +1283,11 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
         x: x + (left ? -15 : 15), y: y + 7,
         "text-anchor": left ? "end" : "start",
         "font-size": 22, fill: "#0b3f22",
-        "font-family": "Georgia, 'Times New Roman', Tinos, serif",
-        stroke: "#f4f0e6", "stroke-width": 5, "paint-order": "stroke", "stroke-linejoin": "round"
+        "font-family": "'Libre Caslon Text', Georgia, 'Times New Roman', serif",
+        stroke: "#f1eee5", "stroke-width": 5, "paint-order": "stroke", "stroke-linejoin": "round"
       });
       t.textContent = p.name;
     });
-
     // Small "N" arrow
     const n = el("g", { transform: "translate(" + (W - 34) + " 40)" });
     el("path", { d: "M0 -16 L8 6 L0 1 L-8 6 Z", fill: "#5d6b5f" }, n);
@@ -1123,12 +1306,11 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   else $("#contact-fb-wrap").hidden = true;
 
   // Footer
+  $("#footer-name").textContent = B.name;
   const foot = $("#footer-line");
-  foot.textContent = "© " + new Date().getFullYear() + " " + B.legalName + " · " + B.town + ", " + B.state + " · ";
+  foot.textContent = "© " + new Date().getFullYear() + " " + B.name + " · " + B.town + ", " + B.state + " · ";
   foot.appendChild(telLink());
-  const credit = $("#footer-credit");
-  if (S.footerCredit) credit.textContent = S.footerCredit;
-  else credit.hidden = true;
+  $("#footer-credit").textContent = (S.footerCredit ? S.footerCredit + " · " : "") + "Version " + S.version;
 
   // ---- Popups and menu: X button, Escape key, and tapping outside all close them ----
   // Older phones (before 2022) don't have built-in popups, so give them a simple stand-in.
@@ -1142,7 +1324,7 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     $$("dialog").forEach((d) => {
       Object.defineProperty(d, "open", { get: () => d.hasAttribute("open") });
       d.showModal = () => { d.setAttribute("open", ""); backdrop.hidden = false; backdrop.onclick = () => d.close(); };
-      d.close = () => { d.removeAttribute("open"); backdrop.hidden = true; };
+      d.close = () => { d.removeAttribute("open"); backdrop.hidden = true; d.dispatchEvent(new Event("close")); };
     });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" || e.key === "Esc") $$("dialog[open]").forEach((d) => d.close());
@@ -1154,12 +1336,11 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   $$("[data-close]").forEach((btn) => {
     btn.addEventListener("click", () => btn.closest("dialog").close());
   });
-
   const menu = $("#menu");
   $("#menu-open").addEventListener("click", () => menu.showModal());
-  $$("#menu .menu-links a").forEach((a) => a.addEventListener("click", () => menu.close()));
+  $$("#menu a").forEach((a) => a.addEventListener("click", () => menu.close()));
   // If the screen gets wide enough for the normal menu, close the phone menu.
-  const wide = window.matchMedia("(min-width: 900px)");
+  const wide = window.matchMedia("(min-width: 1080px)");
   const onWide = (e) => { if (e.matches && menu.open) menu.close(); };
   if (wide.addEventListener) wide.addEventListener("change", onWide); else if (wide.addListener) wide.addListener(onWide);
 
@@ -1169,6 +1350,25 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     fillWithPhone($("#popup-msg"), message);
     popup.showModal();
   }
+
+  // ---- Photo viewer ----
+  const lb = $("#lightbox");
+  let lbIndex = 0;
+  function showLb(i) {
+    lbIndex = (i + workPhotos.length) % workPhotos.length;
+    const p = workPhotos[lbIndex];
+    $("#lb-img").src = p.file;
+    $("#lb-img").alt = p.caption || "Project photo";
+    $("#lb-cap").textContent = p.caption || "";
+  }
+  function openLightbox(i) { showLb(i); lb.showModal(); }
+  $("#lb-nav").hidden = workPhotos.length < 2;
+  $("#lb-prev").addEventListener("click", () => showLb(lbIndex - 1));
+  $("#lb-next").addEventListener("click", () => showLb(lbIndex + 1));
+  lb.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") showLb(lbIndex - 1);
+    if (e.key === "ArrowRight") showLb(lbIndex + 1);
+  });
 
   // ---- Phone call bar: slides in once the big buttons at the top scroll out of view ----
   const callbar = $("#callbar");
@@ -1181,11 +1381,26 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     callbar.classList.remove("is-hidden");
   }
 
-  // ---- Soft shadow under the top bar once the page is scrolled (computers) ----
-  const header = $(".site-header");
+  // ---- Thin line and soft shadow under the top bar once the page is scrolled ----
+  const header = $("#site-header");
   const onScroll = () => header.classList.toggle("scrolled", window.pageYOffset > 4);
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  // ---- Sections fade up as they come into view (skipped if the computer asks for less motion) ----
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const items = $$(".reveal");
+    const vh = window.innerHeight || 800;
+    // Anything already on screen stays put; only things below the fold animate.
+    items.forEach((el) => { if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add("in"); });
+    document.documentElement.classList.add("reveal-on");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    items.forEach((el) => { if (!el.classList.contains("in")) io.observe(el); });
+    // Safety: if something never gets seen by the watcher, show it anyway after a moment.
+    window.addEventListener("load", () => setTimeout(() => items.forEach((el) => el.classList.add("in")), 4000));
+  }
 
   // ---- Quote form ----
   const F = S.form;
@@ -1193,12 +1408,10 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
   const submit = $("#f-submit");
   submit.textContent = F.submitButton;
   $("#f-subject").value = F.emailSubject;
-
   const select = $("#f-service");
   select.add(new Option("Choose one", ""));
   S.services.list.forEach((s) => select.add(new Option(s.name, s.name)));
   select.add(new Option(F.otherOption, F.otherOption));
-
   // Accept either "abcdwxyz" or the full "https://formspree.io/f/abcdwxyz"
   const formId = String(F.formspreeId || "").trim().replace(/^.*\/f\//, "").replace(/[/?#].*$/, "");
   const demoMode = formId === "";
@@ -1206,7 +1419,6 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     $("#demo-note").textContent = F.demoNote;
     $("#demo-note").hidden = false;
   }
-
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (demoMode) {
@@ -1238,7 +1450,6 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     name: B.name,
-    legalName: B.legalName,
     telephone: "+1-" + digits.slice(0, 3) + "-" + digits.slice(3, 6) + "-" + digits.slice(6),
     email: B.email,
     address: {
@@ -1252,7 +1463,9 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     areaServed: S.serviceArea.towns.map((t) => ({ "@type": "City", name: t + ", " + B.state })),
     sameAs: B.facebook ? [B.facebook] : []
   };
+  if (B.legalName) ld.legalName = B.legalName;
   if (B.websiteAddress) ld.url = B.websiteAddress;
+  if (S.photos.hero && S.photos.hero.file) ld.image = new URL(S.photos.hero.file, location.href).href;
   const script = document.createElement("script");
   script.type = "application/ld+json";
   script.textContent = JSON.stringify(ld);
