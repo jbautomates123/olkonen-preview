@@ -202,19 +202,39 @@ section[id], #top { scroll-margin-top: 84px; }
 @media (max-width: 399px) { .brand img { height: 40px; } .header-row { gap: 10px; } .header-actions { gap: 8px; } .menu-btn, .header-quote { padding: 0 11px; } }
 
 /* ---------- Top section (hero) ---------- */
-.hero { padding: 44px 0 0; }
-@media (min-width: 900px) { .hero { padding-top: 72px; } }
-.hero-top { display: grid; gap: 26px; }
-@media (min-width: 1100px) { .hero-top { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; gap: 56px; } }
-@media (min-width: 700px) and (max-width: 1099px) { .hero .lead { max-width: 40em; } }
-.hero h1 { font-family: var(--display); font-size: clamp(2.6rem, 6.6vw, 5.6rem); line-height: 1.02; letter-spacing: -0.012em; color: var(--ink); }
+/* PHOTO SIZING RULE: every photo is sized from the screen's width AND height, so it never
+   gets taller than the screen (short laptop screens) and stays close to its real shape.
+   --screen-h is the visible height (svh = the part not covered by a phone's address bar). */
+:root { --hdr: 72px; --screen-h: 100vh; }
+@supports (height: 100svh) { :root { --screen-h: 100svh; } }
+@media (min-width: 1100px) { :root { --hdr: 88px; } }
+
+/* Top section. Phones and upright tablets: words, then the photo.
+   Laptops, big screens and phones turned sideways: words and photo side by side. */
+.hero { padding: 36px 0 8px; }
+.hero-grid { display: grid; gap: 32px; }
+.hero-side { margin-top: 26px; }
+.hero h1 { font-family: var(--display); font-size: clamp(2.5rem, 9.6vw, 4.4rem); line-height: 1.03; letter-spacing: -0.012em; color: var(--ink); }
 .hero h1 .accent { display: block; font-family: var(--serif); font-style: italic; font-size: 0.86em; color: var(--pine); margin-top: 0.08em; }
 .lead { font-size: 1.2rem; line-height: 1.6; color: var(--ink-2); margin: 0 0 24px; max-width: 34em; }
-.hero-photo { margin: 40px 0 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); }
-@media (min-width: 900px) { .hero-photo { margin-top: 56px; } }
-.hero-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 45%; }
-@media (min-width: 700px) { .hero-photo img { aspect-ratio: 16 / 8; } }
-@media (min-width: 1100px) { .hero-photo img { aspect-ratio: 2 / 1; } }
+/* Photo fit: the frame keeps the photo's real shape (--ar = width / height). If the screen is too
+   short, the frame may trim at most about a fifth of the photo; past that it shrinks instead. */
+.fit {
+  --room: max(calc(var(--screen-h) - var(--hdr) - var(--gap-y, 96px)), 180px);
+  width: min(100%, calc(var(--room) * var(--ar) * var(--give, 1.25)));
+}
+.fit img { width: 100%; aspect-ratio: var(--ar); max-height: var(--room); object-fit: cover; }
+.hero-photo { margin: 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); }
+.hero-photo { --ar: 1; justify-self: start; }
+.hero-photo img { object-position: 50% 50%; }
+@media (min-width: 1000px), (orientation: landscape) and (min-width: 560px) {
+  .hero { padding: clamp(24px, 5vh, 64px) 0 clamp(16px, 4vh, 48px); }
+  .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: center; gap: clamp(32px, 4.5vw, 72px); }
+  .hero h1 { font-size: clamp(2.3rem, min(4.6vw, 10.5vh), 4.6rem); }
+  .hero-side { margin-top: clamp(18px, 3vh, 30px); }
+  .hero-photo { --gap-y: clamp(56px, 10vh, 120px); justify-self: end; }
+}
+@media (orientation: landscape) and (max-height: 500px) { .lead { font-size: 1.05rem; margin-bottom: 16px; } .hero h1 .accent { margin-top: 0; } }
 .photo-cap {
   position: absolute; left: 12px; bottom: 12px; margin: 0; max-width: calc(100% - 24px);
   padding: 6px 12px; border-radius: 999px; background: rgba(15, 26, 19, 0.62); color: #fff;
@@ -246,12 +266,14 @@ section[id], #top { scroll-margin-top: 84px; }
 
 /* ---------- Services ---------- */
 .services-grid { display: grid; gap: 36px; }
-@media (min-width: 900px) { .services-grid { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 72px; align-items: start; } }
+@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) { .services-grid { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px); align-items: start; } }
 .side-photo { margin: 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--paper); }
-.side-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-@media (min-width: 900px) {
-  .services-photo { position: sticky; top: 112px; }
-  .services-photo img { aspect-ratio: 3 / 4; }
+.side-photo { --ar: 1.3333; --gap-y: 48px; }
+.services-photo { --ar: 0.9; --give: 1; }
+.services-photo img { object-position: 60% 42%; }
+@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) {
+  .services-photo { position: sticky; top: calc(var(--hdr) + 24px); }
+  .services-photo { --ar: 0.75; --give: 1.25; }
 }
 .services { list-style: none; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--line); }
 .service { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line); }
@@ -265,13 +287,18 @@ section[id], #top { scroll-margin-top: 84px; }
 .services-note { margin: 24px 0 0; color: var(--ink-2); }
 
 /* ---------- Recent work: before / after slider + photos ---------- */
-.work-head { display: grid; gap: 14px; margin-bottom: 36px; }
-@media (min-width: 900px) { .work-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 56px; margin-bottom: 48px; } .work-head p { margin: 0; } }
-.work-head p { color: var(--ink-2); margin: 0; max-width: 34em; }
-.ba { margin: 0; }
-.ba-frame { position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); aspect-ratio: 4 / 3; --pos: 50%; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-@media (min-width: 900px) { .ba-frame { aspect-ratio: 16 / 9; } }
-.ba-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; pointer-events: none; }
+.work-top { display: grid; gap: 28px; }
+.work-head h2 { margin-bottom: 14px; }
+.work-head p:not(.eyebrow) { color: var(--ink-2); margin: 0; max-width: 34em; }
+.ba { margin: 0; min-width: 0; }
+/* The slider keeps the photos' real 4:3 shape and is never taller than the screen */
+.ba-frame { position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); aspect-ratio: 4 / 3; width: 100%; max-width: calc((var(--screen-h) - var(--hdr) - 80px) * 4 / 3); min-width: min(100%, 280px); --pos: 50%; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+@media (min-width: 1000px), (orientation: landscape) and (min-width: 560px) {
+  .work-top { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); align-items: center; gap: clamp(32px, 4.5vw, 72px); }
+  .ba-frame { margin-left: auto; }
+  .ba-cap { text-align: right; }
+}
+.ba-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; pointer-events: none; }
 .ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
 .ba-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12); pointer-events: none; }
 .ba-knob {
@@ -287,7 +314,7 @@ section[id], #top { scroll-margin-top: 84px; }
 .ba-tag-before { left: 14px; }
 .ba-tag-after { right: 14px; }
 .ba-cap { margin: 12px 0 0; font-size: 0.92rem; color: var(--ink-2); }
-.work-grid { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+.work-grid { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 640px) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1000px) { .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .work-item { margin: 0; }
@@ -306,7 +333,7 @@ section[id], #top { scroll-margin-top: 84px; }
 
 /* ---------- About ---------- */
 .about-grid { display: grid; gap: 36px; }
-@media (min-width: 900px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; } }
+@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; } }
 .statement { font-family: var(--display); font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.2; color: var(--ink); margin: 0 0 24px; text-wrap: balance; }
 .about-text p:not(.statement):not(.eyebrow) { color: var(--ink-2); margin: 0 0 16px; max-width: 36em; }
 .facts { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px; }
@@ -382,7 +409,10 @@ section[id], #top { scroll-margin-top: 84px; }
   border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(20, 32, 24, 0.08);
   transition: transform 0.35s var(--ease);
 }
-.callbar .btn { min-height: 50px; padding: 0 10px; font-size: 1rem; }
+.callbar { grid-template-columns: 1.3fr 1fr; }
+.callbar .btn { min-height: 50px; padding: 0 8px; gap: 7px; font-size: clamp(0.875rem, 3.9vw, 1rem); white-space: nowrap; }
+.callbar .btn svg { width: 17px; height: 17px; }
+@media (orientation: landscape) and (max-height: 500px) { .callbar { padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); } .callbar .btn { min-height: 42px; } body { padding-bottom: 64px; } }
 .callbar.is-hidden { transform: translateY(110%); }
 @media (min-width: 900px) { .callbar { display: none; } }
 @media (prefers-reduced-motion: reduce) { .callbar { transition: none; } }
@@ -485,30 +515,30 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- TOP SECTION -->
   <section class="hero" id="top">
     <div class="wrap">
-      <div class="hero-top">
-        <div>
+      <div class="hero-grid">
+        <div class="hero-copy">
           <p class="eyebrow" data-text="hero.eyebrow"></p>
           <h1 id="hero-heading"><span id="h1-main"></span><span class="accent" id="h1-accent"></span></h1>
-        </div>
-        <div class="hero-side">
-          <p class="lead" data-text="hero.subheading"></p>
-          <div class="btn-row" id="hero-buttons">
-            <a class="btn btn-solid" data-tel="Call {phone}" data-icon="phone"></a>
-            <a class="btn btn-outline" href="#quote" data-text="hero.quoteButton"></a>
+          <div class="hero-side">
+            <p class="lead" data-text="hero.subheading"></p>
+            <div class="btn-row" id="hero-buttons">
+              <a class="btn btn-solid" data-tel="Call {phone}" data-icon="phone"></a>
+              <a class="btn btn-outline" href="#quote" data-text="hero.quoteButton"></a>
+            </div>
           </div>
         </div>
+        <figure class="hero-photo fit" id="hero-photo" hidden>
+          <img id="hero-img" alt="" width="800" height="800" fetchpriority="high">
+          <figcaption class="photo-cap" id="hero-cap"></figcaption>
+        </figure>
       </div>
-      <figure class="hero-photo" id="hero-photo" hidden>
-        <img id="hero-img" alt="" width="800" height="800" fetchpriority="high">
-        <figcaption class="photo-cap" id="hero-cap"></figcaption>
-      </figure>
     </div>
   </section>
 
   <!-- SERVICES -->
   <section class="section section-stone" id="services">
     <div class="wrap services-grid">
-      <figure class="side-photo services-photo reveal" id="services-photo" hidden>
+      <figure class="side-photo services-photo fit reveal" id="services-photo" hidden>
         <img id="services-img" alt="" width="600" height="800" loading="lazy">
         <figcaption class="photo-cap" id="services-cap"></figcaption>
       </figure>
@@ -525,11 +555,10 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- RECENT WORK (before/after slider + photos; hidden if no photos are set) -->
   <section class="section" id="work" hidden>
     <div class="wrap">
+      <div class="work-top">
       <div class="work-head reveal">
-        <div>
-          <p class="eyebrow" data-text="work.eyebrow"></p>
-          <h2 data-text="work.heading"></h2>
-        </div>
+        <p class="eyebrow" data-text="work.eyebrow"></p>
+        <h2 data-text="work.heading"></h2>
         <p data-text="work.intro"></p>
       </div>
       <figure class="ba reveal" id="ba" hidden>
@@ -544,6 +573,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         </div>
         <figcaption class="ba-cap" id="ba-cap"></figcaption>
       </figure>
+      </div>
       <ul class="work-grid reveal" id="work-grid"></ul>
     </div>
   </section>
@@ -551,7 +581,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- ABOUT -->
   <section class="section section-stone" id="about">
     <div class="wrap about-grid">
-      <figure class="side-photo reveal" id="about-photo" hidden>
+      <figure class="side-photo fit reveal" id="about-photo" hidden>
         <img id="about-img" alt="" width="800" height="600" loading="lazy">
         <figcaption class="photo-cap" id="about-cap"></figcaption>
       </figure>
@@ -665,7 +695,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 <!-- Phone call bar (phones and tablets only) -->
 <div class="callbar is-hidden" id="callbar">
   <a class="btn btn-solid" data-tel="Call {phone}" data-icon="phone"></a>
-  <a class="btn btn-outline" href="#quote" data-text="hero.quoteButton" style="background: var(--white);"></a>
+  <a class="btn btn-outline" href="#quote" data-text="hero.quoteButtonShort" style="background: var(--white);"></a>
 </div>
 
 <!-- MENU (phones and tablets) -->
@@ -725,7 +755,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.0",
+  version: "2.1",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -798,9 +828,11 @@ const SETTINGS = {
   // These are from Olkonen's public Facebook page (small copies). ASK THE OWNER before launch,
   // and ask for his original photos: they'll be much sharper.
   photos: {
-    hero:     { file: "photos/pool-patio.jpg",         alt: "Stone patio around an in-ground pool and a stone-sided spa, with woods behind", caption: "Stone patio and pool surround" },
-    services: { file: "photos/lawn-sprinklers.jpg",    alt: "Green lawn with a fieldstone wall and sprinklers running, under a large shade tree", caption: "Lawn and fieldstone wall" },
-    about:    { file: "photos/crew-laying-sod.jpg",    alt: "The Olkonen crew laying rolls of sod next to stone pillars and a new paver walkway", caption: "Our crew laying sod" }
+    // focus = the part of the photo to keep in view when a screen trims the edges:
+    // "50% 50%" is the middle; the first number moves left/right, the second up/down (0% = top).
+    hero:     { file: "photos/pool-patio.jpg",      focus: "50% 55%", alt: "Stone patio around an in-ground pool and a stone-sided spa, with woods behind", caption: "Stone patio and pool surround" },
+    services: { file: "photos/lawn-sprinklers.jpg", focus: "60% 42%", alt: "Green lawn with a fieldstone wall and sprinklers running, under a large shade tree", caption: "Lawn and fieldstone wall" },
+    about:    { file: "photos/crew-laying-sod.jpg", focus: "45% 60%", alt: "The Olkonen crew laying rolls of sod next to stone pillars and a new paver walkway", caption: "Our crew laying sod" }
   },
 
   // ---- RECENT WORK ----
@@ -1014,6 +1046,7 @@ const LOGO_BUILT_IN = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000
     const img = $(imgSel);
     img.src = p.file;
     img.alt = p.alt || "";
+    if (p.focus) img.style.objectPosition = p.focus;
     const cap = capSel ? $(capSel) : null;
     if (cap) { if (p.caption) cap.textContent = p.caption; else cap.hidden = true; }
     fig.hidden = false;
