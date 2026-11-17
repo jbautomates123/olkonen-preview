@@ -42,10 +42,20 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23115c31%22/%3E%3Cpath d=%22M32.00 8.50 L46.00 24.59 L40.75 25.94 L49.10 35.83 L44.19 36.71 L52.33 43.10 L50.45 43.71 L52.73 45.73 L43.31 46.40 L54.35 53.67 L49.23 55.89 L43.11 55.69 L38.06 54.35 L34.83 53.61 L33.82 53.61 L33.82 56.50 L30.18 56.50 L30.18 53.61 L29.17 53.61 L25.94 54.35 L20.89 55.69 L14.77 55.89 L9.65 53.67 L20.69 46.40 L11.27 45.73 L13.55 43.71 L11.67 43.10 L19.81 36.71 L14.90 35.83 L23.25 25.94 L18.00 24.59 L32.00 8.50Z%22 fill=%22%2300a651%22 stroke=%22%23e9f6ec%22 stroke-width=%221.6%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-<!-- Fonts. If Google Fonts is blocked, the page falls back to Georgia and the computer's own font. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<!-- Fonts (v2.4): stored with the site in the "fonts" folder instead of loaded from Google, so the page
+     doesn't wait on another server (faster, and works where Google Fonts is blocked). Free fonts under
+     the SIL Open Font License; the license files are in the fonts folder. The two fonts the top of the
+     page needs first are fetched right away. If a font can't load, Georgia and the computer's own font fill in. -->
+<link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Libre Caslon Display"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-display-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Libre Caslon Text"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-text-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Libre Caslon Text"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-text-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/source-sans-3-latin-700-normal.woff2") format("woff2"); }
+</style>
 
 <!-- If a browser has scripts turned off, show the simple contact box instead of empty spots -->
 <noscript><style>#fallback { display: block !important; } .preview, .site-header, main, .site-footer, .callbar { display: none !important; }</style></noscript>
@@ -89,9 +99,15 @@
 [hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(17, 92, 49, 0.12); background: var(--paper); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+/* Paper grain (v2.4): a very faint speckle on the cream and granite backgrounds so they look like
+   printed paper instead of flat screen color. The tile is paper-grain.png next to this page.
+   Turn it off in SETTINGS (look.paperGrain). */
+:root { --grain: none; }
+.has-grain { --grain: url("paper-grain.png"); }
 body {
   margin: 0;
   background: var(--paper);
+  background-image: var(--grain);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 1.125rem;
@@ -105,10 +121,11 @@ a:hover { text-decoration-thickness: 2px; }
 a[href^="tel:"] { white-space: nowrap; } /* never split a phone number across lines */
 p { text-wrap: pretty; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+[tabindex="-1"]:focus { outline: none; }
 h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 400; color: var(--ink); }
 h2 { font-family: var(--display); font-size: clamp(2rem, 4.4vw, 3.1rem); line-height: 1.08; letter-spacing: -0.005em; }
 h3 { font-family: var(--serif); font-size: 1.28rem; line-height: 1.3; }
-section[id], #top { scroll-margin-top: 84px; }
+section[id], #top, #gallery { scroll-margin-top: 76px; }
 
 .wrap { max-width: 1240px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
 @media (min-width: 700px) { .wrap { padding-left: 32px; padding-right: 32px; } }
@@ -177,13 +194,25 @@ section[id], #top { scroll-margin-top: 84px; }
 .x:hover { background: rgba(255, 255, 255, 0.24); }
 
 /* ---------- Header (stays at the top while scrolling) ---------- */
-.site-header { position: sticky; top: 0; z-index: 30; background: rgba(248, 246, 240, 0.96); border-bottom: 1px solid transparent; transition: border-color 0.25s, box-shadow 0.25s; }
+.site-header { position: sticky; top: 0; z-index: 30; background: rgba(248, 246, 240, 0.96); border-bottom: 1px solid transparent; margin-bottom: 0; transition: border-color 0.3s, box-shadow 0.3s, margin-bottom 0.32s var(--ease); }
 @supports (backdrop-filter: blur(8px)) { .site-header { background: rgba(248, 246, 240, 0.86); backdrop-filter: saturate(1.2) blur(10px); -webkit-backdrop-filter: saturate(1.2) blur(10px); } }
 .site-header.scrolled { border-bottom-color: var(--line); box-shadow: 0 6px 20px rgba(20, 32, 24, 0.06); }
-.header-row { display: flex; align-items: center; gap: 16px; min-height: 72px; }
+.header-row { display: flex; align-items: center; gap: 16px; min-height: 72px; transition: min-height 0.32s var(--ease); }
+/* Once the page scrolls, the top bar gets slimmer and the logo a bit smaller. The bar gives up
+   12px (20px on big screens) and gets the same amount back as space underneath, so nothing on the
+   page jumps while it shrinks. */
+.site-header.scrolled { margin-bottom: 12px; }
+.site-header.scrolled .header-row { min-height: 60px; }
+.brand img { transition: height 0.32s var(--ease); }
+.site-header.scrolled .brand img { height: 38px; }
 .brand { display: block; flex: none; line-height: 0; text-decoration: none; color: var(--pine-deep); font-family: var(--display); font-size: 1.4rem; }
 .brand img { width: auto; height: 46px; }
-@media (min-width: 1100px) { .brand img { height: 58px; } .header-row { min-height: 88px; } }
+@media (min-width: 1100px) {
+  .brand img { height: 58px; } .header-row { min-height: 88px; }
+  .site-header.scrolled { margin-bottom: 20px; }
+  .site-header.scrolled .header-row { min-height: 68px; }
+  .site-header.scrolled .brand img { height: 46px; }
+}
 .nav-desktop { display: none; gap: 28px; margin-left: auto; }
 .nav-desktop a { position: relative; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 1rem; white-space: nowrap; padding: 6px 0; }
 /* Underline that grows from the left on hover, in the accent color */
@@ -218,7 +247,7 @@ section[id], #top { scroll-margin-top: 84px; }
   .header-actions { margin-left: 28px; gap: 20px; }
   .menu-btn { display: none; }
 }
-@media (max-width: 399px) { .brand img { height: 40px; } .header-row { gap: 10px; } .header-actions { gap: 8px; } .menu-btn, .header-quote { padding: 0 11px; } }
+@media (max-width: 399px) { .brand img, .site-header.scrolled .brand img { height: 36px; } .header-row { gap: 10px; } .header-actions { gap: 8px; } .menu-btn, .header-quote { padding: 0 11px; } }
 
 /* ---------- Top section (hero) ---------- */
 /* PHOTO SIZING RULE: every photo is sized from the screen's width AND height, so it never
@@ -257,6 +286,10 @@ section[id], #top { scroll-margin-top: 84px; }
 /* Photo frame (keeps the drifting photo inside its rounded box) and a plain caption under it.
    v2.3: captions moved off the photos; a dark bubble on every photo is a template giveaway. */
 .pic { display: block; overflow: hidden; border-radius: 3px; background: var(--stone); }
+/* Photos fade in once they've loaded, instead of popping in line by line. The pale box behind
+   them holds the spot while they load, so nothing jumps. */
+img.fade { opacity: 0; transition: opacity 0.6s var(--ease); }
+img.fade.loaded { opacity: 1; }
 .photo-cap { margin: 10px 0 0; font-size: 0.92rem; line-height: 1.4; color: var(--ink-2); }
 
 #h1-main { display: block; }
@@ -279,8 +312,8 @@ section[id], #top { scroll-margin-top: 84px; }
 
 /* Photos drift a few pixels as the page scrolls (a slow, calm movement, like looking out a car
    window). The script sets --drift; the photo is drawn 6% bigger so its edges never show. */
-.drift img { scale: 1.06; translate: 0 var(--drift, 0px); will-change: translate; }
-@media (prefers-reduced-motion: reduce) { .drift img { scale: none; translate: none; } }
+.drift-on .drift img { scale: 1.06; translate: 0 var(--drift, 0px); will-change: translate; }
+/* (v2.4: only on computers with a mouse. Phones scroll on their own timing, where it can look jittery.) */
 
 /* Sections fade up a little as they come into view (only if the script turns it on).
    Items in a group (service rows, photos, contact details) come in one after another. */
@@ -290,7 +323,14 @@ section[id], #top { scroll-margin-top: 84px; }
 /* ---------- Sections ---------- */
 .section { padding: 72px 0; }
 @media (min-width: 900px) { .section { padding: 112px 0; } }
-.section-stone { background: var(--stone); }
+/* Pale granite sections fade in from the page color at their top and bottom edges, so sections
+   blend into each other instead of starting with a hard line. (--fade-top / --fade-bottom = 0
+   where a section sits right against the dark green band.) */
+.section-stone {
+  --fade-top: 88px; --fade-bottom: 88px;
+  background-color: var(--stone);
+  background-image: var(--grain), linear-gradient(to bottom, var(--paper), var(--stone) var(--fade-top), var(--stone) calc(100% - var(--fade-bottom)), var(--paper));
+}
 .section-intro { color: var(--ink-2); margin: 14px 0 0; max-width: 40em; }
 
 /* ---------- Before / after (second on the page since v2.3) ---------- */
@@ -335,12 +375,38 @@ section[id], #top { scroll-margin-top: 84px; }
   .services { margin-top: 0 !important; }
 }
 .services { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--line); }
-/* Each service: its name, then a couple of plain sentences (Google reads these words to match
-   searches like "stone walls Hopkinton"). No icons on purpose: one icon per row is a template look. */
-.service { display: grid; gap: 6px; padding: 24px 0; border-bottom: 1px solid var(--line); }
-@media (min-width: 700px) { .service { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 28px; align-items: baseline; padding: 28px 0; } }
-.service h3 { font-size: 1.36rem; line-height: 1.25; }
-.service p { margin: 0; color: var(--ink-2); font-size: 1.05rem; line-height: 1.6; }
+/* Each service is one row that folds open (v2.4). The name and a + show; tap the row and the
+   sentences slide open underneath. The words stay in the page while folded, so Google still reads
+   them (they help match searches like "stone walls Hopkinton"). No icons on purpose. */
+.service { border-bottom: 1px solid var(--line); }
+.service h3 { margin: 0; font-size: inherit; }
+.service-toggle {
+  display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 22px 0; border: 0; background: none; cursor: pointer; text-align: left; color: var(--ink);
+  font-family: var(--serif); font-size: 1.36rem; line-height: 1.25;
+}
+@media (min-width: 700px) { .service-toggle { padding: 26px 0; font-size: 1.45rem; } }
+.service-toggle:focus-visible { outline-offset: 4px; border-radius: 2px; }
+.service-name { transition: color 0.2s, transform 0.3s var(--ease); }
+@media (hover: hover) { .service-toggle:hover .service-name { color: var(--pine); transform: translateX(4px); } }
+/* The + turns into a - when open (its upright bar turns flat) */
+.plus { position: relative; flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--white); transition: border-color 0.2s, background-color 0.2s; }
+.plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2px; margin: -1px 0 0 -7px; border-radius: 2px; background: var(--accent-ink); transition: transform 0.3s var(--ease-ui); }
+.plus::after { transform: rotate(90deg); }
+.service-toggle:hover .plus { border-color: var(--accent); }
+.service-toggle[aria-expanded="true"] .plus { background: var(--pine-tint); border-color: var(--pine-tint); }
+.service-toggle[aria-expanded="true"] .plus::after { transform: rotate(0deg); }
+/* The sliding part: grows from 0 to its real height (no fixed heights, so long text never gets cut) */
+.service-body { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows 0.32s var(--ease-in), visibility 0s linear 0.32s; }
+.service-body > div { overflow: hidden; min-height: 0; }
+.service-body p { margin: 0; padding: 0 56px 24px 0; color: var(--ink-2); font-size: 1.05rem; line-height: 1.6; opacity: 0; transform: translateY(-6px); transition: opacity 0.2s var(--ease-in), transform 0.2s var(--ease-in); }
+.service.open .service-body { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows 0.38s var(--ease), visibility 0s; }
+.service.open .service-body p { opacity: 1; transform: none; transition: opacity 0.35s var(--ease) 0.06s, transform 0.4s var(--ease) 0.06s; }
+@media (max-width: 459px) { .service-body p { padding-right: 0; } }
+/* If the script can't fold them (very old browser), just show everything */
+.no-fold .service-body { grid-template-rows: 1fr; visibility: visible; }
+.no-fold .service-body p { opacity: 1; transform: none; }
+.no-fold .plus { display: none; }
 .services-note { margin: 20px 0 0; color: var(--ink-2); }
 
 /* ---------- Job photos: one row you swipe (phones) or page with the arrows (computers) ---------- */
@@ -392,32 +458,29 @@ section[id], #top { scroll-margin-top: 84px; }
 .facts li { display: flex; gap: 10px; align-items: baseline; }
 .facts li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; transform: translateY(-2px); }
 .about-call { margin-top: 24px !important; color: var(--ink) !important; font-weight: 600; }
+.reviews-link { margin: 14px 0 0 !important; }
+.reviews-link a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none; }
+.reviews-link a:hover { text-decoration: underline; }
+.reviews-link svg { width: 17px; height: 17px; }
 /* Hiring: one quiet line under About (was a full-width band) */
 .hiring { margin-top: 22px; padding-left: 14px; border-left: 3px solid var(--accent); }
 .about-text .hiring p { margin: 0; font-size: 1rem; }
 .hiring strong { margin-right: 6px; color: var(--ink); }
 
-/* ---------- Service area ---------- */
-.area-grid { display: grid; gap: 28px; }
-@media (min-width: 900px) { .area-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; align-items: center; } }
-.area-note { color: var(--ink-2); margin: 16px 0 0; }
-.town-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 22px 0 0; padding: 0; }
-.town-list li { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 0.98rem; }
-.area-map { margin: 0; }
-.map-fig { margin: 0; }
-.area-map svg { display: block; width: 100%; height: auto; border-radius: 3px; border: 1px solid var(--line); background: #f1eee5; }
-.area-map figcaption { font-size: 0.85rem; color: var(--ink-2); margin-top: 8px; }
-/* The "Show the map" button only appears on phones; bigger screens always show the map */
-.map-toggle { display: none; list-style: none; }
-.map-toggle::-webkit-details-marker { display: none; }
-@media (max-width: 699px) {
-  .map-toggle {
-    display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px; cursor: pointer;
-    border: 1.5px solid var(--line); border-radius: var(--corner); background: var(--white); font-weight: 600; color: var(--ink);
-  }
-  .map-toggle svg { width: 18px; height: 18px; color: var(--accent-ink); }
-  .area-map[open] .map-toggle { margin-bottom: 14px; }
-}
+/* ---------- Dark green band (v2.4): breaks up the pale sections with one line in Todd's own words ---------- */
+.band { background: var(--pine-deep); color: #f6f2ea; padding: clamp(80px, 12vw, 136px) 0; -webkit-font-smoothing: antialiased; --contour-color: #cfe3d4; --contour-opacity: 0.12; --contour-shift: 300px 140px; }
+.band-inner { margin: 0 auto; max-width: 900px; text-align: center; }
+.band blockquote { margin: 0; }
+/* A big opening quote mark in the soft accent color */
+.band blockquote::before { content: "\201C"; display: block; height: 0.42em; margin-bottom: 0.12em; font-family: var(--display); font-size: clamp(4.5rem, 9vw, 6.5rem); line-height: 0.8; color: #d4a974; }
+.band blockquote p { margin: 0; font-family: var(--display); font-size: clamp(1.7rem, 3.7vw, 2.75rem); line-height: 1.22; color: #f6f2ea; text-wrap: balance; }
+.band figcaption { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; font-size: 1rem; font-weight: 600; letter-spacing: 0.04em; color: #dcc29b; }
+.band figcaption::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: #c9a06c; }
+/* The pale sections next to the dark band meet it with a clean edge (no fade on that side) */
+#about { --fade-bottom: 0px; }
+#quote { --fade-top: 0px; }
+.no-band #about { --fade-bottom: 88px; }
+.no-band #quote { --fade-top: 88px; }
 
 /* ---------- Quote form ---------- */
 #quote { --contour-opacity: 0.07; --contour-shift: 120px 60px; }
@@ -427,6 +490,9 @@ section[id], #top { scroll-margin-top: 84px; }
 .big-phone { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-family: var(--display); font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1; color: var(--pine-deep); text-decoration: none; }
 .big-phone svg { width: 28px; height: 28px; color: var(--pine); }
 .big-phone:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+/* Towns we work in: one quiet line with a map pin, under the big phone number */
+.quote-side .towns-line { display: flex; gap: 10px; align-items: flex-start; margin: 26px 0 0; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink); font-size: 1.05rem; line-height: 1.55; max-width: 30em; }
+.towns-line svg { width: 19px; height: 19px; flex: none; margin-top: 4px; color: var(--accent-ink); }
 .quote-logo { width: 220px; margin-top: 36px; }
 @media (max-width: 699px) and (orientation: portrait) { .quote-logo { display: none; } } /* phones: the logo is already in the top bar */
 .quote { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 24px; box-shadow: var(--shadow-sm); display: grid; gap: 18px; }
@@ -583,7 +649,6 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
       <a href="#services">Services</a>
       <a href="#work">Our Work</a>
       <a href="#about">About</a>
-      <a href="#area">Service Area</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="header-actions">
@@ -682,30 +747,21 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <div id="about-paragraphs"></div>
         <ul class="facts" id="about-facts" hidden></ul>
         <p class="about-call" id="about-call"></p>
+        <!-- Google reviews link (v2.4). Off for now: see SETTINGS.reviews -->
+        <p class="reviews-link" id="reviews-link" hidden></p>
         <!-- HIRING (a small line now, not a full band; turn off in SETTINGS.hiring.show) -->
         <div class="hiring" id="hiring" hidden><p id="hiring-text"></p></div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICE AREA -->
-  <section class="section" id="area">
-    <div class="wrap area-grid">
-      <div class="reveal">
-        <h2 data-text="serviceArea.heading"></h2>
-        <p class="section-intro" data-text="serviceArea.text"></p>
-        <ul class="town-list" id="town-list"></ul>
-        <p class="area-note" id="area-note"></p>
-      </div>
-      <!-- Simple drawn map, built from SETTINGS.serviceArea.towns. On phones it starts folded
-           behind a "Show the map" button so the page isn't one picture after another. -->
-      <details class="area-map reveal" id="area-map" open>
-        <summary class="map-toggle"><span class="icon" data-icon="pin"></span><span class="map-toggle-text">Show the map</span></summary>
-        <figure class="map-fig">
-          <svg id="map-svg" viewBox="0 0 600 400" role="img"></svg>
-          <figcaption>Simple map for reference.</figcaption>
-        </figure>
-      </details>
+  <!-- DARK GREEN BAND (v2.4): one sentence in the owner's own words. Edit or turn off in SETTINGS.band -->
+  <section class="band contours" id="band" aria-label="In our own words" hidden>
+    <div class="wrap">
+      <figure class="band-inner reveal">
+        <blockquote><p id="band-quote"></p></blockquote>
+        <figcaption id="band-by"></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -717,6 +773,8 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <p data-text="form.intro"></p>
         <p data-text="form.preferCall"></p>
         <a class="big-phone" data-tel="{phone}" data-icon="phone"></a>
+        <!-- Towns we work in (one line instead of the old map section; edit in SETTINGS.serviceArea) -->
+        <p class="towns-line" id="towns-line" hidden><span class="icon" data-icon="pin"></span><span id="towns-text"></span></p>
         <img class="quote-logo" id="quote-logo" alt="Olkonen Earthscapes" width="331" height="150" hidden>
       </div>
       <form class="quote" id="quote-form">
@@ -797,7 +855,6 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
       <li><a href="#services">Services</a></li>
       <li><a href="#work" id="menu-work">Our Work</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#area">Service Area</a></li>
       <li><a href="#quote">Request a Quote</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -845,7 +902,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.3",
+  version: "2.4",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -954,17 +1011,39 @@ const SETTINGS = {
   // ---- ABOUT ----
   about: {
     heading: "About Olkonen Earthscapes",
-    // Big line at the top of About. Based on the owner's own About text.
-    statement: "We listen to what you want, give you our professional advice, and work with you to get the landscape you're after.",
-    // The owner's own About text from the old site.
+    // Big line at the top of About. Based on the first sentence of the owner's own About text.
+    // (v2.4: changed, because the old line said the same thing as the dark green band below.)
+    statement: "Helping you make the best decisions on any landscape project in the Hopkinton and Concord area.",
+    // The owner's own About text from the old site, word for word. (v2.4: the sentence "We focus on
+    // listening..." moved into the dark green band below, so it isn't said twice.)
+    // ASK THE OWNER: his text says "Inc." but state records and Meghan's email say LLC.
     paragraphs: [
       "At Olkonen Earthscapes, we are dedicated to helping you make the best decisions and providing you with the right direction on any type of landscape project throughout the Hopkinton and Concord area.",
-      "We focus on listening to what our customers want, giving you our professional advice and working together to deliver the landscaping you desire. While there are numerous landscape companies available to perform work, businesses and homeowners looking for landscaping services choose Olkonen Earthscapes, Inc. time and time again."
+      "While there are numerous landscape companies available to perform work, businesses and homeowners looking for landscaping services choose Olkonen Earthscapes, Inc. time and time again."
     ],
     // ASK THE OWNER: only add facts he confirms. The list stays hidden while empty.
     // Examples: "Serving the area since ____", "Fully insured" (only if true).
     facts: [],
     callLine: "Have a project in mind? Call {phone}."
+  },
+
+  // ---- GOOGLE REVIEWS LINK (v2.4, OFF for now) ----
+  // A "Read our reviews on Google" link under About, opening his Google listing. It's off because his
+  // Google listing had only 1 review when checked (Nov 17, 2026), and a button that leads to a single
+  // review looks thin. Once he has a handful of good reviews, change show to true.
+  reviews: {
+    show: false,
+    text: "Read our reviews on Google",
+    link: "https://www.google.com/maps/search/?api=1&query=Olkonen+Earthscapes+Hopkinton+NH"
+  },
+
+  // ---- DARK GREEN BAND (v2.4) ----
+  // A full-width dark green strip between About and the quote form, with one sentence in the owner's
+  // own words (word for word from the About text on his old website). Set show to false to hide it.
+  band: {
+    show: true,
+    quote: "We focus on listening to what our customers want, giving you our professional advice and working together to deliver the landscaping you desire.",
+    by: "Olkonen Earthscapes"
   },
 
   // ---- HIRING ----
@@ -976,20 +1055,17 @@ const SETTINGS = {
     linkText: "See the job posting"
   },
 
-  // ---- SERVICE AREA ----
+  // ---- TOWNS WE WORK IN ----
+  // v2.4: the big "Where we work" section and map were removed (it was a long scroll for little).
+  // The towns now show as one line next to the quote form, and are still told to Google behind the scenes
+  // (Google uses them to match searches like "landscaper Henniker NH").
+  // CONFIRM WITH OWNER: Hopkinton, Contoocook and Concord were on the old site. Henniker, Warner and
+  // Dunbarton come from his directory listings (snowlawn.net, checked Nov 17, 2026). Ask Todd which towns
+  // he really goes to, and only list towns he actually works in.
   serviceArea: {
-    heading: "Where we work",
-    text: "We serve homeowners and businesses throughout the Hopkinton and Concord area.",
-    // ASK THE OWNER: which other nearby towns does he cover?
-    // Each town listed here gets a dot on the map and is told to Google.
-    // Towns the map already knows the location of:
-    //   Hopkinton, Contoocook, Concord, Penacook, Henniker, Warner, Bow, Dunbarton,
-    //   Weare, Webster, Boscawen, Canterbury, Pembroke, Hooksett, Loudon, Bradford,
-    //   Hillsborough, Sutton, Goffstown
-    // A town not on that list still counts for Google but won't get a dot (ask Claude to add it).
-    towns: ["Hopkinton", "Contoocook", "Concord"],
-    showMap: true,
-    note: "Not sure if you're in our area? Call {phone} and ask."
+    towns: ["Hopkinton", "Contoocook", "Concord", "Henniker", "Warner", "Dunbarton"],
+    // The line by the quote form. {towns} becomes the list above ("A, B, C and D").
+    line: "We work in {towns} and nearby towns."
   },
 
   // ---- QUOTE FORM ----
@@ -1018,7 +1094,8 @@ const SETTINGS = {
   // ---- LOOK ----
   look: {
     buttonCorners: 4,                           // roundness of buttons and boxes, in pixels. 0 = square corners.
-    contourLines: true                          // the faint survey-map lines in the footer, quote section and Facebook tile. false = off.
+    contourLines: true,                         // the faint survey-map lines in the footer, quote section and dark green band. false = off.
+    paperGrain: true                            // the very faint paper speckle on the light backgrounds. false = off.
   },
 
   // ---- FOOTER ----
@@ -1090,6 +1167,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
 
   // Look
   document.documentElement.style.setProperty("--corner", Number(S.look.buttonCorners) + "px");
+  if (S.look.paperGrain !== false) document.documentElement.classList.add("has-grain");
   if (S.look.contourLines !== false) {
     document.documentElement.style.setProperty("--contour-map", 'url("' + CONTOURS + '")');
     document.documentElement.classList.add("has-contours");
@@ -1144,11 +1222,21 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   if (S.hero.headingAccent) $("#h1-accent").textContent = " " + S.hero.headingAccent;
   else $("#h1-accent").hidden = true;
 
+  // Fade a photo in once it has loaded (instead of it popping in line by line).
+  function fadeIn(img) {
+    if (reduceMotion) return;
+    img.classList.add("fade");
+    const done = () => img.classList.add("loaded");
+    if (img.complete && img.naturalWidth) done();
+    else { img.addEventListener("load", done); img.addEventListener("error", done); }
+  }
+
   // A photo spot: fills the img + caption, or hides the spot if no file is set
   function setPhoto(figSel, imgSel, capSel, p) {
     const fig = $(figSel);
     if (!p || !p.file) { fig.hidden = true; return; }
     const img = $(imgSel);
+    if (imgSel !== "#hero-img") fadeIn(img); // the top photo has its own opening animation
     img.src = p.file;
     img.alt = p.alt || "";
     if (p.focus) img.style.objectPosition = p.focus;
@@ -1161,16 +1249,45 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
 
   // Services
   const list = $("#services-list");
-  S.services.list.forEach((s) => {
+  // Each service: a button with the name (and a +) that folds the description open and shut.
+  S.services.list.forEach((s, i) => {
     const li = document.createElement("li");
     li.className = "service";
     const h = document.createElement("h3");
-    h.textContent = s.name;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "service-toggle";
+    btn.id = "svc-btn-" + i;
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-controls", "svc-" + i);
+    const name = document.createElement("span");
+    name.className = "service-name";
+    name.textContent = s.name;
+    const plus = document.createElement("span");
+    plus.className = "plus";
+    plus.setAttribute("aria-hidden", "true");
+    btn.append(name, plus);
+    h.appendChild(btn);
+    const body = document.createElement("div");
+    body.className = "service-body";
+    body.id = "svc-" + i;
+    body.setAttribute("role", "region");
+    body.setAttribute("aria-labelledby", btn.id);
+    const inner = document.createElement("div");
     const p = document.createElement("p");
     p.textContent = s.description;
-    li.append(h, p);
+    inner.appendChild(p);
+    body.appendChild(inner);
+    btn.addEventListener("click", () => {
+      const open = !li.classList.contains("open");
+      li.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    li.append(h, body);
     list.appendChild(li);
   });
+  // Very old browsers can't animate the fold, so they just show every description.
+  if (!(window.CSS && CSS.supports && CSS.supports("grid-template-rows", "0fr"))) document.documentElement.classList.add("no-fold");
   fillWithPhone($("#services-note"), S.services.note);
 
   // ---- Recent work ----
@@ -1189,6 +1306,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   }
   if (hasBA) {
     $("#ba").hidden = false;
+    ["#ba-before", "#ba-after"].forEach((sel) => fadeIn($(sel)));
     $("#ba-before").src = ba.before.file;
     $("#ba-before").alt = ba.before.alt || "Before";
     $("#ba-after").src = ba.after.file;
@@ -1200,17 +1318,18 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     knob.append(icon("left"), icon("right"));
     const setPos = (v) => frame.style.setProperty("--pos", v + "%");
     range.addEventListener("input", () => setPos(range.value));
-    // A small "nudge" the first time the slider comes into view, so people see it moves
+    // The first time the slider comes into view it glides across by itself once (before, then after,
+    // then back to the middle), so people see it moves. Stops the moment someone touches it.
     if (!reduceMotion && "IntersectionObserver" in window) {
       const io = new IntersectionObserver((entries) => {
         if (!entries[0].isIntersecting) return;
         io.disconnect();
-        const keys = [[0, 50], [700, 30], [1500, 68], [2200, 50]];
+        const keys = [[0, 50], [350, 50], [1250, 14], [2450, 86], [3300, 50]];
         const start = performance.now();
         let touched = false;
         range.addEventListener("pointerdown", () => { touched = true; }, { once: true });
         range.addEventListener("keydown", () => { touched = true; }, { once: true });
-        const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+        const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2); // slow start, slow finish
         (function step(now) {
           if (touched) return;
           const t = now - start;
@@ -1240,6 +1359,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     btn.className = "work-open drift";
     btn.setAttribute("aria-label", "View bigger: " + (p.caption || "project photo"));
     const img = document.createElement("img");
+    fadeIn(img);
     img.src = p.file;
     img.alt = "";
     img.loading = "lazy";
@@ -1307,6 +1427,30 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   if (S.about.callLine) fillWithPhone($("#about-call"), S.about.callLine);
   else $("#about-call").hidden = true;
 
+  // Google reviews link (off until he has more reviews; see SETTINGS)
+  if (S.reviews && S.reviews.show && S.reviews.link) {
+    const a = document.createElement("a");
+    a.href = S.reviews.link;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.append(S.reviews.text || "Read our reviews on Google", icon("out"));
+    const sr = document.createElement("span");
+    sr.className = "sr-only";
+    sr.textContent = " (opens in a new tab)";
+    a.appendChild(sr);
+    $("#reviews-link").appendChild(a);
+    $("#reviews-link").hidden = false;
+  }
+
+  // Dark green band
+  if (S.band && S.band.show && S.band.quote) {
+    $("#band-quote").textContent = plain(S.band.quote);
+    if (S.band.by) $("#band-by").textContent = S.band.by; else $("#band-by").hidden = true;
+    $("#band").hidden = false;
+  } else {
+    document.documentElement.classList.add("no-band");
+  }
+
   // Hiring
   if (S.hiring.show) {
     const p = $("#hiring-text");
@@ -1326,134 +1470,12 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     $("#hiring").hidden = false;
   }
 
-  // Service area
-  const towns = $("#town-list");
-  S.serviceArea.towns.forEach((t) => {
-    const li = document.createElement("li");
-    li.textContent = t;
-    towns.appendChild(li);
-  });
-  fillWithPhone($("#area-note"), S.serviceArea.note);
-  if (S.serviceArea.showMap) drawMap(S.serviceArea.towns);
-  else $("#area-map").hidden = true;
-  // Phones: the map starts folded behind "Show the map". Bigger screens always show it.
-  const mapBox = $("#area-map");
-  const phone = window.matchMedia ? window.matchMedia("(max-width: 699px)") : { matches: false };
-  const mapText = mapBox.querySelector(".map-toggle-text");
-  const syncMapText = () => { mapText.textContent = mapBox.open ? "Hide the map" : "Show the map"; };
-  if (phone.matches) mapBox.open = false;
-  mapBox.addEventListener("toggle", syncMapText);
-  const onPhone = (e) => { if (!e.matches) mapBox.open = true; };
-  if (phone.addEventListener) phone.addEventListener("change", onPhone); else if (phone.addListener) phone.addListener(onPhone);
-  syncMapText();
-
-  // ---- Simple drawn map ----
-  // Real town-center locations (latitude, longitude). side = which side the name goes on.
-  function drawMap(townNames) {
-    const PLACES = {
-      "Hopkinton":    [43.1915, -71.6753, "right"],
-      "Contoocook":   [43.2220, -71.7134, "left"],
-      "Concord":      [43.2081, -71.5376, "right"],
-      "Penacook":     [43.2826, -71.5998, "right"],
-      "Henniker":     [43.1798, -71.8223, "left"],
-      "Warner":       [43.2806, -71.8162, "left"],
-      "Bow":          [43.1320, -71.5440, "right"],
-      "Dunbarton":    [43.1026, -71.6168, "left"],
-      "Weare":        [43.0948, -71.7306, "left"],
-      "Webster":      [43.3290, -71.7180, "left"],
-      "Boscawen":     [43.3151, -71.6201, "right"],
-      "Canterbury":   [43.3370, -71.5650, "right"],
-      "Pembroke":     [43.1468, -71.4576, "right"],
-      "Hooksett":     [43.0968, -71.4651, "right"],
-      "Loudon":       [43.2856, -71.4673, "right"],
-      "Bradford":     [43.2698, -71.9601, "left"],
-      "Hillsborough": [43.1151, -71.8967, "left"],
-      "Sutton":       [43.3345, -71.9512, "left"],
-      "Goffstown":    [43.0204, -71.6003, "right"]
-    };
-    // Interstates (approximate path)
-    const I89 = [[43.1785,-71.5345],[43.1880,-71.5670],[43.1940,-71.5850],[43.2000,-71.6200],[43.2060,-71.6600],[43.2120,-71.7000],[43.2400,-71.7350],[43.2580,-71.7650],[43.2750,-71.8050],[43.2950,-71.8400],[43.3400,-71.9200],[43.3900,-71.9900]];
-    const I93 = [[42.9900,-71.4400],[43.0600,-71.4500],[43.1000,-71.4700],[43.1650,-71.5300],[43.1785,-71.5345],[43.2050,-71.5350],[43.2450,-71.5550],[43.2900,-71.5900],[43.3500,-71.6200],[43.4200,-71.6400]];
-    const pts = townNames.filter((n) => PLACES[n]).map((n) => ({ name: n, lat: PLACES[n][0], lon: PLACES[n][1], side: PLACES[n][2] }));
-    if (!pts.length) { $("#area-map").hidden = true; return; }
-    // Fit the towns into a 600 x 400 drawing, with room around them
-    const W = 600, H = 400, PAD = 0.075; // PAD in degrees of latitude
-    const kx = Math.cos(43.2 * Math.PI / 180); // longitude shrinks this far north
-    let x0 = Math.min(...pts.map((p) => p.lon * kx)) - PAD * 1.6, x1 = Math.max(...pts.map((p) => p.lon * kx)) + PAD * 1.6;
-    let y0 = Math.min(...pts.map((p) => p.lat)) - PAD, y1 = Math.max(...pts.map((p) => p.lat)) + PAD;
-    const spanX = x1 - x0, spanY = y1 - y0;
-    if (spanX / spanY > W / H) { const extra = spanX * H / W - spanY; y0 -= extra / 2; y1 += extra / 2; }
-    else { const extra = spanY * W / H - spanX; x0 -= extra / 2; x1 += extra / 2; }
-    const scale = W / (x1 - x0);
-    const X = (lon) => (lon * kx - x0) * scale;
-    const Y = (lat) => (y1 - lat) * scale;
-    const svg = $("#map-svg");
-    const NS = "http://www.w3.org/2000/svg";
-    const el = (tag, attrs, parent) => {
-      const e = document.createElementNS(NS, tag);
-      Object.keys(attrs).forEach((k) => e.setAttribute(k, attrs[k]));
-      (parent || svg).appendChild(e);
-      return e;
-    };
-    svg.setAttribute("aria-label", "Simple map of the area we serve, showing " + pts.map((p) => p.name).join(", ") + ", New Hampshire");
-    el("rect", { width: W, height: H, fill: "#f1eee5" });
-    // Soft shaded area around the towns (circles merged into one shape)
-    const blur = el("filter", { id: "soft", x: "-50%", y: "-50%", width: "200%", height: "200%" }, el("defs", {}));
-    el("feGaussianBlur", { stdDeviation: 14 }, blur);
-    const area = el("g", { opacity: "0.85", filter: "url(#soft)" });
-    const r = 0.06 * scale;
-    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r: r, fill: "#b8d4bd" }, area));
-    // Interstates
-    const line = (path) => path.map((pt, i) => (i ? "L" : "M") + X(pt[1]).toFixed(1) + " " + Y(pt[0]).toFixed(1)).join(" ");
-    [I89, I93].forEach((path) => {
-      el("path", { d: line(path), fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" });
-      el("path", { d: line(path), fill: "none", stroke: "#b3ab99", "stroke-width": 3.5, "stroke-linecap": "round", "stroke-linejoin": "round" });
-    });
-    // Highway number tags: placed on the road, as far as possible from town dots and names
-    const boxes = pts.map((p) => {
-      const x = X(p.lon), y = Y(p.lat), w = p.name.length * 11 + 22;
-      return p.side === "left" ? [x - w, y - 15, x + 11, y + 15] : [x - 11, y - 15, x + w, y + 15];
-    });
-    const clearance = (x, y) => Math.min(...boxes.map((b) => Math.hypot(Math.max(b[0] - x, 0, x - b[2]), Math.max(b[1] - y, 0, y - b[3]))));
-    const tag = (path, label) => {
-      let best = null;
-      for (let i = 1; i < path.length; i++) {
-        const ax = X(path[i - 1][1]), ay = Y(path[i - 1][0]), bx = X(path[i][1]), by = Y(path[i][0]);
-        for (let t = 0; t <= 1; t += 0.05) {
-          const x = ax + (bx - ax) * t, y = ay + (by - ay) * t;
-          if (x < 40 || x > W - 70 || y < 40 || y > H - 30) continue;
-          const score = Math.min(clearance(x, y), 70) - Math.hypot(x - W / 2, y - H / 2) * 0.05;
-          if (!best || score > best.score) best = { x: x, y: y, score: score };
-        }
-      }
-      if (!best) return;
-      const g = el("g", { transform: "translate(" + best.x.toFixed(1) + " " + best.y.toFixed(1) + ")" });
-      el("rect", { x: -16, y: -12, width: 32, height: 24, rx: 6, fill: "#5d6b5f" }, g);
-      const t = el("text", { x: 0, y: 5, "text-anchor": "middle", "font-size": 14, "font-weight": 700, fill: "#fff", "font-family": "system-ui, Arial, sans-serif" }, g);
-      t.textContent = label;
-    };
-    tag(I89, "89");
-    tag(I93, "93");
-    // Town dots and names
-    pts.forEach((p) => {
-      const x = X(p.lon), y = Y(p.lat);
-      el("circle", { cx: x, cy: y, r: 10, fill: "#fff" });
-      el("circle", { cx: x, cy: y, r: 6.5, fill: "#115c31" });
-      const left = p.side === "left";
-      const t = el("text", {
-        x: x + (left ? -15 : 15), y: y + 7,
-        "text-anchor": left ? "end" : "start",
-        "font-size": 22, fill: "#0b3f22",
-        "font-family": "'Libre Caslon Text', Georgia, 'Times New Roman', serif",
-        stroke: "#f1eee5", "stroke-width": 5, "paint-order": "stroke", "stroke-linejoin": "round"
-      });
-      t.textContent = p.name;
-    });
-    // Small "N" arrow
-    const n = el("g", { transform: "translate(" + (W - 34) + " 40)" });
-    el("path", { d: "M0 -16 L8 6 L0 1 L-8 6 Z", fill: "#5d6b5f" }, n);
-    const nt = el("text", { x: 0, y: 24, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: "#5d6b5f", "font-family": "system-ui, Arial, sans-serif" }, n);
-    nt.textContent = "N";
+  // Towns we work in: "A, B, C and D" put into the line by the quote form
+  const townNames = (S.serviceArea && S.serviceArea.towns) || [];
+  if (townNames.length && S.serviceArea.line) {
+    const list = townNames.length < 2 ? townNames.join("") : townNames.slice(0, -1).join(", ") + " and " + townNames[townNames.length - 1];
+    $("#towns-text").textContent = plain(S.serviceArea.line.split("{towns}").join(list));
+    $("#towns-line").hidden = false;
   }
 
   // Contact
@@ -1562,6 +1584,50 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  // ---- Links to parts of the page glide there smoothly ----
+  // Starts gently, speeds up, then settles (longer trips take a little longer, never over about a
+  // second). Stops right away if the person scrolls or taps during it. Instant with less motion.
+  if (!reduceMotion && window.requestAnimationFrame) {
+    const root = document.documentElement;
+    const bigScreen = window.matchMedia("(min-width: 1100px)");
+    let glide = null;
+    const stopGlide = () => { if (glide) { cancelAnimationFrame(glide); glide = null; root.style.scrollBehavior = ""; } };
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach((ev) => window.addEventListener(ev, stopGlide, { passive: true }));
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      const hash = a.getAttribute("href");
+      const target = hash.length > 1 ? document.getElementById(hash.slice(1)) : null;
+      if (!target) return;
+      e.preventDefault();
+      stopGlide();
+      const barHeight = bigScreen.matches ? 68 : 60; // the slim top bar's height once scrolled
+      const startY = window.pageYOffset;
+      const maxY = root.scrollHeight - window.innerHeight;
+      const endY = hash === "#page-top" ? 0 : Math.max(0, Math.min(maxY, target.getBoundingClientRect().top + startY - barHeight - 16));
+      const dist = Math.abs(endY - startY);
+      const time = Math.max(450, Math.min(1100, 300 + dist * 0.22));
+      const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      const t0 = performance.now();
+      root.style.scrollBehavior = "auto"; // the script moves the page itself, frame by frame
+      const finish = () => {
+        glide = null;
+        root.style.scrollBehavior = "";
+        if (history.pushState) history.pushState(null, "", hash);
+        // Move keyboard focus there too, without jumping the page
+        if (hash !== "#page-top") {
+          if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+          try { target.focus({ preventScroll: true }); } catch (err) { /* old browsers */ }
+        }
+      };
+      (function frame(now) {
+        const t = Math.min(1, (now - t0) / time);
+        window.scrollTo(0, startY + (endY - startY) * ease(t));
+        if (t < 1) glide = requestAnimationFrame(frame); else finish();
+      })(t0);
+    });
+  }
+
   // ---- Sections fade up as they come into view (skipped if the computer asks for less motion) ----
   if (!reduceMotion && "IntersectionObserver" in window) {
     // Groups marked data-stagger: each item fades in a little after the one before it.
@@ -1590,7 +1656,9 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   // ---- Photos drift a few pixels as the page scrolls ----
   // Each photo moves at most 2.5% of its own height, up as it rises through the screen.
   // Only photos on screen are worked out, once per frame. Off for "less motion" settings.
-  if (!reduceMotion) {
+  const fineMouse = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!reduceMotion && fineMouse) {
+    document.documentElement.classList.add("drift-on");
     const drifters = $$(".drift").filter((el) => !el.hidden);
     let ticking = false;
     const update = () => {
