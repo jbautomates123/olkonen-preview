@@ -243,7 +243,7 @@ section[id], #top { scroll-margin-top: 84px; }
   width: min(100%, calc(var(--room) * var(--ar) * var(--give, 1.25)));
 }
 .fit img { width: 100%; aspect-ratio: var(--ar); max-height: var(--room); object-fit: cover; }
-.hero-photo { margin: 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); }
+.hero-photo { margin: 0; position: relative; }
 .hero-photo { --ar: 1; justify-self: start; }
 .hero-photo img { object-position: 50% 50%; }
 @media (min-width: 1000px), (orientation: landscape) and (min-width: 560px) {
@@ -251,15 +251,13 @@ section[id], #top { scroll-margin-top: 84px; }
   .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: center; gap: clamp(32px, 4.5vw, 72px); }
   .hero h1 { font-size: clamp(2.3rem, min(4.6vw, 10.5vh), 4.6rem); }
   .hero-side { margin-top: clamp(18px, 3vh, 30px); }
-  .hero-photo { --gap-y: clamp(56px, 10vh, 120px); justify-self: end; }
+  .hero-photo { --gap-y: calc(clamp(56px, 10vh, 120px) + 32px); justify-self: end; }
 }
 @media (orientation: landscape) and (max-height: 500px) { .lead { font-size: 1.05rem; margin-bottom: 16px; } .hero h1 .accent { margin-top: 0; } }
-.photo-cap {
-  position: absolute; left: 12px; bottom: 12px; margin: 0; max-width: calc(100% - 24px);
-  padding: 6px 12px; border-radius: 999px; background: rgba(15, 26, 19, 0.62); color: #fff;
-  font-size: 0.85rem; line-height: 1.35; -webkit-font-smoothing: antialiased;
-}
-@supports (backdrop-filter: blur(6px)) { .photo-cap { background: rgba(15, 26, 19, 0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); } }
+/* Photo frame (keeps the drifting photo inside its rounded box) and a plain caption under it.
+   v2.3: captions moved off the photos; a dark bubble on every photo is a template giveaway. */
+.pic { display: block; overflow: hidden; border-radius: 3px; background: var(--stone); }
+.photo-cap { margin: 10px 0 0; font-size: 0.92rem; line-height: 1.4; color: var(--ink-2); }
 
 #h1-main { display: block; }
 /* Entrance when the page opens: the label, each headline line, the text and the buttons
@@ -295,100 +293,131 @@ section[id], #top { scroll-margin-top: 84px; }
 .section-stone { background: var(--stone); }
 .section-intro { color: var(--ink-2); margin: 14px 0 0; max-width: 40em; }
 
-/* ---------- Services ---------- */
-.services-grid { display: grid; gap: 36px; }
-@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) { .services-grid { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px); align-items: start; } }
-.side-photo { margin: 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--paper); }
-.side-photo { --ar: 1.3333; --gap-y: 48px; }
-.services-photo { --ar: 0.9; --give: 1; }
-.services-photo img { object-position: 60% 42%; }
-@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) {
-  .services-photo { position: sticky; top: calc(var(--hdr) + 24px); }
-  .services-photo { --ar: 0.75; --give: 1.25; }
+/* ---------- Before / after (second on the page since v2.3) ---------- */
+.work-top { display: grid; gap: 28px; }
+.work-head h2 { margin-bottom: 14px; }
+.work-head p:not(.eyebrow) { color: var(--ink-2); margin: 0; max-width: 34em; }
+.ba { margin: 0; min-width: 0; }
+/* The slider keeps the photos' real 4:3 shape and is never taller than the screen */
+.ba-frame { position: relative; overflow: hidden; border-radius: 3px; background: var(--paper); aspect-ratio: 4 / 3; width: 100%; max-width: calc((var(--screen-h) - var(--hdr) - 80px) * 4 / 3); min-width: min(100%, 280px); --pos: 50%; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+@media (min-width: 1000px), (orientation: landscape) and (min-width: 560px) {
+  .work-top { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); align-items: center; gap: clamp(32px, 4.5vw, 72px); }
+  .ba-frame { margin-left: auto; }
+  .ba-cap { text-align: right; }
 }
-.services { list-style: none; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--line); }
+/* Upright phones: the slider goes edge to edge, so it's the biggest thing on the page after the top */
+@media (max-width: 699px) and (orientation: portrait) {
+  .ba-frame { width: calc(100% + 40px); max-width: none; margin-left: -20px; border-radius: 0; }
+}
+.ba-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; pointer-events: none; }
+.ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.ba-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12); pointer-events: none; }
+/* The handle: white with a fieldstone ring (the accent color, on the one thing people touch) */
+.ba-knob {
+  position: absolute; top: 50%; left: var(--pos); width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%;
+  background: #fff; color: var(--accent-ink); display: flex; align-items: center; justify-content: center; gap: 2px;
+  box-shadow: 0 0 0 3px var(--accent), var(--shadow-md); pointer-events: none; transition: transform 0.2s var(--ease-ui);
+}
+.ba-knob svg { width: 22px; height: 22px; }
+.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; }
+.ba-range:focus-visible + .ba-knob { outline: 3px solid var(--focus); outline-offset: 4px; }
+.ba-frame:hover .ba-knob, .ba-range:active + .ba-knob { transform: scale(1.08); }
+.ba-tag { position: absolute; top: 14px; padding: 5px 12px; border-radius: 999px; background: rgba(248, 246, 240, 0.92); color: var(--ink); font-size: 0.85rem; font-weight: 600; pointer-events: none; }
+.ba-tag-before { left: 14px; }
+.ba-tag-after { right: 14px; }
+.ba-cap { margin: 12px 0 0; font-size: 0.92rem; color: var(--ink-2); }
+
+/* ---------- Services (no side photo since v2.3: heading on the left, the list on the right) ---------- */
+.services-grid { display: grid; gap: 8px; }
+@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) {
+  .services-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .services-head { position: sticky; top: calc(var(--hdr) + 32px); }
+  .services { margin-top: 0 !important; }
+}
+.services { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--line); }
 /* Each service: its name, then a couple of plain sentences (Google reads these words to match
    searches like "stone walls Hopkinton"). No icons on purpose: one icon per row is a template look. */
 .service { display: grid; gap: 6px; padding: 24px 0; border-bottom: 1px solid var(--line); }
 @media (min-width: 700px) { .service { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 28px; align-items: baseline; padding: 28px 0; } }
 .service h3 { font-size: 1.36rem; line-height: 1.25; }
 .service p { margin: 0; color: var(--ink-2); font-size: 1.05rem; line-height: 1.6; }
-.services-note { margin: 24px 0 0; color: var(--ink-2); }
+.services-note { margin: 20px 0 0; color: var(--ink-2); }
 
-/* ---------- Recent work: before / after slider + photos ---------- */
-.work-top { display: grid; gap: 28px; }
-.work-head h2 { margin-bottom: 14px; }
-.work-head p:not(.eyebrow) { color: var(--ink-2); margin: 0; max-width: 34em; }
-.ba { margin: 0; min-width: 0; }
-/* The slider keeps the photos' real 4:3 shape and is never taller than the screen */
-.ba-frame { position: relative; overflow: hidden; border-radius: 3px; background: var(--stone); aspect-ratio: 4 / 3; width: 100%; max-width: calc((var(--screen-h) - var(--hdr) - 80px) * 4 / 3); min-width: min(100%, 280px); --pos: 50%; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-@media (min-width: 1000px), (orientation: landscape) and (min-width: 560px) {
-  .work-top { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); align-items: center; gap: clamp(32px, 4.5vw, 72px); }
-  .ba-frame { margin-left: auto; }
-  .ba-cap { text-align: right; }
+/* ---------- Job photos: one row you swipe (phones) or page with the arrows (computers) ---------- */
+.gallery { margin-top: clamp(56px, 8vw, 96px); }
+.gallery-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.gallery-title { font-family: var(--display); font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.1; }
+.rail-nav { display: flex; gap: 8px; flex: none; }
+.rail-btn {
+  width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--white); color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background-color 0.18s, border-color 0.18s, opacity 0.18s, transform 0.22s var(--ease-ui);
 }
-.ba-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; pointer-events: none; }
-.ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
-.ba-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12); pointer-events: none; }
-.ba-knob {
-  position: absolute; top: 50%; left: var(--pos); width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%;
-  background: #fff; color: var(--pine-deep); display: flex; align-items: center; justify-content: center; gap: 2px;
-  box-shadow: var(--shadow-md); pointer-events: none; transition: transform 0.2s var(--ease);
+.rail-btn:hover { border-color: var(--accent); }
+.rail-btn:active { transform: scale(0.94); }
+.rail-btn:disabled { opacity: 0.35; cursor: default; transform: none; }
+.rail-btn svg { width: 20px; height: 20px; }
+.rail {
+  --bleed: 20px;
+  list-style: none; margin: 0 calc(var(--bleed) * -1); padding: 4px var(--bleed) 10px; display: flex; gap: 14px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding: 0 var(--bleed);
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
-.ba-knob svg { width: 22px; height: 22px; }
-.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; }
-.ba-range:focus-visible + .ba-knob { outline: 3px solid var(--focus); outline-offset: 3px; }
-.ba-frame:hover .ba-knob { transform: scale(1.06); }
-.ba-tag { position: absolute; top: 14px; padding: 5px 12px; border-radius: 999px; background: rgba(15, 26, 19, 0.62); color: #fff; font-size: 0.85rem; font-weight: 600; pointer-events: none; -webkit-font-smoothing: antialiased; }
-.ba-tag-before { left: 14px; }
-.ba-tag-after { right: 14px; }
-.ba-cap { margin: 12px 0 0; font-size: 0.92rem; color: var(--ink-2); }
-.work-grid { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 640px) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1000px) { .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.rail::-webkit-scrollbar { display: none; }
+.rail > li { flex: 0 0 84%; scroll-snap-align: start; min-width: 0; }
+@media (min-width: 640px) { .rail { gap: 18px; } .rail > li { flex-basis: 47%; } }
+@media (min-width: 700px) { .rail { --bleed: 32px; } } /* matches the page's side padding at each size */
+@media (min-width: 1100px) { .rail { --bleed: 48px; } .rail > li { flex-basis: 38%; } }
+@media (prefers-reduced-motion: no-preference) { .rail { scroll-behavior: smooth; } }
 .work-item { margin: 0; }
 .work-open { display: block; width: 100%; padding: 0; border: 0; background: var(--stone); cursor: zoom-in; position: relative; overflow: hidden; border-radius: 3px; }
-.work-open img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.8s var(--ease); }
-.work-open:hover img { transform: scale(1.035); }
+.work-open img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (hover: hover) { .work-open img { transition: transform 0.8s var(--ease); } .work-open:hover img { transform: scale(1.035); } }
 .work-item figcaption { margin-top: 10px; font-size: 0.95rem; color: var(--ink-2); }
-.work-more {
-  display: flex; flex-direction: column; justify-content: space-between; gap: 18px; height: 100%; min-height: 200px;
-  padding: 26px; border-radius: 3px; background: var(--pine-deep); color: #eaf2ec; text-decoration: none; -webkit-font-smoothing: antialiased;
-  overflow: hidden; transition: background-color 0.2s;
-  --contour-color: #cfe3d4; --contour-opacity: 0.16; --contour-shift: -310px -140px;
-}
-.work-more:hover { background: var(--pine); text-decoration: none; }
-.work-more span svg { transition: transform 0.22s var(--ease-ui); }
-.work-more:hover span svg { transform: translateX(4px); }
-.work-more strong { font-family: var(--display); font-weight: 400; font-size: 1.7rem; line-height: 1.15; color: #fff; }
-.work-more span { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
-.work-more svg { width: 18px; height: 18px; }
+.gallery-more { margin: 14px 0 0; }
+.gallery-more a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none; }
+.gallery-more a:hover { text-decoration: underline; }
+.gallery-more svg { width: 17px; height: 17px; }
 
 /* ---------- About ---------- */
-.about-grid { display: grid; gap: 36px; }
+.about-grid { display: grid; gap: 32px; }
 @media (min-width: 900px), (orientation: landscape) and (min-width: 560px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; } }
+.side-photo { margin: 0; position: relative; }
+.side-photo { --ar: 1.3333; --gap-y: 80px; }
+/* Upright phones: a short, wide crew photo instead of a big one */
+@media (max-width: 699px) and (orientation: portrait) { .about-photo { --ar: 1.7778; --give: 1; } }
 .statement { font-family: var(--display); font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.2; color: var(--ink); margin: 0 0 24px; text-wrap: balance; }
 .about-text p:not(.statement):not(.eyebrow) { color: var(--ink-2); margin: 0 0 16px; max-width: 36em; }
 .facts { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px; }
 .facts li { display: flex; gap: 10px; align-items: baseline; }
 .facts li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; transform: translateY(-2px); }
 .about-call { margin-top: 24px !important; color: var(--ink) !important; font-weight: 600; }
-
-/* ---------- Hiring strip ---------- */
-.hiring { background: var(--pine-tint); }
-.hiring .wrap { padding-top: 20px; padding-bottom: 20px; }
-.hiring p { margin: 0; }
-.hiring strong { margin-right: 6px; }
+/* Hiring: one quiet line under About (was a full-width band) */
+.hiring { margin-top: 22px; padding-left: 14px; border-left: 3px solid var(--accent); }
+.about-text .hiring p { margin: 0; font-size: 1rem; }
+.hiring strong { margin-right: 6px; color: var(--ink); }
 
 /* ---------- Service area ---------- */
-.area-grid { display: grid; gap: 32px; }
+.area-grid { display: grid; gap: 28px; }
 @media (min-width: 900px) { .area-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; align-items: center; } }
 .area-note { color: var(--ink-2); margin: 16px 0 0; }
 .town-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 22px 0 0; padding: 0; }
 .town-list li { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 0.98rem; }
 .area-map { margin: 0; }
+.map-fig { margin: 0; }
 .area-map svg { display: block; width: 100%; height: auto; border-radius: 3px; border: 1px solid var(--line); background: #f1eee5; }
 .area-map figcaption { font-size: 0.85rem; color: var(--ink-2); margin-top: 8px; }
+/* The "Show the map" button only appears on phones; bigger screens always show the map */
+.map-toggle { display: none; list-style: none; }
+.map-toggle::-webkit-details-marker { display: none; }
+@media (max-width: 699px) {
+  .map-toggle {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px; cursor: pointer;
+    border: 1.5px solid var(--line); border-radius: var(--corner); background: var(--white); font-weight: 600; color: var(--ink);
+  }
+  .map-toggle svg { width: 18px; height: 18px; color: var(--accent-ink); }
+  .area-map[open] .map-toggle { margin-bottom: 14px; }
+}
 
 /* ---------- Quote form ---------- */
 #quote { --contour-opacity: 0.07; --contour-shift: 120px 60px; }
@@ -399,6 +428,7 @@ section[id], #top { scroll-margin-top: 84px; }
 .big-phone svg { width: 28px; height: 28px; color: var(--pine); }
 .big-phone:hover { text-decoration: underline; text-decoration-thickness: 2px; }
 .quote-logo { width: 220px; margin-top: 36px; }
+@media (max-width: 699px) and (orientation: portrait) { .quote-logo { display: none; } } /* phones: the logo is already in the top bar */
 .quote { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 24px; box-shadow: var(--shadow-sm); display: grid; gap: 18px; }
 @media (min-width: 600px) { .quote { padding: 36px; grid-template-columns: 1fr 1fr; column-gap: 20px; } .field-wide, .quote .demo-note, .quote button, .quote .privacy-note { grid-column: 1 / -1; } }
 .field { display: grid; gap: 6px; min-width: 0; }
@@ -484,6 +514,15 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   #popup[open] .dialog-inner, .lightbox[open] .lb-inner { animation: pop-in 0.26s var(--ease) both; }
 }
 @keyframes slide-in { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+/* ...and leave the opposite way: they start slow and speed off (the script waits for this, then closes) */
+@media (prefers-reduced-motion: no-preference) {
+  dialog.closing::backdrop { animation: fadeout 0.18s var(--ease-in) both; }
+  dialog.menu.closing .dialog-inner { animation: slide-out 0.2s var(--ease-in) both; }
+  #popup.closing .dialog-inner, .lightbox.closing .lb-inner { animation: pop-out 0.16s var(--ease-in) both; }
+}
+@keyframes fadeout { to { opacity: 0; } }
+@keyframes slide-out { to { transform: translateX(40px); opacity: 0; } }
+@keyframes pop-out { to { transform: translateY(8px) scale(0.98); opacity: 0; } }
 @keyframes pop-in { from { transform: translateY(10px) scale(0.98); opacity: 0; } to { transform: none; opacity: 1; } }
 
 /* Older phones (before 2022) have no built-in popups: a simple stand-in */
@@ -574,61 +613,67 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
           </div>
         </div>
         <figure class="hero-photo fit drift" id="hero-photo" hidden>
-          <img id="hero-img" alt="" width="800" height="800" fetchpriority="high">
+          <span class="pic"><img id="hero-img" alt="" width="800" height="800" fetchpriority="high"></span>
           <figcaption class="photo-cap" id="hero-cap"></figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section class="section section-stone" id="services">
-    <div class="wrap services-grid">
-      <figure class="side-photo services-photo fit drift reveal" id="services-photo" hidden>
-        <img id="services-img" alt="" width="600" height="800" loading="lazy">
-        <figcaption class="photo-cap" id="services-cap"></figcaption>
-      </figure>
-      <div class="reveal">
-        <p class="eyebrow" data-text="services.eyebrow"></p>
-        <h2 data-text="services.heading"></h2>
-        <p class="section-intro" data-text="services.intro"></p>
-        <ul class="services" id="services-list" data-stagger="70"></ul>
-        <p class="services-note" id="services-note"></p>
+  <!-- BEFORE / AFTER (moved up in v2.3: the one thing Todd can play with, right after the top) -->
+  <section class="section section-stone" id="work" hidden>
+    <div class="wrap">
+      <div class="work-top">
+        <div class="work-head reveal">
+          <p class="eyebrow" data-text="work.eyebrow"></p>
+          <h2 data-text="work.heading"></h2>
+          <p data-text="work.intro"></p>
+        </div>
+        <figure class="ba reveal" id="ba" hidden>
+          <div class="ba-frame" id="ba-frame">
+            <img class="ba-after" id="ba-after" alt="" width="800" height="600" loading="lazy">
+            <img class="ba-before" id="ba-before" alt="" width="800" height="600" loading="lazy">
+            <span class="ba-tag ba-tag-before" aria-hidden="true">Before</span>
+            <span class="ba-tag ba-tag-after" aria-hidden="true">After</span>
+            <span class="ba-line" aria-hidden="true"></span>
+            <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="50" step="1" aria-label="Slide to compare before and after">
+            <span class="ba-knob" aria-hidden="true"></span>
+          </div>
+          <figcaption class="ba-cap" id="ba-cap"></figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- RECENT WORK (before/after slider + photos; hidden if no photos are set) -->
-  <section class="section" id="work" hidden>
-    <div class="wrap">
-      <div class="work-top">
-      <div class="work-head reveal">
-        <p class="eyebrow" data-text="work.eyebrow"></p>
-        <h2 data-text="work.heading"></h2>
-        <p data-text="work.intro"></p>
+  <!-- SERVICES, then one row of job photos you swipe through -->
+  <section class="section" id="services">
+    <div class="wrap services-grid">
+      <div class="services-head reveal">
+        <p class="eyebrow" data-text="services.eyebrow"></p>
+        <h2 data-text="services.heading"></h2>
+        <p class="section-intro" data-text="services.intro"></p>
+        <p class="services-note" id="services-note"></p>
       </div>
-      <figure class="ba reveal" id="ba" hidden>
-        <div class="ba-frame" id="ba-frame">
-          <img class="ba-after" id="ba-after" alt="" width="800" height="600" loading="lazy">
-          <img class="ba-before" id="ba-before" alt="" width="800" height="600" loading="lazy">
-          <span class="ba-tag ba-tag-before" aria-hidden="true">Before</span>
-          <span class="ba-tag ba-tag-after" aria-hidden="true">After</span>
-          <span class="ba-line" aria-hidden="true"></span>
-          <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="50" step="1" aria-label="Slide to compare before and after">
-          <span class="ba-knob" aria-hidden="true"></span>
+      <ul class="services" id="services-list" data-stagger="70"></ul>
+    </div>
+    <div class="wrap gallery" id="gallery" hidden>
+      <div class="gallery-head reveal">
+        <h3 class="gallery-title" data-text="work.photosHeading"></h3>
+        <div class="rail-nav" id="rail-nav">
+          <button type="button" class="rail-btn" id="rail-prev" aria-label="Previous photos"><span class="icon" data-icon="left"></span></button>
+          <button type="button" class="rail-btn" id="rail-next" aria-label="More photos"><span class="icon" data-icon="right"></span></button>
         </div>
-        <figcaption class="ba-cap" id="ba-cap"></figcaption>
-      </figure>
       </div>
-      <ul class="work-grid" id="work-grid" data-stagger="90"></ul>
+      <ul class="rail" id="work-grid" aria-label="Job photos. Swipe or use the arrows to see more."></ul>
+      <p class="gallery-more" id="gallery-more"></p>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section class="section section-stone" id="about">
     <div class="wrap about-grid">
-      <figure class="side-photo fit drift reveal" id="about-photo" hidden>
-        <img id="about-img" alt="" width="800" height="600" loading="lazy">
+      <figure class="side-photo about-photo fit drift reveal" id="about-photo" hidden>
+        <span class="pic"><img id="about-img" alt="" width="800" height="600" loading="lazy"></span>
         <figcaption class="photo-cap" id="about-cap"></figcaption>
       </figure>
       <div class="about-text reveal">
@@ -637,14 +682,11 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <div id="about-paragraphs"></div>
         <ul class="facts" id="about-facts" hidden></ul>
         <p class="about-call" id="about-call"></p>
+        <!-- HIRING (a small line now, not a full band; turn off in SETTINGS.hiring.show) -->
+        <div class="hiring" id="hiring" hidden><p id="hiring-text"></p></div>
       </div>
     </div>
   </section>
-
-  <!-- HIRING STRIP (turn off in SETTINGS.hiring.show) -->
-  <div class="hiring" id="hiring" hidden>
-    <div class="wrap"><p id="hiring-text"></p></div>
-  </div>
 
   <!-- SERVICE AREA -->
   <section class="section" id="area">
@@ -655,11 +697,15 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <ul class="town-list" id="town-list"></ul>
         <p class="area-note" id="area-note"></p>
       </div>
-      <!-- Simple drawn map, built from SETTINGS.serviceArea.towns -->
-      <figure class="area-map reveal" id="area-map">
-        <svg id="map-svg" viewBox="0 0 600 400" role="img"></svg>
-        <figcaption>Simple map for reference.</figcaption>
-      </figure>
+      <!-- Simple drawn map, built from SETTINGS.serviceArea.towns. On phones it starts folded
+           behind a "Show the map" button so the page isn't one picture after another. -->
+      <details class="area-map reveal" id="area-map" open>
+        <summary class="map-toggle"><span class="icon" data-icon="pin"></span><span class="map-toggle-text">Show the map</span></summary>
+        <figure class="map-fig">
+          <svg id="map-svg" viewBox="0 0 600 400" role="img"></svg>
+          <figcaption>Simple map for reference.</figcaption>
+        </figure>
+      </details>
     </div>
   </section>
 
@@ -799,7 +845,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.2",
+  version: "2.3",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -868,6 +914,7 @@ const SETTINGS = {
   logo: { showLogo: true, file: "" },
 
   // ---- PHOTOS ----
+  // (v2.3: the services section no longer has its own photo; that lawn photo is now in the job photo row below.)
   // Photo files live in the "photos" folder next to this page. To change one, put the new
   // file in that folder and type its name here. Leave file as "" to hide that photo's spot.
   // These are from Olkonen's public Facebook page (small copies). ASK THE OWNER before launch,
@@ -876,13 +923,13 @@ const SETTINGS = {
     // focus = the part of the photo to keep in view when a screen trims the edges:
     // "50% 50%" is the middle; the first number moves left/right, the second up/down (0% = top).
     hero:     { file: "photos/pool-patio.jpg",      focus: "50% 55%", alt: "Stone patio around an in-ground pool and a stone-sided spa, with woods behind", caption: "Stone patio and pool surround" },
-    services: { file: "photos/lawn-sprinklers.jpg", focus: "60% 42%", alt: "Green lawn with a fieldstone wall and sprinklers running, under a large shade tree", caption: "Lawn and fieldstone wall" },
     about:    { file: "photos/crew-laying-sod.jpg", focus: "45% 60%", alt: "The Olkonen crew laying rolls of sod next to stone pillars and a new paver walkway", caption: "Our crew laying sod" }
   },
 
   // ---- RECENT WORK ----
   // The before/after slider: two photos taken from the same spot. Set show to false to hide it.
-  // The photos below it open a bigger viewer when tapped. The section hides if both are empty.
+  // The job photos sit in one row under the services: swipe on a phone, arrows on a computer.
+  // Tapping a photo opens a bigger viewer. Each part hides if it has no photos.
   work: {
     eyebrow: "Recent work",
     heading: "Same hillside. Before and after.",
@@ -893,11 +940,14 @@ const SETTINGS = {
       after:  { file: "photos/slope-after.jpg",  alt: "The same hillside finished with new green lawn, sprinklers running" },
       caption: "Both photos are from the same job, posted on Olkonen's Facebook page in July 2020."
     },
+    photosHeading: "More of our work",
+    // focus (optional) = which part of a photo stays in view, same as the photos above.
     photos: [
       { file: "photos/timber-entry.jpg",     caption: "New walkway and plantings at a timber-frame entry" },
+      { file: "photos/lawn-sprinklers.jpg",  caption: "Lawn and fieldstone wall", focus: "55% 62%" },
       { file: "photos/lawn-stone-house.jpg", caption: "New lawn and shrub beds along a stone-and-clapboard house" }
     ],
-    // The last tile links to their Facebook page. Set to "" to hide it.
+    // A small link under the photo row to their Facebook page. Set to "" to hide it.
     moreText: "See more of our work on Facebook"
   },
 
@@ -1107,7 +1157,6 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     fig.hidden = false;
   }
   setPhoto("#hero-photo", "#hero-img", "#hero-cap", S.photos.hero);
-  setPhoto("#services-photo", "#services-img", "#services-cap", S.photos.services);
   setPhoto("#about-photo", "#about-img", "#about-cap", S.photos.about);
 
   // Services
@@ -1129,10 +1178,14 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   const ba = W.beforeAfter;
   const hasBA = ba && ba.show && ba.before.file && ba.after.file;
   const workPhotos = (W.photos || []).filter((p) => p.file);
-  if (hasBA || workPhotos.length) {
-    $("#work").hidden = false;
-  } else {
-    $$('a[href="#work"]').forEach((a) => { const li = a.closest("li"); (li || a).hidden = true; });
+  // "Our Work" in the menu goes to the before/after; if that's off, to the photo row; if both are off, it hides.
+  if (hasBA) $("#work").hidden = false;
+  if (workPhotos.length) $("#gallery").hidden = false;
+  if (!hasBA) {
+    $$('a[href="#work"]').forEach((a) => {
+      if (workPhotos.length) a.setAttribute("href", "#gallery");
+      else { const li = a.closest("li"); (li || a).hidden = true; }
+    });
   }
   if (hasBA) {
     $("#ba").hidden = false;
@@ -1191,6 +1244,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     img.alt = "";
     img.loading = "lazy";
     img.width = 800; img.height = 600;
+    if (p.focus) img.style.objectPosition = p.focus;
     btn.appendChild(img);
     btn.addEventListener("click", () => openLightbox(i));
     fig.appendChild(btn);
@@ -1202,25 +1256,37 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     li.appendChild(fig);
     grid.appendChild(li);
   });
+  // "See more on Facebook": a small link under the row (was a big dark tile, which made a template-looking row of 3 cards)
+  const more = $("#gallery-more");
   if (W.moreText && B.facebook) {
-    const li = document.createElement("li");
     const a = document.createElement("a");
-    a.className = "work-more contours";
     a.href = B.facebook;
     a.target = "_blank";
     a.rel = "noopener";
-    const strong = document.createElement("strong");
-    strong.textContent = W.moreText;
-    const go = document.createElement("span");
-    go.append("Open Facebook", icon("arrow"));
+    a.append(W.moreText, icon("out"));
     const sr = document.createElement("span");
     sr.className = "sr-only";
     sr.textContent = " (opens in a new tab)";
-    a.append(strong, go, sr);
-    li.appendChild(a);
-    grid.appendChild(li);
+    a.appendChild(sr);
+    more.appendChild(a);
+  } else {
+    more.hidden = true;
   }
-  if (!grid.children.length) grid.hidden = true;
+  // Arrow buttons page the row one photo at a time; they fade out at each end, and hide if everything fits.
+  const prev = $("#rail-prev"), next = $("#rail-next"), railNav = $("#rail-nav");
+  const step = () => { const li = grid.querySelector("li"); return li ? li.getBoundingClientRect().width + parseFloat(getComputedStyle(grid).columnGap || 16) : 300; };
+  const railState = () => {
+    const max = grid.scrollWidth - grid.clientWidth;
+    railNav.hidden = max <= 2;
+    prev.disabled = grid.scrollLeft <= 2;
+    next.disabled = grid.scrollLeft >= max - 2;
+  };
+  prev.addEventListener("click", () => grid.scrollBy({ left: -step(), behavior: reduceMotion ? "auto" : "smooth" }));
+  next.addEventListener("click", () => grid.scrollBy({ left: step(), behavior: reduceMotion ? "auto" : "smooth" }));
+  grid.addEventListener("scroll", () => { clearTimeout(railState.t); railState.t = setTimeout(railState, 60); }, { passive: true });
+  window.addEventListener("resize", railState);
+  window.addEventListener("load", railState);
+  railState();
 
   // About
   const paras = $("#about-paragraphs");
@@ -1270,6 +1336,16 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   fillWithPhone($("#area-note"), S.serviceArea.note);
   if (S.serviceArea.showMap) drawMap(S.serviceArea.towns);
   else $("#area-map").hidden = true;
+  // Phones: the map starts folded behind "Show the map". Bigger screens always show it.
+  const mapBox = $("#area-map");
+  const phone = window.matchMedia ? window.matchMedia("(max-width: 699px)") : { matches: false };
+  const mapText = mapBox.querySelector(".map-toggle-text");
+  const syncMapText = () => { mapText.textContent = mapBox.open ? "Hide the map" : "Show the map"; };
+  if (phone.matches) mapBox.open = false;
+  mapBox.addEventListener("toggle", syncMapText);
+  const onPhone = (e) => { if (!e.matches) mapBox.open = true; };
+  if (phone.addEventListener) phone.addEventListener("change", onPhone); else if (phone.addListener) phone.addListener(onPhone);
+  syncMapText();
 
   // ---- Simple drawn map ----
   // Real town-center locations (latitude, longitude). side = which side the name goes on.
@@ -1412,18 +1488,32 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
       d.close = () => { d.removeAttribute("open"); backdrop.hidden = true; d.dispatchEvent(new Event("close")); };
     });
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" || e.key === "Esc") $$("dialog[open]").forEach((d) => d.close());
+      if (e.key === "Escape" || e.key === "Esc") $$("dialog[open]").forEach((d) => d.dispatchEvent(new Event("cancel", { cancelable: true })));
+    });
+  }
+  // Close softly: play the short "leaving" animation, then really close. (Instant with less motion.)
+  function closeDialog(d) {
+    if (!d.open || d.classList.contains("closing")) return;
+    if (reduceMotion) { d.close(); return; }
+    d.classList.add("closing");
+    let done = false;
+    const finish = () => { if (done) return; done = true; d.classList.remove("closing"); d.close(); };
+    setTimeout(finish, 260); // safety: close even if the animation never reports back
+    d.addEventListener("animationend", function onEnd(e) {
+      if (e.target === d || e.target.classList.contains("dialog-inner") || e.target.classList.contains("lb-inner")) { d.removeEventListener("animationend", onEnd); finish(); }
     });
   }
   $$("dialog").forEach((d) => {
-    d.addEventListener("click", (e) => { if (e.target === d) d.close(); });
+    d.addEventListener("click", (e) => { if (e.target === d) closeDialog(d); });
+    // The Escape key: use the soft close too
+    d.addEventListener("cancel", (e) => { e.preventDefault(); closeDialog(d); });
   });
   $$("[data-close]").forEach((btn) => {
-    btn.addEventListener("click", () => btn.closest("dialog").close());
+    btn.addEventListener("click", () => closeDialog(btn.closest("dialog")));
   });
   const menu = $("#menu");
   $("#menu-open").addEventListener("click", () => menu.showModal());
-  $$("#menu a").forEach((a) => a.addEventListener("click", () => menu.close()));
+  $$("#menu a").forEach((a) => a.addEventListener("click", () => closeDialog(menu)));
   // If the screen gets wide enough for the normal menu, close the phone menu.
   const wide = window.matchMedia("(min-width: 1080px)");
   const onWide = (e) => { if (e.matches && menu.open) menu.close(); };
@@ -1573,7 +1663,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   const pageUrl = B.websiteAddress || location.href.split("#")[0].split("?")[0];
   const abs = (f) => new URL(f, pageUrl).href;
   const metaDesc = document.querySelector('meta[name="description"]');
-  const allPhotos = [S.photos.hero, S.photos.services, S.photos.about].concat(S.work.photos || [])
+  const allPhotos = [S.photos.hero, S.photos.about].concat(S.work.photos || [])
     .filter((ph) => ph && ph.file).map((ph) => abs(ph.file));
   const ld = {
     "@context": "https://schema.org",
