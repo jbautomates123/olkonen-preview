@@ -450,8 +450,11 @@ img.fade.loaded { opacity: 1; }
 @media (min-width: 900px), (orientation: landscape) and (min-width: 560px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; } }
 .side-photo { margin: 0; position: relative; }
 .side-photo { --ar: 1.3333; --gap-y: 80px; }
-/* Upright phones: a short, wide crew photo instead of a big one */
-@media (max-width: 699px) and (orientation: portrait) { .about-photo { --ar: 1.7778; --give: 1; } }
+/* When About is stacked (phones, upright tablets), the words come first and the crew photo after,
+   so it never feels like one picture after another coming out of the photo row (v2.4.1). */
+@media (max-width: 899px) and (orientation: portrait), (max-width: 559px) { .about-photo { order: 2; } }
+/* Upright phones: a short, wide crew photo instead of a big one (v2.4.1: a little shorter, 2:1) */
+@media (max-width: 699px) and (orientation: portrait) { .about-photo { --ar: 2; --give: 1; } }
 .statement { font-family: var(--display); font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.2; color: var(--ink); margin: 0 0 24px; text-wrap: balance; }
 .about-text p:not(.statement):not(.eyebrow) { color: var(--ink-2); margin: 0 0 16px; max-width: 36em; }
 .facts { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px; }
@@ -902,7 +905,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.4",
+  version: "2.4.1",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
