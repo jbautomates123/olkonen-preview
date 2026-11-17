@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The list of pages for Google. One page for now. At launch: change the address to the real
+     domain, update lastmod to the launch date, then submit this file in Google Search Console. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://jbautomates123.github.io/olkonen-preview/</loc>
+    <lastmod>2026-11-17</lastmod>
+  </url>
+</urlset>

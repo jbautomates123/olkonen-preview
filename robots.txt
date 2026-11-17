@@ -1,0 +1,7 @@
+# Tells search engines and AI search tools they may read the whole site.
+# This file only works at the top of a real web address (e.g. https://www.olkonenearthscapes.com/robots.txt),
+# so it starts doing its job once the site moves to its own domain. Change the Sitemap line then.
+User-agent: *
+Allow: /
+
+Sitemap: https://jbautomates123.github.io/olkonen-preview/sitemap.xml
