@@ -46,12 +46,13 @@
      doesn't wait on another server (faster, and works where Google Fonts is blocked). Free fonts under
      the SIL Open Font License; the license files are in the fonts folder. The two fonts the top of the
      page needs first are fetched right away. If a font can't load, Georgia and the computer's own font fill in. -->
-<link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face { font-family: "Libre Caslon Display"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-display-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Caslon Text"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-text-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Caslon Text"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-text-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/source-serif-4-latin-600-normal.woff2") format("woff2"); }
 @font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); }
 @font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/source-sans-3-latin-700-normal.woff2") format("woff2"); }
@@ -86,6 +87,8 @@
   --corner: 4px;           /* overwritten by SETTINGS.look.buttonCorners */
   --display: "Libre Caslon Display", "Libre Caslon Text", Georgia, "Times New Roman", serif;
   --serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  /* v2.6: sturdier serif for the big top headline (Caslon felt too delicate for an earthworks company) */
+  --headline: "Source Serif 4", Georgia, "Times New Roman", serif;
   --sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
   --shadow-sm: 0 1px 2px rgba(20, 32, 24, 0.06), 0 4px 14px rgba(20, 32, 24, 0.05);
   --shadow-md: 0 2px 8px rgba(20, 32, 24, 0.08), 0 18px 40px rgba(20, 32, 24, 0.12);
@@ -262,8 +265,8 @@ section[id], #top, #gallery { scroll-margin-top: 76px; }
 .hero { padding: 36px 0 8px; }
 .hero-grid { display: grid; gap: 32px; }
 .hero-side { margin-top: 26px; }
-.hero h1 { font-family: var(--display); font-size: clamp(2.5rem, 9.6vw, 4.4rem); line-height: 1.03; letter-spacing: -0.012em; color: var(--ink); }
-.hero h1 .accent { display: block; font-family: var(--serif); font-style: italic; font-size: 0.86em; color: var(--pine); margin-top: 0.08em; }
+.hero h1 { font-family: var(--headline); font-weight: 600; font-size: clamp(2.25rem, 8.6vw, 4rem); line-height: 1.08; letter-spacing: -0.02em; color: var(--ink); }
+.hero h1 .accent { display: block; font-family: var(--headline); font-style: normal; font-weight: 600; font-size: 1em; color: var(--pine); margin-top: 0.2em; }
 .lead { font-size: 1.2rem; line-height: 1.6; color: var(--ink-2); margin: 0 0 24px; max-width: 34em; }
 /* Photo fit: the frame keeps the photo's real shape (--ar = width / height). If the screen is too
    short, the frame may trim at most about a fifth of the photo; past that it shrinks instead. */
@@ -278,11 +281,11 @@ section[id], #top, #gallery { scroll-margin-top: 76px; }
 @media (min-width: 1000px), (orientation: landscape) and (min-width: 560px) {
   .hero { padding: clamp(24px, 5vh, 64px) 0 clamp(16px, 4vh, 48px); }
   .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: center; gap: clamp(32px, 4.5vw, 72px); }
-  .hero h1 { font-size: clamp(2.3rem, min(4.6vw, 10.5vh), 4.6rem); }
+  .hero h1 { font-size: clamp(2.1rem, min(4.1vw, 9.6vh), 4.1rem); }
   .hero-side { margin-top: clamp(18px, 3vh, 30px); }
   .hero-photo { --gap-y: calc(clamp(56px, 10vh, 120px) + 32px); justify-self: end; }
 }
-@media (orientation: landscape) and (max-height: 500px) { .lead { font-size: 1.05rem; margin-bottom: 16px; } .hero h1 .accent { margin-top: 0; } }
+@media (orientation: landscape) and (max-height: 500px) { .lead { font-size: 1.05rem; margin-bottom: 16px; } .hero h1 .accent { margin-top: 0.1em; } }
 /* Photo frame (keeps the drifting photo inside its rounded box) and a plain caption under it.
    v2.3: captions moved off the photos; a dark bubble on every photo is a template giveaway. */
 .pic { display: block; overflow: hidden; border-radius: 3px; background: var(--stone); position: relative; }
@@ -418,21 +421,26 @@ img.fade.loaded { opacity: 1; }
 .gallery-title { font-family: var(--display); font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.1; }
 .rail-nav { display: flex; gap: 8px; flex: none; }
 .rail-btn {
-  width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--white); color: var(--ink);
+  width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #b9b1a0; background: var(--white); color: var(--ink);
   display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
   transition: background-color 0.18s, border-color 0.18s, opacity 0.18s, transform 0.22s var(--ease-ui);
 }
 .rail-btn:hover { border-color: var(--accent); }
 .rail-btn:active { transform: scale(0.94); }
 .rail-btn:disabled { opacity: 0.35; cursor: default; transform: none; }
-.rail-btn svg { width: 20px; height: 20px; }
+.rail-btn svg { width: 22px; height: 22px; }
 .rail {
   --bleed: 20px;
   list-style: none; margin: 0 calc(var(--bleed) * -1); padding: 4px var(--bleed) 10px; display: flex; gap: 14px;
   overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding: 0 var(--bleed);
-  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  /* v2.6: a thin bar under the photos so people can see (and grab) that the row scrolls */
+  scrollbar-width: thin; scrollbar-color: var(--accent) rgba(0, 0, 0, 0.06); padding-bottom: 18px;
 }
-.rail::-webkit-scrollbar { display: none; }
+.rail::-webkit-scrollbar { height: 8px; }
+.rail::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.06); border-radius: 8px; margin: 0 var(--bleed); }
+.rail::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 8px; }
+@media (hover: hover) and (pointer: fine) { .rail { cursor: grab; } .rail.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; } .rail.dragging * { pointer-events: none; } }
 .rail > li { flex: 0 0 84%; scroll-snap-align: start; min-width: 0; }
 @media (min-width: 640px) { .rail { gap: 18px; } .rail > li { flex-basis: 47%; } }
 @media (min-width: 700px) { .rail { --bleed: 32px; } } /* matches the page's side padding at each size */
@@ -491,7 +499,7 @@ img.fade.loaded { opacity: 1; }
 /* ---------- Quote form ---------- */
 #quote { --contour-opacity: 0.07; --contour-shift: 120px 60px; }
 .quote-grid { display: grid; gap: 36px; }
-@media (min-width: 900px) { .quote-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; align-items: start; } .quote-side { position: sticky; top: 112px; } }
+@media (min-width: 900px) { .quote-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; align-items: start; } }
 .quote-side p { color: var(--ink-2); margin: 14px 0 0; max-width: 30em; }
 .big-phone { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-family: var(--display); font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1; color: var(--pine-deep); text-decoration: none; }
 .big-phone svg { width: 28px; height: 28px; color: var(--pine); }
@@ -499,6 +507,44 @@ img.fade.loaded { opacity: 1; }
 /* Towns we work in: one quiet line with a map pin, under the big phone number */
 .quote-side .towns-line { display: flex; gap: 10px; align-items: flex-start; margin: 26px 0 0; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink); font-size: 1.05rem; line-height: 1.55; max-width: 30em; }
 .towns-line svg { width: 19px; height: 19px; flex: none; margin-top: 4px; color: var(--accent-ink); }
+/* v2.6: small drawn map of the towns (back by request), folded on phones */
+.area-map { margin: 20px 0 0; }
+.map-fig { margin: 0; }
+.area-map svg { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--line); background: #f1eee5; }
+.area-map figcaption { font-size: 0.85rem; color: var(--ink-2); margin-top: 8px; }
+.map-toggle { display: none; list-style: none; }
+.map-toggle::-webkit-details-marker { display: none; }
+@media (max-width: 699px) {
+  .map-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px; cursor: pointer; border: 1.5px solid var(--line); border-radius: var(--corner); background: var(--white); font-weight: 600; color: var(--ink); }
+  .map-toggle svg { width: 18px; height: 18px; color: var(--accent-ink); }
+  .area-map[open] .map-toggle { margin-bottom: 14px; }
+}
+/* v2.6: "Do you work in my town?" checker */
+.quote-grid > * { min-width: 0; }
+.town-check { margin: 22px 0 0; padding: 18px; border: 1px solid var(--line); border-radius: 6px; background: rgba(255, 255, 255, 0.6); }
+.town-check label { display: block; font-weight: 600; margin-bottom: 8px; }
+.town-check-row { display: flex; gap: 8px; }
+.town-check input { flex: 1 1 auto; min-width: 0; min-height: 48px; padding: 10px 12px; border: 1.5px solid #8a816d; border-radius: var(--corner); font: inherit; font-size: 1.05rem; background: var(--white); color: var(--ink); }
+.town-check input:focus { border-color: var(--pine); outline: 3px solid rgba(17, 92, 49, 0.18); }
+.town-check button { flex: none; min-height: 48px; padding: 0 18px; }
+.town-answer { margin: 12px 0 0; display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; }
+.town-answer::before { content: ""; width: 10px; height: 10px; margin-top: 7px; border-radius: 50%; flex: none; background: var(--accent); }
+.town-answer.yes::before { background: var(--pine); }
+/* v2.6: "How it works" (3 steps) and the reviews row */
+.steps-list { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 18px; counter-reset: st; }
+@media (min-width: 800px) { .steps-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; } }
+.steps-list li { counter-increment: st; padding: 24px 22px; border-top: 3px solid var(--pine); background: var(--white); border-radius: 0 0 6px 6px; box-shadow: var(--shadow-sm); }
+.steps-list li::before { content: counter(st); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--stone); color: var(--pine-deep); font-family: var(--headline); font-weight: 600; margin-bottom: 14px; }
+.steps-list h3 { font-family: var(--sans); font-weight: 700; font-size: 1.15rem; margin: 0 0 6px; }
+.steps-list p { margin: 0; color: var(--ink-2); line-height: 1.55; }
+.quotes { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 18px; }
+@media (min-width: 800px) { .quotes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.quotes blockquote { margin: 0; padding: 22px; background: var(--white); border-radius: 6px; box-shadow: var(--shadow-sm); }
+.quotes blockquote p { margin: 0 0 10px; font-family: var(--serif); font-size: 1.1rem; line-height: 1.5; }
+.quotes cite { font-style: normal; font-weight: 600; color: var(--ink-2); }
+/* v2.6: dashed "waiting on Todd" spots. Only shown while the preview banner is on. */
+.todo-spot { margin: 22px 0 0; padding: 16px 18px; border: 1.5px dashed #b39a74; border-radius: 6px; background: rgba(250, 243, 226, 0.55); color: #5b4618; font-size: 0.98rem; line-height: 1.5; }
+.todo-spot strong { display: block; margin-bottom: 2px; color: #4a3912; }
 .quote-logo { width: 220px; margin-top: 36px; }
 @media (max-width: 699px) and (orientation: portrait) { .quote-logo { display: none; } } /* phones: the logo is already in the top bar */
 .quote { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 24px; box-shadow: var(--shadow-sm); display: grid; gap: 18px; }
@@ -796,6 +842,8 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <h2 class="eyebrow" data-text="about.heading"></h2>
         <p class="statement" data-text="about.statement"></p>
         <div id="about-paragraphs"></div>
+        <!-- v2.6: owner spot (SETTINGS.about.owner). While it's empty, the preview shows a dashed "waiting on Todd" box -->
+        <div id="about-owner" hidden></div>
         <ul class="facts" id="about-facts" hidden></ul>
         <p class="about-call" id="about-call"></p>
         <!-- Google reviews link (v2.4). Off for now: see SETTINGS.reviews -->
@@ -803,6 +851,17 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <!-- HIRING (a small line now, not a full band; turn off in SETTINGS.hiring.show) -->
         <div class="hiring" id="hiring" hidden><p id="hiring-text"></p></div>
       </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS + REVIEWS (v2.6). Words in SETTINGS.steps and SETTINGS.reviews -->
+  <section class="section" id="steps" hidden>
+    <div class="wrap">
+      <p class="eyebrow reveal" data-text="steps.eyebrow"></p>
+      <h2 class="reveal" data-text="steps.heading"></h2>
+      <ol class="steps-list" id="steps-list"></ol>
+      <ul class="quotes" id="quotes" hidden></ul>
+      <div id="quotes-spot" hidden></div>
     </div>
   </section>
 
@@ -826,6 +885,23 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <a class="big-phone" data-tel="{phone}" data-icon="phone"></a>
         <!-- Towns we work in (one line instead of the old map section; edit in SETTINGS.serviceArea) -->
         <p class="towns-line" id="towns-line" hidden><span class="icon" data-icon="pin"></span><span id="towns-text"></span></p>
+        <!-- v2.6: small drawn map from SETTINGS.serviceArea.towns (folded on phones), then the town checker -->
+        <details class="area-map" id="area-map" open hidden>
+          <summary class="map-toggle"><span class="icon" data-icon="pin"></span><span class="map-toggle-text">Show the map</span></summary>
+          <figure class="map-fig">
+            <svg id="map-svg" viewBox="0 0 600 400" role="img"></svg>
+            <figcaption id="map-cap"></figcaption>
+          </figure>
+        </details>
+        <form class="town-check" id="town-check" hidden novalidate>
+          <label for="town-input" id="town-label"></label>
+          <div class="town-check-row">
+            <input id="town-input" type="text" list="town-list" autocomplete="address-level2" maxlength="60">
+            <button type="submit" class="btn btn-outline" id="town-btn"></button>
+          </div>
+          <datalist id="town-list"></datalist>
+          <p class="town-answer" id="town-answer" hidden aria-live="polite"></p>
+        </form>
         <img class="quote-logo" id="quote-logo" alt="Olkonen Earthscapes" width="331" height="150" hidden>
       </div>
       <form class="quote" id="quote-form" novalidate>
@@ -998,7 +1074,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.5",
+  version: "2.6",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -1053,7 +1129,7 @@ const SETTINGS = {
 
   // ---- TOP SECTION ----
   hero: {
-    eyebrow: "Landscaping in Hopkinton & Concord, NH",
+    eyebrow: "Landscaping in Hopkinton, Concord & nearby towns",
     heading: "Landscapes planned with you,",
     headingAccent: "built with care.",       // the second line, in green italic
     // Based on the owner's own About text.
@@ -1152,6 +1228,8 @@ const SETTINGS = {
     // ASK THE OWNER: only add facts he confirms. The list stays hidden while empty.
     // Examples: "Serving the area since ____", "Fully insured" (only if true).
     facts: [],
+    // v2.6: the owner, once Todd sends a photo and a few lines. Leave text "" to keep it hidden.
+    owner: { name: "", photo: "", text: "" },
     callLine: "Have a project in mind? Call {phone}."
   },
 
@@ -1160,6 +1238,9 @@ const SETTINGS = {
   // Google listing had only 1 review when checked (Nov 17, 2026), and a button that leads to a single
   // review looks thin. Once he has a handful of good reviews, change show to true.
   reviews: {
+    // v2.6: real customer reviews, with the customer's OK. Each: { text: "...", name: "First name, Town" }.
+    // They show in the "How it works" section. Empty = hidden (the preview shows a dashed spot instead).
+    quotes: [],
     show: false,
     text: "Read our reviews on Google",
     link: "https://www.google.com/maps/search/?api=1&query=Olkonen+Earthscapes+Hopkinton+NH"
@@ -1193,7 +1274,42 @@ const SETTINGS = {
   serviceArea: {
     towns: ["Hopkinton", "Contoocook", "Concord", "Henniker", "Warner", "Dunbarton"],
     // The line by the quote form. {towns} becomes the list above ("A, B, C and D").
-    line: "We work in {towns} and nearby towns."
+    line: "We work in {towns} and nearby towns.",
+    // v2.6: the small drawn map is back (dots = the towns above; the map knows 19 towns around
+    // Concord, see PLACES in the map code). false = hide it.
+    showMap: true,
+    mapCaption: "Simple map for reference. Not every road is shown.",
+    // v2.6: "Do you work in my town?" box. Answers from the towns list above.
+    checker: {
+      show: true,
+      label: "Do you work in my town?",
+      button: "Check",
+      yes: "Yes, we work in {town}. Call {phone} or fill out the form.",
+      near: "{town} isn't on our usual list, but it's close by. Call {phone} and ask.",
+      unknown: "We're not sure about {town}. Call {phone} and we'll tell you."
+    }
+  },
+
+  // ---- HOW IT WORKS (v2.6) ----
+  // CONFIRM WITH OWNER: three plain steps of how a job starts. Change the words to how Todd really does it.
+  steps: {
+    show: true,
+    eyebrow: "How it works",
+    heading: "From first call to a finished yard.",
+    list: [
+      { title: "Call or send a request", text: "Tell us what you have in mind. Call {phone} or use the form below." },
+      { title: "We come take a look", text: "We set up a time to see the property and talk through what you want." },
+      { title: "You get a quote", text: "We get back to you with a price, and once you say go, we put it on the schedule." }
+    ]
+  },
+
+  // ---- WAITING-ON-TODD SPOTS (v2.6) ----
+  // Dashed boxes that show where real info will go. They ONLY show while the preview banner is on,
+  // and each one disappears by itself once its real info is filled in (about.owner, about.facts, reviews.quotes).
+  placeholders: {
+    owner: "Spot for a photo of Todd and a few lines in his own words (how he started, what he cares about on a job).",
+    facts: "Spot for quick facts Todd confirms, like years in business, insured, and any memberships or awards.",
+    reviews: "Spot for 2 or 3 real customer reviews, used with the customer's OK."
   },
 
   // ---- QUOTE FORM ----
@@ -1206,7 +1322,7 @@ const SETTINGS = {
     //     switching to Olkonen's email later is a one-line change there, not here.
     //   - or a Formspree form ID / link ("abcdwxyz" or "https://formspree.io/f/abcdwxyz").
     // While this is empty, the form is in DEMO MODE: nothing is sent to anyone.
-    formLink: "",
+    formLink: "https://script.google.com/macros/s/AKfycbz4yQn1-v7Wz07aP0fxYf-qvdfosbrCFHvChB0U3EPsir5DkswrXkE_LTUIpJIj82xwSw/exec",
     heading: "Tell us about your project.",
     intro: "Two quick steps and we'll be in touch.",
     preferCall: "Rather talk to someone? Call us:",
@@ -1608,6 +1724,39 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   window.addEventListener("resize", railState);
   window.addEventListener("load", railState);
   railState();
+  // v2.6: click and drag the photo row with a mouse (a click without dragging still opens the photo)
+  (function () {
+    let down = false, startX = 0, startL = 0, moved = false;
+    grid.addEventListener("dragstart", (e) => e.preventDefault()); // stop the browser dragging the picture itself
+    grid.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      down = true; moved = false; startX = e.clientX; startL = grid.scrollLeft;
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (!moved && Math.abs(dx) > 6) { moved = true; grid.classList.add("dragging"); grid.style.scrollSnapType = "none"; grid.style.scrollBehavior = "auto"; }
+      if (moved) grid.scrollLeft = startL - dx;
+    });
+    const up = () => {
+      if (!down) return;
+      down = false;
+      if (moved) {
+        grid.classList.remove("dragging");
+        grid.style.scrollSnapType = ""; grid.style.scrollBehavior = "";
+        // settle on the nearest photo
+        const st = step(), max = grid.scrollWidth - grid.clientWidth, cur = grid.scrollLeft;
+        const stops = []; for (let x = 0; x < max; x += st) stops.push(x); stops.push(max);
+        const target = stops.reduce((best, x) => (Math.abs(x - cur) < Math.abs(best - cur) ? x : best), 0);
+        grid.scrollTo({ left: target, behavior: reduceMotion ? "auto" : "smooth" });
+        const block = (ev) => { ev.preventDefault(); ev.stopPropagation(); };
+        grid.addEventListener("click", block, { capture: true, once: true });
+        setTimeout(() => grid.removeEventListener("click", block, { capture: true }), 50);
+      }
+    };
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", up);
+  })();
 
   // About
   const paras = $("#about-paragraphs");
@@ -1671,12 +1820,212 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     $("#hiring").hidden = false;
   }
 
+  // ---- Simple drawn map ----
+  // Real town-center locations (latitude, longitude). side = which side the name goes on.
+  const MAP_PLACES = {
+      "Hopkinton":    [43.1915, -71.6753, "right"],
+      "Contoocook":   [43.2220, -71.7134, "left"],
+      "Concord":      [43.2081, -71.5376, "right"],
+      "Penacook":     [43.2826, -71.5998, "right"],
+      "Henniker":     [43.1798, -71.8223, "left"],
+      "Warner":       [43.2806, -71.8162, "left"],
+      "Bow":          [43.1320, -71.5440, "right"],
+      "Dunbarton":    [43.1026, -71.6168, "left"],
+      "Weare":        [43.0948, -71.7306, "left"],
+      "Webster":      [43.3290, -71.7180, "left"],
+      "Boscawen":     [43.3151, -71.6201, "right"],
+      "Canterbury":   [43.3370, -71.5650, "right"],
+      "Pembroke":     [43.1468, -71.4576, "right"],
+      "Hooksett":     [43.0968, -71.4651, "right"],
+      "Loudon":       [43.2856, -71.4673, "right"],
+      "Bradford":     [43.2698, -71.9601, "left"],
+      "Hillsborough": [43.1151, -71.8967, "left"],
+      "Sutton":       [43.3345, -71.9512, "left"],
+      "Goffstown":    [43.0204, -71.6003, "right"]
+    };
+  function drawMap(townNames) {
+    const PLACES = MAP_PLACES;
+    // Interstates (approximate path)
+    const I89 = [[43.1785,-71.5345],[43.1880,-71.5670],[43.1940,-71.5850],[43.2000,-71.6200],[43.2060,-71.6600],[43.2120,-71.7000],[43.2400,-71.7350],[43.2580,-71.7650],[43.2750,-71.8050],[43.2950,-71.8400],[43.3400,-71.9200],[43.3900,-71.9900]];
+    const I93 = [[42.9900,-71.4400],[43.0600,-71.4500],[43.1000,-71.4700],[43.1650,-71.5300],[43.1785,-71.5345],[43.2050,-71.5350],[43.2450,-71.5550],[43.2900,-71.5900],[43.3500,-71.6200],[43.4200,-71.6400]];
+    const pts = townNames.filter((n) => PLACES[n]).map((n) => ({ name: n, lat: PLACES[n][0], lon: PLACES[n][1], side: PLACES[n][2] }));
+    if (!pts.length) { $("#area-map").hidden = true; return; }
+    // Fit the towns into a 600 x 400 drawing, with room around them
+    const W = 600, H = 400, PAD = 0.075; // PAD in degrees of latitude
+    const kx = Math.cos(43.2 * Math.PI / 180); // longitude shrinks this far north
+    let x0 = Math.min(...pts.map((p) => p.lon * kx)) - PAD * 1.6, x1 = Math.max(...pts.map((p) => p.lon * kx)) + PAD * 1.6;
+    let y0 = Math.min(...pts.map((p) => p.lat)) - PAD, y1 = Math.max(...pts.map((p) => p.lat)) + PAD;
+    const spanX = x1 - x0, spanY = y1 - y0;
+    if (spanX / spanY > W / H) { const extra = spanX * H / W - spanY; y0 -= extra / 2; y1 += extra / 2; }
+    else { const extra = spanY * W / H - spanX; x0 -= extra / 2; x1 += extra / 2; }
+    const scale = W / (x1 - x0);
+    const X = (lon) => (lon * kx - x0) * scale;
+    const Y = (lat) => (y1 - lat) * scale;
+    const svg = $("#map-svg");
+    const NS = "http://www.w3.org/2000/svg";
+    const el = (tag, attrs, parent) => {
+      const e = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach((k) => e.setAttribute(k, attrs[k]));
+      (parent || svg).appendChild(e);
+      return e;
+    };
+    svg.setAttribute("aria-label", "Simple map of the area we serve, showing " + pts.map((p) => p.name).join(", ") + ", New Hampshire");
+    el("rect", { width: W, height: H, fill: "#f1eee5" });
+    // Soft shaded area around the towns (circles merged into one shape)
+    const blur = el("filter", { id: "soft", x: "-50%", y: "-50%", width: "200%", height: "200%" }, el("defs", {}));
+    el("feGaussianBlur", { stdDeviation: 14 }, blur);
+    const area = el("g", { opacity: "0.85", filter: "url(#soft)" });
+    const r = 0.06 * scale;
+    pts.forEach((p) => el("circle", { cx: X(p.lon), cy: Y(p.lat), r: r, fill: "#b8d4bd" }, area));
+    // Interstates
+    const line = (path) => path.map((pt, i) => (i ? "L" : "M") + X(pt[1]).toFixed(1) + " " + Y(pt[0]).toFixed(1)).join(" ");
+    [I89, I93].forEach((path) => {
+      el("path", { d: line(path), fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" });
+      el("path", { d: line(path), fill: "none", stroke: "#b3ab99", "stroke-width": 3.5, "stroke-linecap": "round", "stroke-linejoin": "round" });
+    });
+    // Highway number tags: placed on the road, as far as possible from town dots and names
+    const boxes = pts.map((p) => {
+      const x = X(p.lon), y = Y(p.lat), w = p.name.length * 11 + 22;
+      return p.side === "left" ? [x - w, y - 15, x + 11, y + 15] : [x - 11, y - 15, x + w, y + 15];
+    });
+    const clearance = (x, y) => Math.min(...boxes.map((b) => Math.hypot(Math.max(b[0] - x, 0, x - b[2]), Math.max(b[1] - y, 0, y - b[3]))));
+    const tag = (path, label) => {
+      let best = null;
+      for (let i = 1; i < path.length; i++) {
+        const ax = X(path[i - 1][1]), ay = Y(path[i - 1][0]), bx = X(path[i][1]), by = Y(path[i][0]);
+        for (let t = 0; t <= 1; t += 0.05) {
+          const x = ax + (bx - ax) * t, y = ay + (by - ay) * t;
+          if (x < 40 || x > W - 70 || y < 40 || y > H - 30) continue;
+          const score = Math.min(clearance(x, y), 70) - Math.hypot(x - W / 2, y - H / 2) * 0.05;
+          if (!best || score > best.score) best = { x: x, y: y, score: score };
+        }
+      }
+      if (!best) return;
+      const g = el("g", { transform: "translate(" + best.x.toFixed(1) + " " + best.y.toFixed(1) + ")" });
+      el("rect", { x: -16, y: -12, width: 32, height: 24, rx: 6, fill: "#5d6b5f" }, g);
+      const t = el("text", { x: 0, y: 5, "text-anchor": "middle", "font-size": 14, "font-weight": 700, fill: "#fff", "font-family": "system-ui, Arial, sans-serif" }, g);
+      t.textContent = label;
+    };
+    tag(I89, "89");
+    tag(I93, "93");
+    // Town dots and names
+    pts.forEach((p) => {
+      const x = X(p.lon), y = Y(p.lat);
+      el("circle", { cx: x, cy: y, r: 10, fill: "#fff" });
+      el("circle", { cx: x, cy: y, r: 6.5, fill: "#115c31" });
+      const left = p.side === "left";
+      const t = el("text", {
+        x: x + (left ? -15 : 15), y: y + 7,
+        "text-anchor": left ? "end" : "start",
+        "font-size": 22, fill: "#0b3f22",
+        "font-family": "'Libre Caslon Text', Georgia, 'Times New Roman', serif",
+        stroke: "#f1eee5", "stroke-width": 5, "paint-order": "stroke", "stroke-linejoin": "round"
+      });
+      t.textContent = p.name;
+    });
+    // Small "N" arrow
+    const n = el("g", { transform: "translate(" + (W - 34) + " 40)" });
+    el("path", { d: "M0 -16 L8 6 L0 1 L-8 6 Z", fill: "#5d6b5f" }, n);
+    const nt = el("text", { x: 0, y: 24, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: "#5d6b5f", "font-family": "system-ui, Arial, sans-serif" }, n);
+    nt.textContent = "N";
+  }
+
+  // ---- v2.6: preview-only "waiting on Todd" spots ----
+  const PH = S.placeholders || {};
+  function todoSpot(box, text) {
+    if (!S.previewBanner.show || !text || !box) return;
+    box.className = "todo-spot";
+    box.innerHTML = "";
+    const b = document.createElement("strong");
+    b.textContent = "Waiting on Todd";
+    box.append(b, text);
+    box.hidden = false;
+  }
+  // Owner: real info if filled in, otherwise the dashed spot
+  const O = S.about.owner || {};
+  const ownerBox = $("#about-owner");
+  if (O.text) {
+    ownerBox.className = "about-owner";
+    if (O.photo) { const im = document.createElement("img"); im.src = O.photo; im.alt = O.name || "The owner"; im.width = 120; im.height = 120; im.style.cssText = "width:120px;height:120px;object-fit:cover;border-radius:50%;margin:20px 0 10px"; ownerBox.appendChild(im); }
+    const t = document.createElement("p"); t.textContent = O.text; ownerBox.appendChild(t);
+    if (O.name) { const n = document.createElement("p"); n.style.fontWeight = "600"; n.textContent = O.name; ownerBox.appendChild(n); }
+    ownerBox.hidden = false;
+  } else todoSpot(ownerBox, PH.owner);
+  if (!S.about.facts.length) {
+    const f = document.createElement("div");
+    $("#about-facts").after(f);
+    todoSpot(f, PH.facts);
+  }
+  // How it works + reviews
+  if (S.steps && S.steps.show && S.steps.list.length) {
+    const ol = $("#steps-list");
+    S.steps.list.forEach((st) => {
+      const li = document.createElement("li");
+      const h = document.createElement("h3"); h.textContent = st.title;
+      const p = document.createElement("p"); fillWithPhone(p, st.text);
+      li.append(h, p);
+      ol.appendChild(li);
+    });
+    const qs = (S.reviews && S.reviews.quotes) || [];
+    if (qs.length) {
+      const ul = $("#quotes");
+      qs.forEach((q) => {
+        const li = document.createElement("li");
+        const bq = document.createElement("blockquote");
+        const p = document.createElement("p"); p.textContent = "\u201C" + q.text + "\u201D";
+        const c = document.createElement("cite"); c.textContent = q.name || "";
+        bq.append(p, c); li.appendChild(bq); ul.appendChild(li);
+      });
+      ul.hidden = false;
+    } else todoSpot($("#quotes-spot"), PH.reviews);
+    $("#steps").hidden = false;
+  }
+
   // Towns we work in: "A, B, C and D" put into the line by the quote form
   const townNames = (S.serviceArea && S.serviceArea.towns) || [];
   if (townNames.length && S.serviceArea.line) {
     const list = townNames.length < 2 ? townNames.join("") : townNames.slice(0, -1).join(", ") + " and " + townNames[townNames.length - 1];
     $("#towns-text").textContent = plain(S.serviceArea.line.split("{towns}").join(list));
     $("#towns-line").hidden = false;
+  }
+  // v2.6: the small map (folded on phones) and the town checker
+  if (S.serviceArea.showMap && townNames.length) {
+    $("#area-map").hidden = false;
+    $("#map-cap").textContent = S.serviceArea.mapCaption || "";
+    drawMap(townNames);
+    const mapBox = $("#area-map");
+    const phoneQ = window.matchMedia ? window.matchMedia("(max-width: 699px)") : { matches: false };
+    const mapText = mapBox.querySelector(".map-toggle-text");
+    const syncMapText = () => { mapText.textContent = mapBox.open ? "Hide the map" : "Show the map"; };
+    if (phoneQ.matches) mapBox.open = false;
+    mapBox.addEventListener("toggle", syncMapText);
+    const onPhoneQ = (e) => { if (!e.matches) mapBox.open = true; };
+    if (phoneQ.addEventListener) phoneQ.addEventListener("change", onPhoneQ); else if (phoneQ.addListener) phoneQ.addListener(onPhoneQ);
+    syncMapText();
+  }
+  const CK = S.serviceArea.checker;
+  if (CK && CK.show && townNames.length) {
+    const tc = $("#town-check");
+    $("#town-label").textContent = CK.label;
+    $("#town-btn").textContent = CK.button;
+    const dl = $("#town-list");
+    Object.keys(MAP_PLACES).concat(townNames).filter((v, i, a) => a.indexOf(v) === i).sort().forEach((n) => { const o = document.createElement("option"); o.value = n; dl.appendChild(o); });
+    const norm = (v) => v.toLowerCase().replace(/,?\s*(nh|new hampshire)\.?$/, "").replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
+    tc.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const raw = $("#town-input").value.trim();
+      const ans = $("#town-answer");
+      if (!raw) { $("#town-input").focus(); return; }
+      const key = norm(raw);
+      const hit = townNames.find((t) => norm(t) === key);
+      const near = !hit && Object.keys(MAP_PLACES).find((t) => norm(t) === key);
+      const name = hit || near || raw.replace(/,?\s*(nh|new hampshire)\.?$/i, "").trim();
+      const msg = (hit ? CK.yes : near ? CK.near : CK.unknown).split("{town}").join(name);
+      ans.textContent = ""; const sp = document.createElement("span"); fillWithPhone(sp, msg); ans.appendChild(sp);
+      ans.className = "town-answer" + (hit ? " yes" : "");
+      ans.hidden = false;
+    });
+    tc.hidden = false;
   }
 
   // Contact
