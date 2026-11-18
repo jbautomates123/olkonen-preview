@@ -285,7 +285,10 @@ section[id], #top, #gallery { scroll-margin-top: 76px; }
 @media (orientation: landscape) and (max-height: 500px) { .lead { font-size: 1.05rem; margin-bottom: 16px; } .hero h1 .accent { margin-top: 0; } }
 /* Photo frame (keeps the drifting photo inside its rounded box) and a plain caption under it.
    v2.3: captions moved off the photos; a dark bubble on every photo is a template giveaway. */
-.pic { display: block; overflow: hidden; border-radius: 3px; background: var(--stone); }
+.pic { display: block; overflow: hidden; border-radius: 3px; background: var(--stone); position: relative; }
+/* v2.5: "Sample photo" tag on stock photos (SETTINGS.photoMode = "sample"), so nobody mistakes them for Olkonen's work */
+.sample-tag { position: absolute; left: 10px; top: 10px; z-index: 2; padding: 5px 10px 5px 9px; border-radius: 999px; background: rgba(250, 248, 242, 0.94); color: var(--ink); font-size: 0.78rem; font-weight: 600; line-height: 1; letter-spacing: 0.02em; box-shadow: 0 1px 6px rgba(20, 32, 24, 0.18); pointer-events: none; display: inline-flex; align-items: center; gap: 6px; }
+.sample-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 /* Photos fade in once they've loaded, instead of popping in line by line. The pale box behind
    them holds the spot while they load, so nothing jumps. */
 img.fade { opacity: 0; transition: opacity 0.6s var(--ease); }
@@ -515,6 +518,51 @@ img.fade.loaded { opacity: 1; }
 /* Short privacy note under the send button (what we collect and where it goes) */
 .privacy-note { margin: 0; display: flex; gap: 8px; align-items: flex-start; font-size: 0.9rem; line-height: 1.5; color: var(--ink-2); }
 .privacy-note svg { width: 16px; height: 16px; flex: none; margin-top: 3px; color: var(--accent-ink); }
+
+/* v2.5: two-step quote form. Step 1 = the project, step 2 = how to reach you. */
+.q-step { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 18px; }
+@media (min-width: 600px) { .q-step { grid-template-columns: 1fr 1fr; column-gap: 20px; } .quote .q-step { grid-column: 1 / -1; } .q-step > .field-wide, .q-step > .q-actions, .q-step > .privacy-note, .q-step > .q-step-head { grid-column: 1 / -1; } }
+.q-step[hidden] { display: none; }
+@media (prefers-reduced-motion: no-preference) { .q-step.q-enter { animation: q-in 0.32s var(--ease) both; } }
+@keyframes q-in { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+.q-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; grid-column: 1 / -1; counter-reset: qstep; }
+.q-steps li { counter-increment: qstep; display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 3px solid var(--line); color: var(--ink-2); font-size: 0.95rem; font-weight: 600; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
+.q-steps li::before { content: counter(qstep); display: grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; border: 1.5px solid #8a816d; font-size: 0.85rem; transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease); }
+.q-steps li.on { color: var(--ink); border-bottom-color: var(--pine); }
+.q-steps li.on::before { background: var(--pine); border-color: var(--pine); color: #fff; }
+.q-steps li.done::before { content: "\2713"; background: var(--white); border-color: var(--pine); color: var(--pine); }
+.field-label { font-weight: 600; font-size: 1rem; }
+.field-hint { margin: -2px 0 2px; font-size: 0.92rem; color: var(--ink-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; display: inline-flex; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chip span { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 9px 15px; border: 1.5px solid #8a816d; border-radius: 999px; background: var(--white); font-size: 0.98rem; line-height: 1.25; color: var(--ink); transition: background-color 0.18s, border-color 0.18s, color 0.18s, transform 0.2s var(--ease-ui); }
+.chip small { font-size: 0.84rem; color: var(--ink-2); font-weight: 400; transition: color 0.18s; }
+.chip input:checked + span { background: var(--pine); border-color: var(--pine); color: #fff; }
+.chip input:checked + span small { color: #d7e8dc; }
+.chip input[type="checkbox"]:checked + span::before { content: ""; width: 11px; height: 6px; margin-top: -3px; border: 2px solid #fff; border-top: 0; border-right: 0; transform: rotate(-45deg); }
+.chip input:focus-visible + span { outline: 3px solid rgba(17, 92, 49, 0.35); outline-offset: 2px; }
+@media (hover: hover) { .chip input:not(:checked):hover + span { border-color: var(--pine); background: #f3f6f2; } }
+.chip input:active + span { transform: scale(0.97); }
+.sqft { display: flex; align-items: center; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+.sqft label { font-weight: 400; color: var(--ink-2); font-size: 0.95rem; }
+.sqft input { width: 9.5em; min-height: 44px; }
+.field-error { margin: 2px 0 0; color: #a3321f; font-size: 0.92rem; font-weight: 600; }
+.field.has-error input, .field.has-error .chip span { border-color: #a3321f; }
+.q-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.q-actions .btn { flex: 1 1 auto; }
+.q-actions .q-back { flex: 0 0 auto; }
+/* After sending: the form is swapped for a short "here's what happens next" card */
+.quote-done { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 28px 24px; box-shadow: var(--shadow-sm); }
+@media (min-width: 600px) { .quote-done { padding: 40px 36px; } }
+@media (prefers-reduced-motion: no-preference) { .quote-done:not([hidden]) { animation: pop-in 0.4s var(--ease) both; } }
+.done-mark { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--pine); color: #fff; margin-bottom: 18px; }
+.done-mark svg { width: 26px; height: 26px; }
+.quote-done h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 3vw, 2rem); line-height: 1.15; margin: 0 0 10px; color: var(--pine-deep); }
+.quote-done p { margin: 0 0 14px; color: var(--ink-2); }
+.done-steps { margin: 18px 0 22px; padding: 0; list-style: none; display: grid; gap: 12px; }
+.done-steps li { display: flex; gap: 12px; align-items: flex-start; }
+.done-steps li::before { content: ""; width: 8px; height: 8px; margin-top: 9px; border-radius: 50%; background: var(--accent); flex: none; }
 
 /* ---------- Contact ---------- */
 .contact-list { display: grid; gap: 0; margin: 32px 0 0; border-top: 1px solid var(--line); }
@@ -780,41 +828,86 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <p class="towns-line" id="towns-line" hidden><span class="icon" data-icon="pin"></span><span id="towns-text"></span></p>
         <img class="quote-logo" id="quote-logo" alt="Olkonen Earthscapes" width="331" height="150" hidden>
       </div>
-      <form class="quote" id="quote-form">
+      <form class="quote" id="quote-form" novalidate>
         <p class="demo-note" id="demo-note" hidden></p>
-        <div class="field">
-          <label for="f-name">Your name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="f-phone">Phone number</label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
-        </div>
-        <div class="field">
-          <label for="f-email">Email <span class="opt">(optional)</span></label>
-          <input id="f-email" name="email" type="email" autocomplete="email">
-        </div>
-        <div class="field">
-          <label for="f-town">Town or street address</label>
-          <input id="f-town" name="town" type="text" autocomplete="street-address">
-        </div>
-        <div class="field field-wide">
-          <label for="f-service">What do you need help with?</label>
-          <select id="f-service" name="service"></select>
-        </div>
-        <div class="field field-wide">
-          <label for="f-details">Tell us about your project <span class="opt">(optional)</span></label>
-          <textarea id="f-details" name="details"></textarea>
-        </div>
+        <!-- v2.5: two short steps instead of one long form. Words for both steps are in SETTINGS.form -->
+        <ol class="q-steps" id="q-steps" aria-label="Two steps">
+          <li class="on" id="q-tab-1" aria-current="step"></li>
+          <li id="q-tab-2"></li>
+        </ol>
+        <fieldset class="q-step" id="q-step-1">
+          <legend class="sr-only" id="q-legend-1"></legend>
+          <div class="field field-wide" id="w-services">
+            <span class="field-label" id="l-services"></span>
+            <p class="field-hint" id="h-services"></p>
+            <div class="chips" id="f-services" role="group" aria-labelledby="l-services" aria-describedby="h-services e-services"></div>
+            <p class="field-error" id="e-services" hidden></p>
+          </div>
+          <div class="field field-wide">
+            <span class="field-label" id="l-size"></span>
+            <div class="chips" id="f-size" role="radiogroup" aria-labelledby="l-size"></div>
+            <div class="sqft">
+              <label for="f-sqft" id="l-sqft"></label>
+              <input id="f-sqft" name="sqft" type="text" inputmode="numeric" autocomplete="off" maxlength="9">
+            </div>
+          </div>
+          <div class="field field-wide">
+            <span class="field-label" id="l-timing"></span>
+            <div class="chips" id="f-timing" role="radiogroup" aria-labelledby="l-timing"></div>
+          </div>
+          <div class="field field-wide">
+            <label for="f-details" id="l-details"></label>
+            <textarea id="f-details" name="details" maxlength="4000"></textarea>
+          </div>
+          <div class="q-actions">
+            <button type="button" class="btn btn-solid btn-block" id="q-next"></button>
+          </div>
+        </fieldset>
+        <fieldset class="q-step" id="q-step-2" hidden>
+          <legend class="sr-only" id="q-legend-2"></legend>
+          <div class="field" id="w-name">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name" maxlength="120">
+            <p class="field-error" id="e-name" hidden></p>
+          </div>
+          <div class="field" id="w-phone">
+            <label for="f-phone">Phone number</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="e-phone" maxlength="30">
+            <p class="field-error" id="e-phone" hidden></p>
+          </div>
+          <div class="field" id="w-email">
+            <label for="f-email">Email <span class="opt">(optional)</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" aria-describedby="e-email" maxlength="160">
+            <p class="field-error" id="e-email" hidden></p>
+          </div>
+          <div class="field">
+            <label for="f-town">Town or street address</label>
+            <input id="f-town" name="town" type="text" autocomplete="street-address" maxlength="200">
+          </div>
+          <div class="field field-wide">
+            <span class="field-label" id="l-contact"></span>
+            <div class="chips" id="f-contact" role="radiogroup" aria-labelledby="l-contact"></div>
+          </div>
+          <div class="q-actions">
+            <button type="button" class="btn btn-outline q-back" id="q-back"></button>
+            <button type="submit" class="btn btn-solid" id="f-submit"></button>
+          </div>
+          <p class="privacy-note" id="privacy-note" hidden><span class="icon" data-icon="lock"></span><span id="privacy-text"></span></p>
+        </fieldset>
         <!-- Spam trap: real people never see or fill this in -->
         <div class="hp" aria-hidden="true">
           <label for="f-gotcha">Leave this empty</label>
           <input id="f-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
         </div>
-        <input type="hidden" name="_subject" id="f-subject">
-        <button type="submit" class="btn btn-solid btn-block" id="f-submit"></button>
-        <p class="privacy-note" id="privacy-note" hidden><span class="icon" data-icon="lock"></span><span id="privacy-text"></span></p>
       </form>
+      <!-- Shown after a request is sent (replaces the form). Words in SETTINGS.form -->
+      <div class="quote-done" id="quote-done" hidden tabindex="-1" aria-live="polite">
+        <span class="done-mark"><span class="icon" data-icon="check"></span></span>
+        <h3 id="done-title"></h3>
+        <p id="done-text"></p>
+        <ul class="done-steps" id="done-steps"></ul>
+        <button type="button" class="btn btn-outline" id="done-again"></button>
+      </div>
     </div>
   </section>
 
@@ -905,12 +998,41 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.4.1",
+  version: "2.5",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
     show: true,
-    text: "Free sample redesign by JB Automates. Not the live Olkonen Earthscapes website. Photos are from Olkonen's Facebook page."
+    text: "Free sample redesign by JB Automates. Not the live Olkonen Earthscapes website. Photos are from Olkonen's Facebook page.",
+    // Used instead of the line above while photoMode is "sample" (see PHOTO MODE below)
+    textSample: "Free sample redesign by JB Automates. Not the live Olkonen Earthscapes website. Photos marked \"Sample photo\" are stock photos, not Olkonen's work."
+  },
+
+  // ---- PHOTO MODE (v2.5) ----
+  // "real"   = Olkonen's own photos (the PHOTOS and RECENT WORK lists further down).
+  // "sample" = free stock photos from Unsplash (the SAMPLE PHOTOS list right below), each one tagged
+  //            "Sample photo" on the picture and in its caption. Used on the public preview link until
+  //            Olkonen says yes to using its Facebook photos. Stock photos are never used on the live site.
+  photoMode: "sample",
+
+  // ---- SAMPLE PHOTOS (only used while photoMode is "sample") ----
+  // Free under the Unsplash License (free for business use, no credit needed; checked Nov 18, 2026).
+  // They load from Unsplash's own image server, sized for each screen. The before/after slider is
+  // hidden in sample mode: it needs two photos of the SAME job, and stock photos can't honestly do that.
+  samplePhotos: {
+    tag: "Sample photo",                        // the small tag shown on each picture
+    showBeforeAfter: false,
+    hero:  { file: "https://images.unsplash.com/photo-1778869290979-6f09567a0eee", focus: "50% 60%",
+             alt: "Sample photo: a backyard stone patio with Adirondack chairs around a fire pit, lawn and trees behind",
+             caption: "Sample photo by Julia A. Keirns on Unsplash" },
+    about: { file: "https://images.unsplash.com/photo-1734303023491-db8037a21f09", focus: "50% 55%",
+             alt: "Sample photo: a lawn crew mowing and trimming a large lawn beside a row of evergreens",
+             caption: "Sample photo by Michael Smith on Unsplash" },
+    work: [
+      { file: "https://images.unsplash.com/photo-1783253027575-ba38687d83d2", caption: "Sample photo: stone steps through fall color (Klaudia Borowiec, Unsplash)" },
+      { file: "https://images.unsplash.com/photo-1766823343386-586aac281b28", caption: "Sample photo: stone wall and patio beside a lawn (Unsplash)", focus: "50% 60%" },
+      { file: "https://images.unsplash.com/photo-1659242484336-edb4f31b0d0c", caption: "Sample photo: natural stone steps up a rocky slope (Riza Gabriela, Unsplash)" }
+    ]
   },
 
   // ---- BUSINESS INFO ----
@@ -979,6 +1101,9 @@ const SETTINGS = {
   // file in that folder and type its name here. Leave file as "" to hide that photo's spot.
   // These are from Olkonen's public Facebook page (small copies). ASK THE OWNER before launch,
   // and ask for his original photos: they'll be much sharper.
+  // v2.5: until Olkonen says yes, these files are NOT in this public folder (photoMode is "sample").
+  // Jack's private copy is in jb-automates/olkonen/facebook-photos. Put them back in "photos" and set
+  // photoMode to "real" once there's a yes, or use the owner's own originals.
   photos: {
     // focus = the part of the photo to keep in view when a screen trims the edges:
     // "50% 50%" is the middle; the first number moves left/right, the second up/down (0% = top).
@@ -1072,24 +1197,64 @@ const SETTINGS = {
   },
 
   // ---- QUOTE FORM ----
+  // v2.5: two short steps. Step 1 = what the job is (services, rough size, timing, details).
+  // Step 2 = name, phone, email, town, and the best way to reach them.
   form: {
-    // Paste your Formspree form ID or full link here, e.g. "abcdwxyz" or "https://formspree.io/f/abcdwxyz".
+    // WHERE REQUESTS GO. Paste ONE of these between the quotes:
+    //   - the web app link of the free Google Apps Script handler ("https://script.google.com/macros/s/.../exec").
+    //     The email address that gets the requests is set inside that script (SEND_TO at its top), so
+    //     switching to Olkonen's email later is a one-line change there, not here.
+    //   - or a Formspree form ID / link ("abcdwxyz" or "https://formspree.io/f/abcdwxyz").
     // While this is empty, the form is in DEMO MODE: nothing is sent to anyone.
-    formspreeId: "",
+    formLink: "",
     heading: "Tell us about your project.",
-    intro: "Fill this out and we'll be in touch.",
+    intro: "Two quick steps and we'll be in touch.",
     preferCall: "Rather talk to someone? Call us:",
+    stepNames: ["Your project", "Contact info"],
+    servicesLabel: "What do you need help with?",
+    servicesHint: "Pick as many as you like.",
+    servicesError: "Pick at least one, or \"Something else / not sure\".",
+    otherOption: "Something else / not sure",
+    sizeLabel: "About how big is the project? (optional)",
+    sizeOptions: [
+      { name: "Small", note: "a bed or a front walk" },
+      { name: "Medium", note: "part of a yard" },
+      { name: "Large", note: "a whole yard or more" },
+      { name: "Not sure" }
+    ],
+    sqftLabel: "Square feet, if you know it:",
+    timingLabel: "When would you like it done? (optional)",
+    timingOptions: ["As soon as possible", "In the next month or two", "Next spring", "Just planning"],
+    detailsLabel: "Anything else we should know? (optional)",
+    nextButton: "Next: how to reach you",
+    backButton: "Back",
+    contactLabel: "Best way to reach you",
+    contactOptions: ["Call", "Text", "Email"],
+    nameError: "Please add your name.",
+    phoneError: "Please add a phone number we can call, with the area code.",
+    emailError: "That email doesn't look right. Check it, or leave it empty.",
+    emailNeeded: "Add your email, or pick Call or Text.",
     submitButton: "Send My Request",
     // Short privacy note under the send button. Keep it true: if the form ever goes somewhere
     // else (a Google Sheet, a different email), change this sentence to match.
     privacyNote: "We only use this to reply about your project. It goes straight to Olkonen Earthscapes by email and is never sold or shared.",
-    otherOption: "Something else / not sure",
+    // PREVIEW ONLY (v2.5): while the preview banner is on and the form is connected, requests go to
+    // JB Automates for testing, not to Olkonen. These lines say so, so nobody is misled.
+    previewNote: "Preview: this sample form sends to JB Automates (the web designer) for testing, not to Olkonen yet. To reach Olkonen, call {phone}.",
+    previewPrivacy: "Preview: requests from this sample go to JB Automates by email for testing and are never sold or shared.",
     emailSubject: "New quote request from the website",
     demoNote: "Demo mode: this sample form is not connected yet. Nothing you type here will be sent.",
     demoTitle: "Demo mode: nothing was sent",
     demoMessage: "This sample form isn't connected yet, so your request was not sent to anyone. Once it's set up, requests will go straight to Olkonen Earthscapes by email.",
-    thanksTitle: "Thank you!",
-    thanksMessage: "Your request was sent. We'll get back to you soon. If it's urgent, call {phone}.",
+    // The card that replaces the form after sending. {name} = their first name.
+    doneTitle: "Thanks, {name}. Your request is in.",
+    doneText: "It went straight to our office. Here's what happens next:",
+    doneSteps: [
+      "We read every request and get back to you the way you picked.",
+      "If it helps, we'll set up a time to come look at the property.",
+      "If it's urgent, call {phone}."
+    ],
+    doneAgain: "Send another request",
     errorTitle: "Sorry, that didn't go through",
     errorMessage: "Something went wrong sending your request. Please call us at {phone} instead."
   },
@@ -1120,6 +1285,35 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   "use strict";
   const S = SETTINGS;
   const B = S.business;
+  // v2.5 photo mode: in "sample" mode the stock photos stand in for the real ones (each marked sample: true)
+  const SAMPLE_MODE = S.photoMode === "sample" && S.samplePhotos;
+  if (SAMPLE_MODE) {
+    const SP = S.samplePhotos;
+    const mark = (p) => (p ? Object.assign({}, p, { sample: true }) : p);
+    S.photos = { hero: mark(SP.hero), about: mark(SP.about) };
+    S.work.photos = (SP.work || []).map(mark);
+    S.work.beforeAfter.show = !!SP.showBeforeAfter;
+  }
+  // Photos on Unsplash's image server get sized for each screen (sharp on big screens, light on phones)
+  const UNSPLASH = /^https:\/\/images\.unsplash\.com\//;
+  function setSrc(img, file, maxW) {
+    if (UNSPLASH.test(file)) {
+      const base = file.split("?")[0] + "?auto=format&fit=crop&q=78&w=";
+      const widths = [640, 960, 1280, 1600, 2000].filter((w) => w <= (maxW || 2000));
+      img.srcset = widths.map((w) => base + w + " " + w + "w").join(", ");
+      img.sizes = "(min-width: 900px) 50vw, 100vw";
+      img.src = base + (maxW ? Math.min(maxW, 1280) : 1280);
+    } else {
+      img.src = file;
+    }
+  }
+  function addSampleTag(box, p) {
+    if (!p || !p.sample || !box) return;
+    const t = document.createElement("span");
+    t.className = "sample-tag";
+    t.textContent = (S.samplePhotos && S.samplePhotos.tag) || "Sample photo";
+    box.appendChild(t);
+  }
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1141,6 +1335,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     left: '<path d="M15 5l-7 7 7 7"/>',
     right: '<path d="M9 5l7 7-7 7"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/>'
   };
   function icon(name) {
@@ -1197,7 +1392,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   // Preview banner
   const banner = $("#preview-banner");
   if (S.previewBanner.show) {
-    $("#preview-text").textContent = S.previewBanner.text;
+    $("#preview-text").textContent = (SAMPLE_MODE && S.previewBanner.textSample) || S.previewBanner.text;
     banner.hidden = false;
     $("#preview-close").addEventListener("click", () => { banner.hidden = true; });
   }
@@ -1240,9 +1435,10 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     if (!p || !p.file) { fig.hidden = true; return; }
     const img = $(imgSel);
     if (imgSel !== "#hero-img") fadeIn(img); // the top photo has its own opening animation
-    img.src = p.file;
+    setSrc(img, p.file);
     img.alt = p.alt || "";
     if (p.focus) img.style.objectPosition = p.focus;
+    addSampleTag(img.parentElement, p);
     const cap = capSel ? $(capSel) : null;
     if (cap) { if (p.caption) cap.textContent = p.caption; else cap.hidden = true; }
     fig.hidden = false;
@@ -1363,12 +1559,14 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     btn.setAttribute("aria-label", "View bigger: " + (p.caption || "project photo"));
     const img = document.createElement("img");
     fadeIn(img);
-    img.src = p.file;
-    img.alt = "";
     img.loading = "lazy";
+    setSrc(img, p.file, 1280);
+    img.sizes = "(min-width: 900px) 40vw, 85vw";
+    img.alt = "";
     img.width = 800; img.height = 600;
     if (p.focus) img.style.objectPosition = p.focus;
     btn.appendChild(img);
+    addSampleTag(btn, p);
     btn.addEventListener("click", () => openLightbox(i));
     fig.appendChild(btn);
     if (p.caption) {
@@ -1557,7 +1755,9 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   function showLb(i) {
     lbIndex = (i + workPhotos.length) % workPhotos.length;
     const p = workPhotos[lbIndex];
-    $("#lb-img").src = p.file;
+    const lbImg = $("#lb-img");
+    lbImg.removeAttribute("srcset");
+    lbImg.src = UNSPLASH.test(p.file) ? p.file.split("?")[0] + "?auto=format&fit=max&q=80&w=2000" : p.file;
     $("#lb-img").alt = p.caption || "Project photo";
     $("#lb-cap").textContent = p.caption || "";
   }
@@ -1681,45 +1881,184 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     update();
   }
 
-  // ---- Quote form ----
+  // ---- Quote form (v2.5: two steps) ----
   const F = S.form;
   const form = $("#quote-form");
   const submit = $("#f-submit");
+  const step1 = $("#q-step-1"), step2 = $("#q-step-2");
+  const tab1 = $("#q-tab-1"), tab2 = $("#q-tab-2");
+  const txt = (sel, t) => { const el = $(sel); if (el) el.textContent = t || ""; };
+  txt("#q-tab-1", F.stepNames[0]); txt("#q-tab-2", F.stepNames[1]);
+  txt("#q-legend-1", F.stepNames[0]); txt("#q-legend-2", F.stepNames[1]);
+  txt("#l-services", F.servicesLabel); txt("#h-services", F.servicesHint);
+  txt("#l-size", F.sizeLabel); txt("#l-sqft", F.sqftLabel); txt("#l-timing", F.timingLabel);
+  txt("#l-details", F.detailsLabel); txt("#l-contact", F.contactLabel);
+  txt("#q-next", F.nextButton); txt("#q-back", F.backButton);
   submit.textContent = F.submitButton;
-  $("#f-subject").value = F.emailSubject;
-  const select = $("#f-service");
-  select.add(new Option("Choose one", ""));
-  S.services.list.forEach((s) => select.add(new Option(s.name, s.name)));
-  select.add(new Option(F.otherOption, F.otherOption));
-  // Accept either "abcdwxyz" or the full "https://formspree.io/f/abcdwxyz"
-  const formId = String(F.formspreeId || "").trim().replace(/^.*\/f\//, "").replace(/[/?#].*$/, "");
-  const demoMode = formId === "";
-  if (F.privacyNote) {
-    $("#privacy-text").textContent = F.privacyNote;
-    $("#privacy-note").hidden = false;
+  // A row of tap-able choices (checkboxes or radio buttons that look like pills)
+  function chips(box, name, type, options) {
+    options.forEach((o) => {
+      const opt = typeof o === "string" ? { name: o } : o;
+      const lab = document.createElement("label");
+      lab.className = "chip";
+      const inp = document.createElement("input");
+      inp.type = type; inp.name = name; inp.value = opt.name;
+      const span = document.createElement("span");
+      span.append(opt.name);
+      if (opt.note) { const sm = document.createElement("small"); sm.textContent = opt.note; span.append(" ", sm); }
+      lab.append(inp, span);
+      box.appendChild(lab);
+    });
   }
-  if (demoMode) {
-    $("#demo-note").textContent = F.demoNote;
-    $("#demo-note").hidden = false;
+  chips($("#f-services"), "services", "checkbox", S.services.list.map((sv) => sv.name).concat([F.otherOption]));
+  chips($("#f-size"), "size", "radio", F.sizeOptions || []);
+  chips($("#f-timing"), "timing", "radio", F.timingOptions || []);
+  chips($("#f-contact"), "contact", "radio", F.contactOptions || []);
+  // Radio pills can be tapped again to clear them (they're all optional)
+  $$('#quote-form input[type="radio"]').forEach((r) => {
+    r.addEventListener("pointerdown", () => { r.dataset.was = r.checked ? "1" : ""; });
+    r.addEventListener("click", () => { if (r.dataset.was === "1") { r.checked = false; r.dataset.was = ""; } });
+  });
+  // Square feet: digits only
+  $("#f-sqft").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/[^\d,]/g, ""); });
+  // Phone: tidy it into 603-555-0147 as they type (only when it's a plain 10-digit number)
+  $("#f-phone").addEventListener("blur", (e) => {
+    const d = e.target.value.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
+    if (d.length === 10) e.target.value = d.slice(0, 3) + "-" + d.slice(3, 6) + "-" + d.slice(6);
+  });
+
+  // Where requests go: an Apps Script web app link, or a Formspree ID/link. Empty = demo mode.
+  const link = String(F.formLink || "").trim();
+  const isScript = /^https:\/\/script\.google(usercontent)?\.com\//.test(link);
+  const fsId = isScript ? "" : link.replace(/^.*\/f\//, "").replace(/[/?#].*$/, "");
+  const sendUrl = isScript ? link : (fsId ? "https://formspree.io/f/" + encodeURIComponent(fsId) : "");
+  const demoMode = sendUrl === "";
+  const previewMode = !demoMode && S.previewBanner.show;
+  const privacy = previewMode ? (F.previewPrivacy || F.privacyNote) : F.privacyNote;
+  if (privacy) { $("#privacy-text").textContent = privacy; $("#privacy-note").hidden = false; }
+  if (demoMode) { $("#demo-note").textContent = F.demoNote; $("#demo-note").hidden = false; }
+  else if (previewMode && F.previewNote) { fillWithPhone($("#demo-note"), F.previewNote); $("#demo-note").hidden = false; }
+
+  // Errors show in red under the box they belong to (no popups)
+  function setError(key, msg) {
+    const wrap = $("#w-" + key), err = $("#e-" + key);
+    if (!err) return;
+    err.textContent = msg || "";
+    err.hidden = !msg;
+    if (wrap) wrap.classList.toggle("has-error", !!msg);
+    const field = $("#f-" + key);
+    if (field && field.tagName === "INPUT") field.setAttribute("aria-invalid", msg ? "true" : "false");
   }
+  const checkedVals = (name) => $$('#quote-form input[name="' + name + '"]:checked').map((i) => i.value);
+  $("#f-services").addEventListener("change", () => { if (checkedVals("services").length) setError("services", ""); });
+  ["name", "phone", "email"].forEach((k) => $("#f-" + k).addEventListener("input", () => setError(k, "")));
+
+  function showStep(n, focus) {
+    const one = n === 1;
+    step1.hidden = !one; step2.hidden = one;
+    tab1.classList.toggle("on", one); tab2.classList.toggle("on", !one);
+    tab1.classList.toggle("done", !one);
+    if (one) { tab1.setAttribute("aria-current", "step"); tab2.removeAttribute("aria-current"); }
+    else { tab2.setAttribute("aria-current", "step"); tab1.removeAttribute("aria-current"); }
+    const shown = one ? step1 : step2;
+    shown.classList.remove("q-enter"); void shown.offsetWidth; shown.classList.add("q-enter");
+    // Keep the top of the form in view on phones (the steps are different heights)
+    const top = form.getBoundingClientRect().top;
+    if (top < 70) window.scrollBy({ top: top - 90, behavior: reduceMotion ? "auto" : "smooth" });
+    if (focus) { const f = shown.querySelector("input:not([type=hidden]), textarea"); if (f) f.focus({ preventScroll: true }); }
+  }
+  $("#q-next").addEventListener("click", () => {
+    if (!checkedVals("services").length) {
+      setError("services", F.servicesError);
+      const first = $("#f-services input"); if (first) first.focus();
+      return;
+    }
+    showStep(2, true);
+  });
+  $("#q-back").addEventListener("click", () => showStep(1, false));
+
+  function checkStep2() {
+    let firstBad = null;
+    const bad = (k, m) => { setError(k, m); if (!firstBad) firstBad = $("#f-" + k); };
+    const name = $("#f-name").value.trim();
+    const digits = $("#f-phone").value.replace(/\D/g, "");
+    const email = $("#f-email").value.trim();
+    if (!name) bad("name", F.nameError); else setError("name", "");
+    if (digits.length < 10 || digits.length > 11) bad("phone", F.phoneError); else setError("phone", "");
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) bad("email", F.emailError);
+    else if (!email && checkedVals("contact")[0] === "Email") bad("email", F.emailNeeded);
+    else setError("email", "");
+    if (firstBad) firstBad.focus();
+    return !firstBad;
+  }
+
+  function payload() {
+    const d = new URLSearchParams();
+    d.set("name", $("#f-name").value.trim());
+    d.set("phone", $("#f-phone").value.trim());
+    d.set("email", $("#f-email").value.trim());
+    d.set("town", $("#f-town").value.trim());
+    d.set("services", checkedVals("services").join(", "));
+    d.set("size", checkedVals("size")[0] || "");
+    d.set("sqft", $("#f-sqft").value.trim());
+    d.set("timing", checkedVals("timing")[0] || "");
+    d.set("contact", checkedVals("contact")[0] || "");
+    d.set("details", $("#f-details").value.trim());
+    d.set("_gotcha", $("#f-gotcha").value);
+    d.set("_subject", F.emailSubject);
+    d.set("page", location.href.split("#")[0]);
+    return d;
+  }
+
+  const done = $("#quote-done");
+  function showDone(firstName) {
+    $("#done-title").textContent = F.doneTitle.replace("{name}", firstName || "").replace(/^Thanks, \./, "Thanks.");
+    $("#done-text").textContent = F.doneText;
+    const ul = $("#done-steps");
+    ul.textContent = "";
+    (F.doneSteps || []).forEach((line) => { const li = document.createElement("li"); const sp = document.createElement("span"); fillWithPhone(sp, line); li.appendChild(sp); ul.appendChild(li); });
+    $("#done-again").textContent = F.doneAgain;
+    form.hidden = true;
+    done.hidden = false;
+    done.focus({ preventScroll: true });
+    const top = done.getBoundingClientRect().top;
+    if (top < 70 || top > window.innerHeight * 0.6) window.scrollBy({ top: top - 100, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+  $("#done-again").addEventListener("click", () => {
+    form.reset();
+    done.hidden = true;
+    form.hidden = false;
+    showStep(1, true);
+  });
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (!step2.hidden && !checkStep2()) return;
+    if (step2.hidden) { $("#q-next").click(); return; }
+    const firstName = $("#f-name").value.trim().split(/\s+/)[0];
     if (demoMode) {
       showPopup(F.demoTitle, F.demoMessage);
       form.reset();
+      showStep(1, false);
       return;
     }
     submit.disabled = true;
     submit.textContent = "Sending...";
     try {
-      const res = await fetch("https://formspree.io/f/" + encodeURIComponent(formId), {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" }
-      });
-      if (!res.ok) throw new Error("Formspree returned " + res.status);
+      let ok = false;
+      if (isScript) {
+        // Google Apps Script answers with {"ok": true} once the email is sent
+        const res = await fetch(sendUrl, { method: "POST", body: payload() });
+        const out = await res.json().catch(() => ({}));
+        ok = res.ok && out.ok === true;
+      } else {
+        const res = await fetch(sendUrl, { method: "POST", body: payload(), headers: { Accept: "application/json" } });
+        ok = res.ok;
+      }
+      if (!ok) throw new Error("not sent");
       form.reset();
-      showPopup(F.thanksTitle, F.thanksMessage);
+      showStep(1, false);
+      showDone(firstName);
     } catch (err) {
       showPopup(F.errorTitle, F.errorMessage);
     } finally {
@@ -1735,7 +2074,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   const abs = (f) => new URL(f, pageUrl).href;
   const metaDesc = document.querySelector('meta[name="description"]');
   const allPhotos = [S.photos.hero, S.photos.about].concat(S.work.photos || [])
-    .filter((ph) => ph && ph.file).map((ph) => abs(ph.file));
+    .filter((ph) => ph && ph.file && !ph.sample).map((ph) => abs(ph.file));
   const ld = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
