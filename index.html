@@ -290,6 +290,18 @@ section[id], #top, #gallery { scroll-margin-top: 76px; }
   .hero-side { margin-top: clamp(18px, 3vh, 30px); }
   .hero-photo { --gap-y: calc(clamp(56px, 10vh, 120px) + 32px); justify-self: end; }
 }
+/* v2.11: upright phones. The first screen leads with a big edge-to-edge photo (like a printed brochure),
+   then the headline. Switch: SETTINGS.look.phonePhotoFirst (false = words first, photo after the buttons). */
+@media (max-width: 699px) and (orientation: portrait) {
+  .phone-photo-first .hero { padding-top: 0; }
+  .phone-photo-first .hero-grid { gap: 26px; }
+  .phone-photo-first .hero-photo { order: -1; width: auto; margin: 0 -20px; justify-self: stretch; }
+  .phone-photo-first .hero-photo img { aspect-ratio: 3 / 2; max-height: 46svh; }
+  .phone-photo-first .hero-photo .pic { border-radius: 0; }
+  .phone-photo-first .hero-photo .photo-cap { padding: 0 20px; margin-top: 8px; }
+  .hero .btn-row .btn { flex: 1 1 100%; }   /* both big buttons the same full width, easy to hit with a thumb */
+  .section { padding: 56px 0; }               /* a little tighter between sections */
+}
 @media (orientation: landscape) and (max-height: 500px) { .lead { font-size: 1.05rem; margin-bottom: 16px; } .hero h1 .accent { margin-top: 0.1em; } }
 /* Photo frame (keeps the drifting photo inside its rounded box) and a plain caption under it.
    v2.3: captions moved off the photos; a dark bubble on every photo is a template giveaway. */
@@ -457,7 +469,7 @@ img.fade.loaded { opacity: 1; }
 .work-open img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .work-item figcaption { margin-top: 10px; font-size: 0.95rem; color: var(--ink-2); }
 .gallery-more { margin: 14px 0 0; }
-.gallery-more a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none; }
+.gallery-more a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; text-decoration: none; }
 .gallery-more a:hover { text-decoration: underline; }
 .gallery-more svg { width: 17px; height: 17px; }
 
@@ -632,6 +644,7 @@ img.fade.loaded { opacity: 1; }
 .contact-list dt { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 600; color: var(--ink-2); margin-bottom: 6px; }
 .contact-list dt svg { width: 18px; height: 18px; color: var(--pine); }
 .contact-list dd { margin: 0; font-size: 1.15rem; overflow-wrap: anywhere; }
+.contact-list dd a { display: inline-flex; align-items: center; min-height: 44px; } /* v2.11: easy to tap */
 .phone-big { font-family: var(--display); font-size: 1.7rem; text-decoration: none; color: var(--pine-deep); }
 
 /* ---------- Footer ---------- */
@@ -643,7 +656,7 @@ img.fade.loaded { opacity: 1; }
 .footer-name { font-family: var(--display); font-size: clamp(1.8rem, 3.4vw, 2.4rem); color: #fff; margin: 0 0 10px; line-height: 1.1; }
 .site-footer p { margin: 0 0 6px; }
 .footer-small { font-size: 0.88rem; color: #a9c0b0; }
-.to-top { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; }
+.to-top { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; font-weight: 600; }
 .to-top svg { width: 18px; height: 18px; }
 
 /* ---------- Phone call bar (phones and tablets) ---------- */
@@ -665,6 +678,7 @@ img.fade.loaded { opacity: 1; }
 dialog { border: 0; padding: 0; background: transparent; color: var(--ink); max-width: none; max-height: none; }
 dialog::backdrop { background: rgba(14, 22, 17, 0.55); }
 .dialog-inner { position: relative; background: var(--paper); border-radius: 10px; padding: 28px 24px 24px; width: min(440px, calc(100vw - 32px)); box-shadow: var(--shadow-md); }
+.x.x-big { width: 44px; height: 44px; }
 .dialog-inner .x, .lightbox .x { position: absolute; top: 12px; right: 12px; background: var(--stone); color: var(--ink); }
 .dialog-inner .x:hover { background: var(--line); }
 #popup .dialog-inner h2 { font-size: 1.7rem; padding-right: 44px; margin-bottom: 10px; }
@@ -749,7 +763,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 <div class="preview" id="preview-banner" hidden>
   <div class="wrap">
     <p id="preview-text"></p>
-    <button type="button" class="x" id="preview-close" aria-label="Close this notice">&times;</button>
+    <button type="button" class="x x-big" id="preview-close" aria-label="Close this notice">&times;</button>
   </div>
 </div>
 
@@ -1086,7 +1100,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.10",
+  version: "2.11",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -1382,6 +1396,7 @@ const SETTINGS = {
     buttonCorners: 4,                           // roundness of buttons and boxes, in pixels. 0 = square corners.
     contourLines: true,                         // the faint survey-map lines in the footer, quote section and dark green band. false = off.
     paperGrain: true,                           // the very faint paper speckle on the light backgrounds. false = off.
+    phonePhotoFirst: true,                      // v2.11: on upright phones the top photo comes first, edge to edge. false = words first.
     sectionLabels: false                        // v2.9: the small brown labels above each section heading. false = only the top one shows.
   },
 
@@ -1934,6 +1949,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   }
 
   if (S.look && S.look.sectionLabels === false) document.documentElement.classList.add("no-labels");
+  if (S.look && S.look.phonePhotoFirst !== false) document.documentElement.classList.add("phone-photo-first");
 
   // ---- v2.6: preview-only "waiting on Todd" spots ----
   const PH = S.placeholders || {};
@@ -2048,7 +2064,9 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   // Footer
   $("#footer-name").textContent = B.name;
   const foot = $("#footer-line");
-  foot.textContent = "© " + new Date().getFullYear() + " " + B.name + " · " + B.town + ", " + B.state + " ";
+  foot.textContent = "© " + new Date().getFullYear() + " " + B.name + " · ";
+  const footTown = document.createElement("span"); footTown.style.whiteSpace = "nowrap"; footTown.textContent = B.town + ", " + B.state; // v2.11
+  foot.append(footTown, " ");
   const footPhone = document.createElement("span"); footPhone.style.whiteSpace = "nowrap"; // v2.7: no lonely "·" on its own line
   footPhone.append("· ", telLink()); foot.appendChild(footPhone);
   $("#footer-credit").textContent = (S.footerCredit ? S.footerCredit + " · " : "") + "Version " + S.version;
@@ -2130,10 +2148,15 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   // ---- Phone call bar: slides in once the big buttons at the top scroll out of view ----
   const callbar = $("#callbar");
   const heroButtons = $("#hero-buttons");
-  if ("IntersectionObserver" in window && heroButtons) {
-    new IntersectionObserver((entries) => {
-      callbar.classList.toggle("is-hidden", entries[0].isIntersecting);
-    }).observe(heroButtons);
+  // v2.11: hidden while the big buttons are on screen OR still below it (the top bar already has Call + Quote);
+  // shows once they've been scrolled past. Checked on scroll, so a fast fling can't skip it.
+  if (heroButtons) {
+    let barTick = false;
+    const barCheck = () => { barTick = false; callbar.classList.toggle("is-hidden", heroButtons.getBoundingClientRect().bottom > 0); };
+    const onBar = () => { if (!barTick) { barTick = true; requestAnimationFrame(barCheck); } };
+    window.addEventListener("scroll", onBar, { passive: true });
+    window.addEventListener("resize", onBar);
+    barCheck();
   } else {
     callbar.classList.remove("is-hidden");
   }
