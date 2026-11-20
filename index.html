@@ -47,11 +47,12 @@
      the SIL Open Font License; the license files are in the fonts folder. The two fonts the top of the
      page needs first are fetched right away. If a font can't load, Georgia and the computer's own font fill in. -->
 <link rel="preload" href="fonts/source-serif-4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face { font-family: "Libre Caslon Display"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-display-latin-400-normal.woff2") format("woff2"); }
-@font-face { font-family: "Libre Caslon Text"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-text-latin-400-normal.woff2") format("woff2"); }
-@font-face { font-family: "Libre Caslon Text"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-text-latin-400-italic.woff2") format("woff2"); }
+/* v2.7: one headline family everywhere (Source Serif 4: 400 for big quotes, 500 for headings, 600 for the top headline) */
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/source-serif-4-latin-500-normal.woff2") format("woff2"); }
 @font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/source-serif-4-latin-600-normal.woff2") format("woff2"); }
 @font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); }
@@ -85,8 +86,8 @@
   --line-soft: #e6e1d5;    /* thin lines between rows */
   --focus: #b8741f;        /* keyboard focus ring */
   --corner: 4px;           /* overwritten by SETTINGS.look.buttonCorners */
-  --display: "Libre Caslon Display", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-  --serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   /* v2.6: sturdier serif for the big top headline (Caslon felt too delicate for an earthworks company) */
   --headline: "Source Serif 4", Georgia, "Times New Roman", serif;
   --sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
@@ -100,6 +101,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
+button, input, select, textarea { font-family: inherit; } /* v2.7: buttons were falling back to Arial */
 html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(17, 92, 49, 0.12); background: var(--paper); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 /* Paper grain (v2.4): a very faint speckle on the cream and granite backgrounds so they look like
@@ -115,9 +117,9 @@ body {
   font-family: var(--sans);
   font-size: 1.125rem;
   line-height: 1.6;
-  padding-bottom: 84px; /* room for the phone call bar */
 }
-@media (min-width: 900px) { body { padding-bottom: 0; } }
+/* v2.7: the room for the phone call bar sits inside the green footer (was a beige strip under it) */
+@media (max-width: 899px) { .site-footer { padding-bottom: calc(44px + 84px); } }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--pine); text-underline-offset: 0.16em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
@@ -126,8 +128,8 @@ p { text-wrap: pretty; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 [tabindex="-1"]:focus { outline: none; }
 h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 400; color: var(--ink); }
-h2 { font-family: var(--display); font-size: clamp(2rem, 4.4vw, 3.1rem); line-height: 1.08; letter-spacing: -0.005em; }
-h3 { font-family: var(--serif); font-size: 1.28rem; line-height: 1.3; }
+h2 { font-family: var(--display); font-weight: 500; font-size: clamp(1.9rem, 4.2vw, 2.9rem); line-height: 1.12; letter-spacing: -0.012em; }
+h3 { font-family: var(--serif); font-weight: 500; font-size: 1.28rem; line-height: 1.3; }
 section[id], #top, #gallery { scroll-margin-top: 76px; }
 
 .wrap { max-width: 1240px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
@@ -389,7 +391,7 @@ img.fade.loaded { opacity: 1; }
 .service-toggle {
   display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 20px;
   padding: 22px 0; border: 0; background: none; cursor: pointer; text-align: left; color: var(--ink);
-  font-family: var(--serif); font-size: 1.36rem; line-height: 1.25;
+  font-family: var(--serif); font-weight: 500; font-size: 1.3rem; line-height: 1.25;
 }
 @media (min-width: 700px) { .service-toggle { padding: 26px 0; font-size: 1.45rem; } }
 .service-toggle:focus-visible { outline-offset: 4px; border-radius: 2px; }
@@ -418,7 +420,7 @@ img.fade.loaded { opacity: 1; }
 /* ---------- Job photos: one row you swipe (phones) or page with the arrows (computers) ---------- */
 .gallery { margin-top: clamp(56px, 8vw, 96px); }
 .gallery-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
-.gallery-title { font-family: var(--display); font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.1; }
+.gallery-title { font-family: var(--display); font-weight: 500; font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.1; }
 .rail-nav { display: flex; gap: 8px; flex: none; }
 .rail-btn {
   width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #b9b1a0; background: var(--white); color: var(--ink);
@@ -444,7 +446,8 @@ img.fade.loaded { opacity: 1; }
 .rail > li { flex: 0 0 84%; scroll-snap-align: start; min-width: 0; }
 @media (min-width: 640px) { .rail { gap: 18px; } .rail > li { flex-basis: 47%; } }
 @media (min-width: 700px) { .rail { --bleed: 32px; } } /* matches the page's side padding at each size */
-@media (min-width: 1100px) { .rail { --bleed: 48px; } .rail > li { flex-basis: 38%; } }
+@media (min-width: 1100px) { .rail { --bleed: 48px; } }
+@media (min-width: 1000px) { .rail > li { flex-basis: calc((100% - 36px) / 3); } } /* v2.7: 3 whole photos, never one cut in half */
 @media (prefers-reduced-motion: no-preference) { .rail { scroll-behavior: smooth; } }
 .work-item { margin: 0; }
 .work-open { display: block; width: 100%; padding: 0; border: 0; background: var(--stone); cursor: zoom-in; position: relative; overflow: hidden; border-radius: 3px; }
@@ -458,7 +461,7 @@ img.fade.loaded { opacity: 1; }
 
 /* ---------- About ---------- */
 .about-grid { display: grid; gap: 32px; }
-@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; } }
+@media (min-width: 900px), (orientation: landscape) and (min-width: 560px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; } }
 .side-photo { margin: 0; position: relative; }
 .side-photo { --ar: 1.3333; --gap-y: 80px; }
 /* When About is stacked (phones, upright tablets), the words come first and the crew photo after,
@@ -466,7 +469,7 @@ img.fade.loaded { opacity: 1; }
 @media (max-width: 899px) and (orientation: portrait), (max-width: 559px) { .about-photo { order: 2; } }
 /* Upright phones: a short, wide crew photo instead of a big one (v2.4.1: a little shorter, 2:1) */
 @media (max-width: 699px) and (orientation: portrait) { .about-photo { --ar: 2; --give: 1; } }
-.statement { font-family: var(--display); font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.2; color: var(--ink); margin: 0 0 24px; text-wrap: balance; }
+.statement { font-family: var(--display); font-weight: 500; font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.18; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 24px; text-wrap: balance; }
 .about-text p:not(.statement):not(.eyebrow) { color: var(--ink-2); margin: 0 0 16px; max-width: 36em; }
 .facts { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px; }
 .facts li { display: flex; gap: 10px; align-items: baseline; }
@@ -533,9 +536,11 @@ img.fade.loaded { opacity: 1; }
 /* v2.6: "How it works" (3 steps) and the reviews row */
 .steps-list { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 18px; counter-reset: st; }
 @media (min-width: 800px) { .steps-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; } }
-.steps-list li { counter-increment: st; padding: 24px 22px; border-top: 3px solid var(--pine); background: var(--white); border-radius: 0 0 6px 6px; box-shadow: var(--shadow-sm); }
-.steps-list li::before { content: counter(st); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--stone); color: var(--pine-deep); font-family: var(--headline); font-weight: 600; margin-bottom: 14px; }
-.steps-list h3 { font-family: var(--sans); font-weight: 700; font-size: 1.15rem; margin: 0 0 6px; }
+/* v2.7: a plain numbered list with thin lines (was three white cards, which read as a template) */
+.steps-list li { counter-increment: st; display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); column-gap: 14px; align-content: start; padding: 22px 0 4px; border-top: 1px solid var(--line); }
+.steps-list li::before { content: counter(st); grid-row: span 2; font-family: var(--headline); font-weight: 500; font-size: 2rem; line-height: 1; color: var(--accent-ink); }
+@media (min-width: 800px) { .steps-list li { padding-top: 26px; } }
+.steps-list h3 { font-family: var(--sans); font-weight: 700; font-size: 1.15rem; margin: 2px 0 6px; }
 .steps-list p { margin: 0; color: var(--ink-2); line-height: 1.55; }
 .quotes { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 18px; }
 @media (min-width: 800px) { .quotes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -642,7 +647,7 @@ img.fade.loaded { opacity: 1; }
 .callbar { grid-template-columns: 1.3fr 1fr; }
 .callbar .btn { min-height: 50px; padding: 0 8px; gap: 7px; font-size: clamp(0.875rem, 3.9vw, 1rem); white-space: nowrap; }
 .callbar .btn svg { width: 17px; height: 17px; }
-@media (orientation: landscape) and (max-height: 500px) { .callbar { padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); } .callbar .btn { min-height: 42px; } body { padding-bottom: 64px; } }
+@media (orientation: landscape) and (max-height: 500px) { .callbar { padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); } .callbar .btn { min-height: 42px; } .site-footer { padding-bottom: calc(44px + 64px); } }
 .callbar.is-hidden { transform: translateY(110%); }
 @media (min-width: 900px) { .callbar { display: none; } }
 @media (prefers-reduced-motion: reduce) { .callbar { transition: none; } }
@@ -896,7 +901,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
         <form class="town-check" id="town-check" hidden novalidate>
           <label for="town-input" id="town-label"></label>
           <div class="town-check-row">
-            <input id="town-input" type="text" list="town-list" autocomplete="address-level2" maxlength="60">
+            <input id="town-input" type="text" list="town-list" autocomplete="address-level2" maxlength="60" placeholder="e.g. Bow">
             <button type="submit" class="btn btn-outline" id="town-btn"></button>
           </div>
           <datalist id="town-list"></datalist>
@@ -1074,7 +1079,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.6",
+  version: "2.7",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -1133,7 +1138,7 @@ const SETTINGS = {
     heading: "Landscapes planned with you,",
     headingAccent: "built with care.",       // the second line, in green italic
     // Based on the owner's own About text.
-    subheading: "From new lawns and plantings to stone walls, walkways and patios, we listen to what you want, give you our professional advice, and build the landscape you're after.",
+    subheading: "New lawns and plantings, stone walls, walkways and patios, plus the mowing, cleanups and snow removal that keep it all looking right.",
     quoteButton: "Request a Quote",             // ASK THE OWNER: are quotes free? If yes, can say "Request a Free Quote"
     quoteButtonShort: "Get a Quote"             // the smaller button in the top bar
   },
@@ -1146,11 +1151,11 @@ const SETTINGS = {
   // Google reads these sentences to match searches, so plain, specific words help.
   services: {
     eyebrow: "What we do",
-    heading: "Everything outside, from the first shovel to the last snowfall.",
+    heading: "Everything outside, from the first shovel to the last snowfall",
     intro: "New projects, stonework, site prep and the upkeep that keeps it all looking right, for homes and businesses across the Hopkinton and Concord area.",
     list: [
       { name: "Landscaping",
-        description: "New lawns, sod, plantings and garden beds, from one bed by the front steps to a whole yard. We start by listening to what you want, then give you our professional advice." },
+        description: "New lawns, sod, plantings and garden beds, from one bed by the front steps to a whole yard." },
       { name: "Trees & Shrubs",
         description: "Planting new trees and shrubs that suit your property and the New Hampshire seasons, and caring for the ones you already have." },
       { name: "Walls, Walks, Steps & Patios",
@@ -1193,7 +1198,7 @@ const SETTINGS = {
   // Tapping a photo opens a bigger viewer. Each part hides if it has no photos.
   work: {
     eyebrow: "Recent work",
-    heading: "Same hillside. Before and after.",
+    heading: "Same hillside, before and after",
     intro: "Slide across to see a slope we graded and prepped, then finished with a new lawn.",
     beforeAfter: {
       show: true,
@@ -1217,13 +1222,13 @@ const SETTINGS = {
     heading: "About Olkonen Earthscapes",
     // Big line at the top of About. Based on the first sentence of the owner's own About text.
     // (v2.4: changed, because the old line said the same thing as the dark green band below.)
-    statement: "Helping you make the best decisions on any landscape project in the Hopkinton and Concord area.",
+    statement: "A Hopkinton landscaping company, working across the Concord area",
     // The owner's own About text from the old site, word for word. (v2.4: the sentence "We focus on
     // listening..." moved into the dark green band below, so it isn't said twice.)
     // ASK THE OWNER: his text says "Inc." but state records and Meghan's email say LLC.
     paragraphs: [
       "At Olkonen Earthscapes, we are dedicated to helping you make the best decisions and providing you with the right direction on any type of landscape project throughout the Hopkinton and Concord area.",
-      "While there are numerous landscape companies available to perform work, businesses and homeowners looking for landscaping services choose Olkonen Earthscapes, Inc. time and time again."
+      "While there are numerous landscape companies available to perform work, businesses and homeowners looking for landscaping services choose Olkonen Earthscapes time and time again."
     ],
     // ASK THE OWNER: only add facts he confirms. The list stays hidden while empty.
     // Examples: "Serving the area since ____", "Fully insured" (only if true).
@@ -1295,7 +1300,7 @@ const SETTINGS = {
   steps: {
     show: true,
     eyebrow: "How it works",
-    heading: "From first call to a finished yard.",
+    heading: "What happens when you call",
     list: [
       { title: "Call or send a request", text: "Tell us what you have in mind. Call {phone} or use the form below." },
       { title: "We come take a look", text: "We set up a time to see the property and talk through what you want." },
@@ -1323,7 +1328,7 @@ const SETTINGS = {
     //   - or a Formspree form ID / link ("abcdwxyz" or "https://formspree.io/f/abcdwxyz").
     // While this is empty, the form is in DEMO MODE: nothing is sent to anyone.
     formLink: "https://script.google.com/macros/s/AKfycbz4yQn1-v7Wz07aP0fxYf-qvdfosbrCFHvChB0U3EPsir5DkswrXkE_LTUIpJIj82xwSw/exec",
-    heading: "Tell us about your project.",
+    heading: "Tell us about your project",
     intro: "Two quick steps and we'll be in touch.",
     preferCall: "Rather talk to someone? Call us:",
     stepNames: ["Your project", "Contact info"],
@@ -1918,7 +1923,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
         x: x + (left ? -15 : 15), y: y + 7,
         "text-anchor": left ? "end" : "start",
         "font-size": 22, fill: "#0b3f22",
-        "font-family": "'Libre Caslon Text', Georgia, 'Times New Roman', serif",
+        "font-family": "'Source Serif 4', Georgia, 'Times New Roman', serif", "font-weight": 500,
         stroke: "#f1eee5", "stroke-width": 5, "paint-order": "stroke", "stroke-linejoin": "round"
       });
       t.textContent = p.name;
@@ -1951,7 +1956,9 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     if (O.name) { const n = document.createElement("p"); n.style.fontWeight = "600"; n.textContent = O.name; ownerBox.appendChild(n); }
     ownerBox.hidden = false;
   } else todoSpot(ownerBox, PH.owner);
-  if (!S.about.facts.length) {
+  if (!S.about.facts.length && !O.text && S.previewBanner.show && PH.facts) {
+    ownerBox.append(" Also: " + PH.facts.replace(/^Spot for /, "").replace(/^q/, "q")); // v2.7: one box, not two
+  } else if (!S.about.facts.length) {
     const f = document.createElement("div");
     $("#about-facts").after(f);
     todoSpot(f, PH.facts);
@@ -2041,8 +2048,9 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   // Footer
   $("#footer-name").textContent = B.name;
   const foot = $("#footer-line");
-  foot.textContent = "© " + new Date().getFullYear() + " " + B.name + " · " + B.town + ", " + B.state + " · ";
-  foot.appendChild(telLink());
+  foot.textContent = "© " + new Date().getFullYear() + " " + B.name + " · " + B.town + ", " + B.state + " ";
+  const footPhone = document.createElement("span"); footPhone.style.whiteSpace = "nowrap"; // v2.7: no lonely "·" on its own line
+  footPhone.append("· ", telLink()); foot.appendChild(footPhone);
   $("#footer-credit").textContent = (S.footerCredit ? S.footerCredit + " · " : "") + "Version " + S.version;
 
   // ---- Popups and menu: X button, Escape key, and tapping outside all close them ----
