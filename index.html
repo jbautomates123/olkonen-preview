@@ -526,6 +526,15 @@ img.fade.loaded { opacity: 1; }
 }
 /* v2.6: "Do you work in my town?" checker */
 .quote-grid > * { min-width: 0; }
+/* v2.10: phones and narrow windows: heading, then the form, then the phone/towns/map/checker (the heading used to sit far above the form) */
+@media (max-width: 899px) {
+  .quote-grid { gap: 24px; }
+  .quote-side { display: contents; }
+  .quote-head { order: 1; }
+  .quote-grid > form, .quote-grid > .quote-done { order: 2; }
+  .quote-more { order: 3; margin-top: 12px; }
+  .quote-head, .quote-more { min-width: 0; }
+}
 .town-check { margin: 22px 0 0; padding: 18px; border: 1px solid var(--line); border-radius: 6px; background: rgba(255, 255, 255, 0.6); }
 .town-check label { display: block; font-weight: 600; margin-bottom: 8px; }
 .town-check-row { display: flex; gap: 8px; }
@@ -884,8 +893,12 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <section class="section section-stone contours" id="quote">
     <div class="wrap quote-grid">
       <div class="quote-side">
-        <h2 data-text="form.heading"></h2>
-        <p data-text="form.intro"></p>
+        <!-- v2.10: on phones the heading sits right above the form, and the rest (phone, towns, map, checker) comes after it -->
+        <div class="quote-head">
+          <h2 data-text="form.heading"></h2>
+          <p data-text="form.intro"></p>
+        </div>
+        <div class="quote-more">
         <p data-text="form.preferCall"></p>
         <a class="big-phone" data-tel="{phone}" data-icon="phone"></a>
         <!-- Towns we work in (one line instead of the old map section; edit in SETTINGS.serviceArea) -->
@@ -908,6 +921,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
           <p class="town-answer" id="town-answer" hidden aria-live="polite"></p>
         </form>
         <img class="quote-logo" id="quote-logo" alt="Olkonen Earthscapes" width="331" height="150" hidden>
+        </div>
       </div>
       <form class="quote" id="quote-form" novalidate>
         <p class="demo-note" id="demo-note" hidden></p>
@@ -1072,7 +1086,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.9",
+  version: "2.10",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
