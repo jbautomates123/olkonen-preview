@@ -576,10 +576,11 @@ img.fade.loaded { opacity: 1; }
 .q-step[hidden] { display: none; }
 @media (prefers-reduced-motion: no-preference) { .q-step.q-enter { animation: q-in 0.32s var(--ease) both; } }
 @keyframes q-in { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
-.q-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; grid-column: 1 / -1; counter-reset: qstep; }
+.q-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; grid-column: 1 / -1; counter-reset: qstep; }
 .q-steps li { counter-increment: qstep; display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 3px solid var(--line); color: var(--ink-2); font-size: 0.95rem; font-weight: 600; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
 .q-steps li::before { content: counter(qstep); display: grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; border: 1.5px solid #8a816d; font-size: 0.85rem; transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease); }
 .q-steps li.on { color: var(--ink); border-bottom-color: var(--pine); }
+@media (max-width: 480px) { .q-steps li { flex-direction: column; align-items: flex-start; gap: 6px; font-size: 0.88rem; line-height: 1.25; } } /* v2.8: 3 steps fit on phones */
 .q-steps li.on::before { background: var(--pine); border-color: var(--pine); color: #fff; }
 .q-steps li.done::before { content: "\2713"; background: var(--white); border-color: var(--pine); color: var(--pine); }
 .field-label { font-weight: 600; font-size: 1rem; }
@@ -595,9 +596,6 @@ img.fade.loaded { opacity: 1; }
 .chip input:focus-visible + span { outline: 3px solid rgba(17, 92, 49, 0.35); outline-offset: 2px; }
 @media (hover: hover) { .chip input:not(:checked):hover + span { border-color: var(--pine); background: #f3f6f2; } }
 .chip input:active + span { transform: scale(0.97); }
-.sqft { display: flex; align-items: center; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
-.sqft label { font-weight: 400; color: var(--ink-2); font-size: 0.95rem; }
-.sqft input { width: 9.5em; min-height: 44px; }
 .field-error { margin: 2px 0 0; color: #a3321f; font-size: 0.92rem; font-weight: 600; }
 .field.has-error input, .field.has-error .chip span { border-color: #a3321f; }
 .q-actions { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -911,10 +909,11 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
       </div>
       <form class="quote" id="quote-form" novalidate>
         <p class="demo-note" id="demo-note" hidden></p>
-        <!-- v2.5: two short steps instead of one long form. Words for both steps are in SETTINGS.form -->
-        <ol class="q-steps" id="q-steps" aria-label="Two steps">
+        <!-- v2.8: three tiny steps: the job, your info, anything else. Words for all three are in SETTINGS.form -->
+        <ol class="q-steps" id="q-steps" aria-label="Three steps">
           <li class="on" id="q-tab-1" aria-current="step"></li>
           <li id="q-tab-2"></li>
+          <li id="q-tab-3"></li>
         </ol>
         <fieldset class="q-step" id="q-step-1">
           <legend class="sr-only" id="q-legend-1"></legend>
@@ -923,22 +922,6 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
             <p class="field-hint" id="h-services"></p>
             <div class="chips" id="f-services" role="group" aria-labelledby="l-services" aria-describedby="h-services e-services"></div>
             <p class="field-error" id="e-services" hidden></p>
-          </div>
-          <div class="field field-wide">
-            <span class="field-label" id="l-size"></span>
-            <div class="chips" id="f-size" role="radiogroup" aria-labelledby="l-size"></div>
-            <div class="sqft">
-              <label for="f-sqft" id="l-sqft"></label>
-              <input id="f-sqft" name="sqft" type="text" inputmode="numeric" autocomplete="off" maxlength="9">
-            </div>
-          </div>
-          <div class="field field-wide">
-            <span class="field-label" id="l-timing"></span>
-            <div class="chips" id="f-timing" role="radiogroup" aria-labelledby="l-timing"></div>
-          </div>
-          <div class="field field-wide">
-            <label for="f-details" id="l-details"></label>
-            <textarea id="f-details" name="details" maxlength="4000"></textarea>
           </div>
           <div class="q-actions">
             <button type="button" class="btn btn-solid btn-block" id="q-next"></button>
@@ -956,21 +939,29 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
             <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="e-phone" maxlength="30">
             <p class="field-error" id="e-phone" hidden></p>
           </div>
+          <div class="field">
+            <label for="f-town">Town or street address</label>
+            <input id="f-town" name="town" type="text" autocomplete="street-address" maxlength="200">
+          </div>
           <div class="field" id="w-email">
             <label for="f-email">Email <span class="opt">(optional)</span></label>
             <input id="f-email" name="email" type="email" autocomplete="email" aria-describedby="e-email" maxlength="160">
             <p class="field-error" id="e-email" hidden></p>
           </div>
-          <div class="field">
-            <label for="f-town">Town or street address</label>
-            <input id="f-town" name="town" type="text" autocomplete="street-address" maxlength="200">
-          </div>
-          <div class="field field-wide">
-            <span class="field-label" id="l-contact"></span>
-            <div class="chips" id="f-contact" role="radiogroup" aria-labelledby="l-contact"></div>
-          </div>
           <div class="q-actions">
             <button type="button" class="btn btn-outline q-back" id="q-back"></button>
+            <button type="button" class="btn btn-solid" id="q-next2"></button>
+          </div>
+        </fieldset>
+        <fieldset class="q-step" id="q-step-3" hidden>
+          <legend class="sr-only" id="q-legend-3"></legend>
+          <div class="field field-wide">
+            <label for="f-details" id="l-details"></label>
+            <p class="field-hint" id="h-details"></p>
+            <textarea id="f-details" name="details" maxlength="4000" aria-describedby="h-details"></textarea>
+          </div>
+          <div class="q-actions">
+            <button type="button" class="btn btn-outline q-back" id="q-back2"></button>
             <button type="submit" class="btn btn-solid" id="f-submit"></button>
           </div>
           <p class="privacy-note" id="privacy-note" hidden><span class="icon" data-icon="lock"></span><span id="privacy-text"></span></p>
@@ -1079,7 +1070,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.7",
+  version: "2.8",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -1329,32 +1320,21 @@ const SETTINGS = {
     // While this is empty, the form is in DEMO MODE: nothing is sent to anyone.
     formLink: "https://script.google.com/macros/s/AKfycbz4yQn1-v7Wz07aP0fxYf-qvdfosbrCFHvChB0U3EPsir5DkswrXkE_LTUIpJIj82xwSw/exec",
     heading: "Tell us about your project",
-    intro: "Two quick steps and we'll be in touch.",
+    intro: "Three short steps and we'll be in touch.",
     preferCall: "Rather talk to someone? Call us:",
-    stepNames: ["Your project", "Contact info"],
+    stepNames: ["The job", "Your info", "Anything else"],
     servicesLabel: "What do you need help with?",
-    servicesHint: "Pick as many as you like.",
+    servicesHint: "Tap all that apply.",
     servicesError: "Pick at least one, or \"Something else / not sure\".",
     otherOption: "Something else / not sure",
-    sizeLabel: "About how big is the project? (optional)",
-    sizeOptions: [
-      { name: "Small", note: "a bed or a front walk" },
-      { name: "Medium", note: "part of a yard" },
-      { name: "Large", note: "a whole yard or more" },
-      { name: "Not sure" }
-    ],
-    sqftLabel: "Square feet, if you know it:",
-    timingLabel: "When would you like it done? (optional)",
-    timingOptions: ["As soon as possible", "In the next month or two", "Next spring", "Just planning"],
+    nextButton: "Next: your info",
+    next2Button: "Next",
     detailsLabel: "Anything else we should know? (optional)",
-    nextButton: "Next: how to reach you",
+    detailsHint: "Size, timing, what you have in mind. Or leave it empty and send.",
     backButton: "Back",
-    contactLabel: "Best way to reach you",
-    contactOptions: ["Call", "Text", "Email"],
     nameError: "Please add your name.",
     phoneError: "Please add a phone number we can call, with the area code.",
     emailError: "That email doesn't look right. Check it, or leave it empty.",
-    emailNeeded: "Add your email, or pick Call or Text.",
     submitButton: "Send My Request",
     // Short privacy note under the send button. Keep it true: if the form ever goes somewhere
     // else (a Google Sheet, a different email), change this sentence to match.
@@ -1371,7 +1351,7 @@ const SETTINGS = {
     doneTitle: "Thanks, {name}. Your request is in.",
     doneText: "It went straight to our office. Here's what happens next:",
     doneSteps: [
-      "We read every request and get back to you the way you picked.",
+      "We read every request and get back to you.",
       "If it helps, we'll set up a time to come look at the property.",
       "If it's urgent, call {phone}."
     ],
@@ -2238,21 +2218,21 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     update();
   }
 
-  // ---- Quote form (v2.5: two steps) ----
+  // ---- Quote form (v2.8: three tiny steps: the job, your info, anything else) ----
   const F = S.form;
   const form = $("#quote-form");
   const submit = $("#f-submit");
-  const step1 = $("#q-step-1"), step2 = $("#q-step-2");
-  const tab1 = $("#q-tab-1"), tab2 = $("#q-tab-2");
+  const steps = [$("#q-step-1"), $("#q-step-2"), $("#q-step-3")];
+  const tabs = [$("#q-tab-1"), $("#q-tab-2"), $("#q-tab-3")];
+  const step2 = steps[1], step3 = steps[2];
   const txt = (sel, t) => { const el = $(sel); if (el) el.textContent = t || ""; };
-  txt("#q-tab-1", F.stepNames[0]); txt("#q-tab-2", F.stepNames[1]);
-  txt("#q-legend-1", F.stepNames[0]); txt("#q-legend-2", F.stepNames[1]);
+  F.stepNames.forEach((n, i) => { txt("#q-tab-" + (i + 1), n); txt("#q-legend-" + (i + 1), n); });
   txt("#l-services", F.servicesLabel); txt("#h-services", F.servicesHint);
-  txt("#l-size", F.sizeLabel); txt("#l-sqft", F.sqftLabel); txt("#l-timing", F.timingLabel);
-  txt("#l-details", F.detailsLabel); txt("#l-contact", F.contactLabel);
-  txt("#q-next", F.nextButton); txt("#q-back", F.backButton);
+  txt("#l-details", F.detailsLabel); txt("#h-details", F.detailsHint);
+  txt("#q-next", F.nextButton); txt("#q-next2", F.next2Button);
+  txt("#q-back", F.backButton); txt("#q-back2", F.backButton);
   submit.textContent = F.submitButton;
-  // A row of tap-able choices (checkboxes or radio buttons that look like pills)
+  // A row of tap-able choices (checkboxes that look like pills)
   function chips(box, name, type, options) {
     options.forEach((o) => {
       const opt = typeof o === "string" ? { name: o } : o;
@@ -2268,16 +2248,6 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     });
   }
   chips($("#f-services"), "services", "checkbox", S.services.list.map((sv) => sv.name).concat([F.otherOption]));
-  chips($("#f-size"), "size", "radio", F.sizeOptions || []);
-  chips($("#f-timing"), "timing", "radio", F.timingOptions || []);
-  chips($("#f-contact"), "contact", "radio", F.contactOptions || []);
-  // Radio pills can be tapped again to clear them (they're all optional)
-  $$('#quote-form input[type="radio"]').forEach((r) => {
-    r.addEventListener("pointerdown", () => { r.dataset.was = r.checked ? "1" : ""; });
-    r.addEventListener("click", () => { if (r.dataset.was === "1") { r.checked = false; r.dataset.was = ""; } });
-  });
-  // Square feet: digits only
-  $("#f-sqft").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/[^\d,]/g, ""); });
   // Phone: tidy it into 603-555-0147 as they type (only when it's a plain 10-digit number)
   $("#f-phone").addEventListener("blur", (e) => {
     const d = e.target.value.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
@@ -2311,29 +2281,25 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   ["name", "phone", "email"].forEach((k) => $("#f-" + k).addEventListener("input", () => setError(k, "")));
 
   function showStep(n, focus) {
-    const one = n === 1;
-    step1.hidden = !one; step2.hidden = one;
-    tab1.classList.toggle("on", one); tab2.classList.toggle("on", !one);
-    tab1.classList.toggle("done", !one);
-    if (one) { tab1.setAttribute("aria-current", "step"); tab2.removeAttribute("aria-current"); }
-    else { tab2.setAttribute("aria-current", "step"); tab1.removeAttribute("aria-current"); }
-    const shown = one ? step1 : step2;
+    steps.forEach((st, i) => { st.hidden = i !== n - 1; });
+    tabs.forEach((t, i) => {
+      t.classList.toggle("on", i === n - 1);
+      t.classList.toggle("done", i < n - 1);
+      if (i === n - 1) t.setAttribute("aria-current", "step"); else t.removeAttribute("aria-current");
+    });
+    const shown = steps[n - 1];
     shown.classList.remove("q-enter"); void shown.offsetWidth; shown.classList.add("q-enter");
     // Keep the top of the form in view on phones (the steps are different heights)
     const top = form.getBoundingClientRect().top;
     if (top < 70) window.scrollBy({ top: top - 90, behavior: reduceMotion ? "auto" : "smooth" });
     if (focus) { const f = shown.querySelector("input:not([type=hidden]), textarea"); if (f) f.focus({ preventScroll: true }); }
   }
-  $("#q-next").addEventListener("click", () => {
-    if (!checkedVals("services").length) {
-      setError("services", F.servicesError);
-      const first = $("#f-services input"); if (first) first.focus();
-      return;
-    }
-    showStep(2, true);
-  });
-  $("#q-back").addEventListener("click", () => showStep(1, false));
-
+  function checkStep1() {
+    if (checkedVals("services").length) return true;
+    setError("services", F.servicesError);
+    const first = $("#f-services input"); if (first) first.focus();
+    return false;
+  }
   function checkStep2() {
     let firstBad = null;
     const bad = (k, m) => { setError(k, m); if (!firstBad) firstBad = $("#f-" + k); };
@@ -2343,11 +2309,14 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     if (!name) bad("name", F.nameError); else setError("name", "");
     if (digits.length < 10 || digits.length > 11) bad("phone", F.phoneError); else setError("phone", "");
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) bad("email", F.emailError);
-    else if (!email && checkedVals("contact")[0] === "Email") bad("email", F.emailNeeded);
     else setError("email", "");
     if (firstBad) firstBad.focus();
     return !firstBad;
   }
+  $("#q-next").addEventListener("click", () => { if (checkStep1()) showStep(2, true); });
+  $("#q-next2").addEventListener("click", () => { if (checkStep2()) showStep(3, true); });
+  $("#q-back").addEventListener("click", () => showStep(1, false));
+  $("#q-back2").addEventListener("click", () => showStep(2, false));
 
   function payload() {
     const d = new URLSearchParams();
@@ -2356,10 +2325,6 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     d.set("email", $("#f-email").value.trim());
     d.set("town", $("#f-town").value.trim());
     d.set("services", checkedVals("services").join(", "));
-    d.set("size", checkedVals("size")[0] || "");
-    d.set("sqft", $("#f-sqft").value.trim());
-    d.set("timing", checkedVals("timing")[0] || "");
-    d.set("contact", checkedVals("contact")[0] || "");
     d.set("details", $("#f-details").value.trim());
     d.set("_gotcha", $("#f-gotcha").value);
     d.set("_subject", F.emailSubject);
@@ -2390,8 +2355,11 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!step2.hidden && !checkStep2()) return;
-    if (step2.hidden) { $("#q-next").click(); return; }
+    // Enter on step 1 or 2 just moves on; only step 3 sends
+    if (!steps[0].hidden) { $("#q-next").click(); return; }
+    if (!step2.hidden) { $("#q-next2").click(); return; }
+    if (!checkStep1()) { showStep(1, true); return; }
+    if (!checkStep2()) { showStep(2, true); return; }
     const firstName = $("#f-name").value.trim().split(/\s+/)[0];
     if (demoMode) {
       showPopup(F.demoTitle, F.demoMessage);
