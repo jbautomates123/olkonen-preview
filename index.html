@@ -140,6 +140,9 @@ section[id], #top, #gallery { scroll-margin-top: 76px; }
    Only used on 4 sections on purpose: a label over every heading looks like a template. */
 .eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; font-family: var(--sans); font-size: 0.95rem; font-weight: 600; font-style: normal; line-height: 1.4; letter-spacing: 0.04em; color: var(--accent-ink); }
 .eyebrow::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: var(--accent); flex: none; }
+/* v2.9: section labels off (SETTINGS.look.sectionLabels). About's label is its real heading, so screen readers still get it. */
+.no-labels .section p.eyebrow { display: none; }
+.no-labels .section h2.eyebrow { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Contour lines (like a land survey map): a quiet texture used in 3 places.
    The lines are drawn once (CONTOURS at the bottom of the page) and repeat without seams. */
@@ -452,7 +455,6 @@ img.fade.loaded { opacity: 1; }
 .work-item { margin: 0; }
 .work-open { display: block; width: 100%; padding: 0; border: 0; background: var(--stone); cursor: zoom-in; position: relative; overflow: hidden; border-radius: 3px; }
 .work-open img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-@media (hover: hover) { .work-open img { transition: transform 0.8s var(--ease); } .work-open:hover img { transform: scale(1.035); } }
 .work-item figcaption { margin-top: 10px; font-size: 0.95rem; color: var(--ink-2); }
 .gallery-more { margin: 14px 0 0; }
 .gallery-more a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none; }
@@ -747,7 +749,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
     <a href="#page-top" class="brand" id="brand-name"></a>
     <nav class="nav-desktop" aria-label="Main">
       <a href="#services">Services</a>
-      <a href="#work">Our Work</a>
+      <a href="#work">Our work</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -777,7 +779,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
             </div>
           </div>
         </div>
-        <figure class="hero-photo fit drift" id="hero-photo" hidden>
+        <figure class="hero-photo fit" id="hero-photo" hidden>
           <span class="pic"><img id="hero-img" alt="" width="800" height="800" fetchpriority="high"></span>
           <figcaption class="photo-cap" id="hero-cap"></figcaption>
         </figure>
@@ -789,7 +791,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <section class="section section-stone" id="work" hidden>
     <div class="wrap">
       <div class="work-top">
-        <div class="work-head reveal">
+        <div class="work-head">
           <p class="eyebrow" data-text="work.eyebrow"></p>
           <h2 data-text="work.heading"></h2>
           <p data-text="work.intro"></p>
@@ -813,16 +815,16 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- SERVICES, then one row of job photos you swipe through -->
   <section class="section" id="services">
     <div class="wrap services-grid">
-      <div class="services-head reveal">
+      <div class="services-head">
         <p class="eyebrow" data-text="services.eyebrow"></p>
         <h2 data-text="services.heading"></h2>
         <p class="section-intro" data-text="services.intro"></p>
         <p class="services-note" id="services-note"></p>
       </div>
-      <ul class="services" id="services-list" data-stagger="70"></ul>
+      <ul class="services" id="services-list"></ul>
     </div>
     <div class="wrap gallery" id="gallery" hidden>
-      <div class="gallery-head reveal">
+      <div class="gallery-head">
         <h3 class="gallery-title" data-text="work.photosHeading"></h3>
         <div class="rail-nav" id="rail-nav">
           <button type="button" class="rail-btn" id="rail-prev" aria-label="Previous photos"><span class="icon" data-icon="left"></span></button>
@@ -837,11 +839,11 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- ABOUT -->
   <section class="section section-stone" id="about">
     <div class="wrap about-grid">
-      <figure class="side-photo about-photo fit drift reveal" id="about-photo" hidden>
+      <figure class="side-photo about-photo fit reveal" id="about-photo" hidden>
         <span class="pic"><img id="about-img" alt="" width="800" height="600" loading="lazy"></span>
         <figcaption class="photo-cap" id="about-cap"></figcaption>
       </figure>
-      <div class="about-text reveal">
+      <div class="about-text">
         <h2 class="eyebrow" data-text="about.heading"></h2>
         <p class="statement" data-text="about.statement"></p>
         <div id="about-paragraphs"></div>
@@ -860,8 +862,8 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- HOW IT WORKS + REVIEWS (v2.6). Words in SETTINGS.steps and SETTINGS.reviews -->
   <section class="section" id="steps" hidden>
     <div class="wrap">
-      <p class="eyebrow reveal" data-text="steps.eyebrow"></p>
-      <h2 class="reveal" data-text="steps.heading"></h2>
+      <p class="eyebrow" data-text="steps.eyebrow"></p>
+      <h2 data-text="steps.heading"></h2>
       <ol class="steps-list" id="steps-list"></ol>
       <ul class="quotes" id="quotes" hidden></ul>
       <div id="quotes-spot" hidden></div>
@@ -871,7 +873,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- DARK GREEN BAND (v2.4): one sentence in the owner's own words. Edit or turn off in SETTINGS.band -->
   <section class="band contours" id="band" aria-label="In our own words" hidden>
     <div class="wrap">
-      <figure class="band-inner reveal">
+      <figure class="band-inner">
         <blockquote><p id="band-quote"></p></blockquote>
         <figcaption id="band-by"></figcaption>
       </figure>
@@ -986,8 +988,8 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
   <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="wrap">
-      <h2 class="reveal">Contact us</h2>
-      <dl class="contact-list" data-stagger="80">
+      <h2>Contact us</h2>
+      <dl class="contact-list">
         <div><dt><span class="icon" data-icon="phone"></span>Phone</dt><dd><a class="phone-big" data-tel="{phone}"></a></dd></div>
         <div><dt><span class="icon" data-icon="mail"></span>Email</dt><dd><a id="contact-email"></a></dd></div>
         <div><dt><span class="icon" data-icon="pin"></span>Address</dt><dd id="contact-address"><span id="addr-street"></span><br><span id="addr-town"></span></dd></div>
@@ -1021,7 +1023,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
     <p class="menu-title" id="menu-title">Menu</p>
     <ul class="menu-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#work" id="menu-work">Our Work</a></li>
+      <li><a href="#work" id="menu-work">Our work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#quote">Request a Quote</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -1070,7 +1072,7 @@ dialog.menu .dialog-inner { height: 100%; width: min(360px, 88vw); border-radius
 const SETTINGS = {
 
   // ---- VERSION (shown small at the bottom of the page; Claude bumps it on every change) ----
-  version: "2.8",
+  version: "2.9",
 
   // ---- PREVIEW BANNER (set show to false before going live) ----
   previewBanner: {
@@ -1130,8 +1132,8 @@ const SETTINGS = {
     headingAccent: "built with care.",       // the second line, in green italic
     // Based on the owner's own About text.
     subheading: "New lawns and plantings, stone walls, walkways and patios, plus the mowing, cleanups and snow removal that keep it all looking right.",
-    quoteButton: "Request a Quote",             // ASK THE OWNER: are quotes free? If yes, can say "Request a Free Quote"
-    quoteButtonShort: "Get a Quote"             // the smaller button in the top bar
+    quoteButton: "Get a quote",                 // ASK THE OWNER: are quotes free? If yes, can say "Get a free quote"
+    quoteButtonShort: "Get a quote"             // the smaller button in the top bar
   },
 
   // ---- SERVICES ----
@@ -1142,8 +1144,8 @@ const SETTINGS = {
   // Google reads these sentences to match searches, so plain, specific words help.
   services: {
     eyebrow: "What we do",
-    heading: "Everything outside, from the first shovel to the last snowfall",
-    intro: "New projects, stonework, site prep and the upkeep that keeps it all looking right, for homes and businesses across the Hopkinton and Concord area.",
+    heading: "Landscaping, stonework and snow removal",
+    intro: "New projects, site prep and the upkeep that keeps it all looking right, for homes and businesses across the Hopkinton and Concord area.",
     list: [
       { name: "Landscaping",
         description: "New lawns, sod, plantings and garden beds, from one bed by the front steps to a whole yard." },
@@ -1158,7 +1160,7 @@ const SETTINGS = {
       { name: "Maintenance",
         description: "Weekly mowing, spring and fall cleanups, and lawn and garden care through the season." }
     ],
-    note: "Don't see what you need? Call {phone} and ask."
+    note: ""                                    // v2.9: was "Don't see what you need? Call {phone} and ask." ("" = no line)
   },
 
   // ---- LOGO ----
@@ -1218,15 +1220,15 @@ const SETTINGS = {
     // listening..." moved into the dark green band below, so it isn't said twice.)
     // ASK THE OWNER: his text says "Inc." but state records and Meghan's email say LLC.
     paragraphs: [
-      "At Olkonen Earthscapes, we are dedicated to helping you make the best decisions and providing you with the right direction on any type of landscape project throughout the Hopkinton and Concord area.",
-      "While there are numerous landscape companies available to perform work, businesses and homeowners looking for landscaping services choose Olkonen Earthscapes time and time again."
+      "At Olkonen Earthscapes, we are dedicated to helping you make the best decisions and providing you with the right direction on any type of landscape project throughout the Hopkinton and Concord area."
+      // v2.9: cut "While there are numerous landscape companies..." (read like filler)
     ],
     // ASK THE OWNER: only add facts he confirms. The list stays hidden while empty.
     // Examples: "Serving the area since ____", "Fully insured" (only if true).
     facts: [],
     // v2.6: the owner, once Todd sends a photo and a few lines. Leave text "" to keep it hidden.
     owner: { name: "", photo: "", text: "" },
-    callLine: "Have a project in mind? Call {phone}."
+    callLine: ""                                // v2.9: was "Have a project in mind? Call {phone}." ("" = no line)
   },
 
   // ---- GOOGLE REVIEWS LINK (v2.4, OFF for now) ----
@@ -1246,7 +1248,7 @@ const SETTINGS = {
   // A full-width dark green strip between About and the quote form, with one sentence in the owner's
   // own words (word for word from the About text on his old website). Set show to false to hide it.
   band: {
-    show: true,
+    show: false,                                // v2.9: off until there's a real customer review to put here
     quote: "We focus on listening to what our customers want, giving you our professional advice and working together to deliver the landscaping you desire.",
     by: "Olkonen Earthscapes"
   },
@@ -1303,6 +1305,7 @@ const SETTINGS = {
   // Dashed boxes that show where real info will go. They ONLY show while the preview banner is on,
   // and each one disappears by itself once its real info is filled in (about.owner, about.facts, reviews.quotes).
   placeholders: {
+    show: false,   // v2.9: the dashed "Waiting on Todd" boxes are OFF (Jack shows this site to Todd). true = show them on the preview.
     owner: "Spot for a photo of Todd and a few lines in his own words (how he started, what he cares about on a job).",
     facts: "Spot for quick facts Todd confirms, like years in business, insured, and any memberships or awards.",
     reviews: "Spot for 2 or 3 real customer reviews, used with the customer's OK."
@@ -1335,7 +1338,7 @@ const SETTINGS = {
     nameError: "Please add your name.",
     phoneError: "Please add a phone number we can call, with the area code.",
     emailError: "That email doesn't look right. Check it, or leave it empty.",
-    submitButton: "Send My Request",
+    submitButton: "Send my request",
     // Short privacy note under the send button. Keep it true: if the form ever goes somewhere
     // else (a Google Sheet, a different email), change this sentence to match.
     privacyNote: "We only use this to reply about your project. It goes straight to Olkonen Earthscapes by email and is never sold or shared.",
@@ -1364,7 +1367,8 @@ const SETTINGS = {
   look: {
     buttonCorners: 4,                           // roundness of buttons and boxes, in pixels. 0 = square corners.
     contourLines: true,                         // the faint survey-map lines in the footer, quote section and dark green band. false = off.
-    paperGrain: true                            // the very faint paper speckle on the light backgrounds. false = off.
+    paperGrain: true,                           // the very faint paper speckle on the light backgrounds. false = off.
+    sectionLabels: false                        // v2.9: the small brown labels above each section heading. false = only the top one shows.
   },
 
   // ---- FOOTER ----
@@ -1588,7 +1592,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
   });
   // Very old browsers can't animate the fold, so they just show every description.
   if (!(window.CSS && CSS.supports && CSS.supports("grid-template-rows", "0fr"))) document.documentElement.classList.add("no-fold");
-  fillWithPhone($("#services-note"), S.services.note);
+  if (S.services.note) fillWithPhone($("#services-note"), S.services.note); else $("#services-note").hidden = true;
 
   // ---- Recent work ----
   const W = S.work;
@@ -1656,7 +1660,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     fig.className = "work-item";
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "work-open drift";
+    btn.className = "work-open";
     btn.setAttribute("aria-label", "View bigger: " + (p.caption || "project photo"));
     const img = document.createElement("img");
     fadeIn(img);
@@ -1759,7 +1763,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     });
     facts.hidden = false;
   }
-  if (S.about.callLine) fillWithPhone($("#about-call"), S.about.callLine);
+  if (S.about.callLine) fillWithPhone($("#about-call"), S.about.callLine); else if ($("#about-call")) $("#about-call").hidden = true;
   else $("#about-call").hidden = true;
 
   // Google reviews link (off until he has more reviews; see SETTINGS)
@@ -1915,10 +1919,12 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     nt.textContent = "N";
   }
 
+  if (S.look && S.look.sectionLabels === false) document.documentElement.classList.add("no-labels");
+
   // ---- v2.6: preview-only "waiting on Todd" spots ----
   const PH = S.placeholders || {};
   function todoSpot(box, text) {
-    if (!S.previewBanner.show || !text || !box) return;
+    if (!PH.show || !S.previewBanner.show || !text || !box) return;
     box.className = "todo-spot";
     box.innerHTML = "";
     const b = document.createElement("strong");
@@ -1936,7 +1942,7 @@ const CONTOURS = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' w
     if (O.name) { const n = document.createElement("p"); n.style.fontWeight = "600"; n.textContent = O.name; ownerBox.appendChild(n); }
     ownerBox.hidden = false;
   } else todoSpot(ownerBox, PH.owner);
-  if (!S.about.facts.length && !O.text && S.previewBanner.show && PH.facts) {
+  if (!S.about.facts.length && !O.text && PH.show && S.previewBanner.show && PH.facts) {
     ownerBox.append(" Also: " + PH.facts.replace(/^Spot for /, "").replace(/^q/, "q")); // v2.7: one box, not two
   } else if (!S.about.facts.length) {
     const f = document.createElement("div");
